@@ -1,0 +1,2 @@
+# accelerating-nerfs
+Accelerating NeRFs
