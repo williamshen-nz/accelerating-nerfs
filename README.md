@@ -20,3 +20,11 @@ export DOCKER_ARCH=amd64
 docker-compose up
 ```
 
+### Download NeRF datasets and checkpoints
+**Datasets**
+1. Download `nerf_synthetic.zip` from https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1
+2. Unzip `nerf_synthetic.zip` and update the `data_root` variable in the scripts.
+
+**Checkpoints**
+1. Download checkpoints from https://drive.google.com/file/d/1vw9H-5xXYr6Q_tHcpVc0Kri96i6Do4vE/view?usp=share_link
+2. Unzip to the project directory, and point the appropriate variables...
