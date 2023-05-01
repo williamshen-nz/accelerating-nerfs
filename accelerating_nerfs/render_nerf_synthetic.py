@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Tuple
+from typing import Optional, Tuple
 
 import imageio
 import numpy as np
@@ -80,7 +80,7 @@ def render_nerf_synthetic(num_downscales: int, max_num_scenes: Optional[int] = N
     lpips_fn = lambda x, y: lpips_net(lpips_norm_fn(x), lpips_norm_fn(y)).mean()
 
     def render_scene(scene: str):
-        print(f"===== Rendering scene {scene} =====")
+        print(f"===== Rendering '{scene}' scene =====")
         psnrs = []
         lpips = []
 
@@ -99,7 +99,8 @@ def render_nerf_synthetic(num_downscales: int, max_num_scenes: Optional[int] = N
 
         # Render frames
         image_paths = []
-        for idx, data in enumerate(tqdm(test_dataset, desc="Rendering image")):
+        for idx in tqdm(range(len(test_dataset)), desc="Rendering image"):
+            data = test_dataset[idx]
             render_bkgd = data["color_bkgd"]
             rays = data["rays"]
             pixels = data["pixels"]
@@ -131,7 +132,7 @@ def render_nerf_synthetic(num_downscales: int, max_num_scenes: Optional[int] = N
         # Create video
         video_path = os.path.join(render_dir, "video.mp4")
         clip = ImageSequenceClip(image_paths, fps=24)
-        clip.write_videofile(video_path)
+        clip.write_videofile(video_path, verbose=False)
         print(f"Saved video to {video_path}")
 
         # Metrics
@@ -154,4 +155,4 @@ def render_nerf_synthetic(num_downscales: int, max_num_scenes: Optional[int] = N
 
 
 if __name__ == "__main__":
-    render_nerf_synthetic(num_downscales=2, max_num_scenes=1)
+    render_nerf_synthetic(num_downscales=1, max_num_scenes=None)
