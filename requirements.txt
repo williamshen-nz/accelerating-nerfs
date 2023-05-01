@@ -1,0 +1,12 @@
+numpy
+torch<2.0
+
+pycolmap
+opencv-python
+imageio
+tqdm
+scipy
+lpips
+
+nerfacc
+moviepy
