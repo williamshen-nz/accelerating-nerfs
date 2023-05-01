@@ -22,6 +22,7 @@ from accelerating_nerfs.utils import (
 
 device = "cuda:0"
 set_random_seed(42)
+checkpoint_pattern = "results/{scene}/nerf_20000.pt"
 
 # Load config
 config = nerf_synthetic_config(device)
@@ -69,7 +70,10 @@ def load_checkpoint(model_path: str) -> Tuple[VanillaNeRF, OccGridEstimator]:
 
 
 @torch.no_grad()
-def render_nerf_synthetic(num_downscales: int):
+def render_nerf_synthetic(num_downscales: int, max_num_scenes: Optional[int] = None):
+    assert num_downscales >= 0
+    assert max_num_scenes is None or max_num_scenes > 0
+
     # Setup LPIPS
     lpips_net = LPIPS(net="vgg").to(device)
     lpips_norm_fn = lambda x: x[None, ...].permute(0, 3, 1, 2) * 2 - 1
@@ -81,7 +85,7 @@ def render_nerf_synthetic(num_downscales: int):
         lpips = []
 
         # Load checkpoint
-        model_path = f"results/{scene}/nerf_20000.pt"
+        model_path = checkpoint_pattern.format(scene=scene)
         radiance_field, estimator = load_checkpoint(model_path)
 
         # Load test dataset
@@ -145,9 +149,9 @@ def render_nerf_synthetic(num_downscales: int):
             json.dump(metrics, f, indent=4)
         print(f"Saved metrics to {metrics_path}")
 
-    for scene_ in NERF_SYNTHETIC_SCENES:
+    for scene_ in NERF_SYNTHETIC_SCENES[:max_num_scenes]:
         render_scene(scene_)
 
 
 if __name__ == "__main__":
-    render_nerf_synthetic(num_downscales=2)
+    render_nerf_synthetic(num_downscales=2, max_num_scenes=1)
