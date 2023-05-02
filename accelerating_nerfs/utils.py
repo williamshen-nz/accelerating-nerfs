@@ -77,11 +77,7 @@ def render_image_with_occgrid(
         positions = t_origins + t_dirs * (t_starts + t_ends)[:, None] / 2.0
         if timestamps is not None:
             # dnerf
-            t = (
-                timestamps[ray_indices]
-                if radiance_field.training
-                else timestamps.expand_as(positions[:, :1])
-            )
+            t = timestamps[ray_indices] if radiance_field.training else timestamps.expand_as(positions[:, :1])
             sigmas = radiance_field.query_density(positions, t)
         else:
             sigmas = radiance_field.query_density(positions)
@@ -93,11 +89,7 @@ def render_image_with_occgrid(
         positions = t_origins + t_dirs * (t_starts + t_ends)[:, None] / 2.0
         if timestamps is not None:
             # dnerf
-            t = (
-                timestamps[ray_indices]
-                if radiance_field.training
-                else timestamps.expand_as(positions[:, :1])
-            )
+            t = timestamps[ray_indices] if radiance_field.training else timestamps.expand_as(positions[:, :1])
             rgbs, sigmas = radiance_field(positions, t, t_dirs)
         else:
             rgbs, sigmas = radiance_field(positions, t_dirs)
@@ -129,8 +121,7 @@ def render_image_with_occgrid(
         chunk_results = [rgb, opacity, depth, len(t_starts)]
         results.append(chunk_results)
     colors, opacities, depths, n_rendering_samples = [
-        torch.cat(r, dim=0) if isinstance(r[0], torch.Tensor) else r
-        for r in zip(*results)
+        torch.cat(r, dim=0) if isinstance(r[0], torch.Tensor) else r for r in zip(*results)
     ]
     return (
         colors.view((*rays_shape[:-1], -1)),
@@ -179,9 +170,7 @@ def render_image_with_propnet(
 
     def rgb_sigma_fn(t_starts, t_ends, ray_indices):
         t_origins = chunk_rays.origins[..., None, :]
-        t_dirs = chunk_rays.viewdirs[..., None, :].repeat_interleave(
-            t_starts.shape[-1], dim=-2
-        )
+        t_dirs = chunk_rays.viewdirs[..., None, :].repeat_interleave(t_starts.shape[-1], dim=-2)
         positions = t_origins + t_dirs * (t_starts + t_ends)[..., None] / 2.0
         rgb, sigmas = radiance_field(positions, t_dirs)
         if opaque_bkgd:
@@ -193,9 +182,7 @@ def render_image_with_propnet(
     for i in range(0, num_rays, chunk):
         chunk_rays = namedtuple_map(lambda r: r[i : i + chunk], rays)
         t_starts, t_ends = estimator.sampling(
-            prop_sigma_fns=[
-                lambda *args: prop_sigma_fn(*args, p) for p in proposal_networks
-            ],
+            prop_sigma_fns=[lambda *args: prop_sigma_fn(*args, p) for p in proposal_networks],
             prop_samples=num_samples_per_prop,
             num_samples=num_samples,
             n_rays=chunk_rays.origins.shape[0],
