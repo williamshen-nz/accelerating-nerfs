@@ -1,22 +1,69 @@
-# accelerating-nerfs
+# Accelerating NeRFs: Optimizing Neural Radiance Fields with Specialized Hardware Architectures
 
-[**Project Website**](https://williamshen-nz.github.io/accelerating-nerfs/)
+#### [Project Website](https://williamshen-nz.github.io/accelerating-nerfs/)
 
-NeRFs are slow, we are trying to accelerate them!
+NeRFs are slow, we are trying to accelerate them! 🏎💨
 
-## General Setup
+___
 
-To train and render NeRFs. We use nerfacc to speed things up to make our life easier.
+## Table of Contents
+
+- [Installation Instructions](#installation-instructions)
+    - [NeRF Setup](#nerf-setup)
+    - [Timeloop and Accelergy Setup](#timeloop-and-accelergy-setup)
+- [Usage](#usage)
+    - [Training NeRFs](#training-nerfs)
+    - [Rendering NeRFs](#rendering-nerfs)
+    - [Evaluating Designs](#evaluating-designs)
+- [Tips](#tips)
+    - [Profiling Rendering Code](#profiling-rendering-code)
+
+___
+
+## Installation Instructions
+
+We use two separate environments for this project, one for NeRF training and rendering,
+and the other for Timeloop and Accelergy.
+
+### NeRF Setup
+
+Use this environment for training NeRFs and rendering images.
+
+**Python Environment**
+Create a virtual environment and install the dependencies. We suggest using conda.
 
 ```
-conda create -n accnerfs python=3.8
-conda activate accnerfs
+conda create -n accelerate-nerfs python=3.8
+conda activate accelerate-nerfs
 pip install -r requirements.txt
 ```
 
-## Timeloop and Accelergy Setup
+**Download Datasets**
 
-We use Timeloop and Accelergy to evaluate our designs.
+1. Download `nerf_synthetic.zip` from https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1
+2. Unzip `nerf_synthetic.zip` to the project root directory (at the level of README.md).
+
+**Download trained checkpoints**
+
+1. Download checkpoints from https://drive.google.com/file/d/1vw9H-5xXYr6Q_tHcpVc0Kri96i6Do4vE/view?usp=share_link
+2. Unzip to the project root directory (at the level of README.md).
+
+**Expected directory structure**
+After you have downloaded the datasets and checkpoints, your directory structure should look like this:
+
+```
+accelerating-nerfs (project root)
+├── accelerating_nerfs/
+├── README.md
+├── nerf_synthetic/
+├── nerf-synthetic-checkpoints/
+...
+```
+
+### Timeloop and Accelergy Setup
+
+We use Timeloop and Accelergy to evaluate our designs. You will need to have Docker installed.
+We use the provided Docker compose file to run Timeloop and Accelergy, so it's easier to set up.
 
 ```
 export DOCKER_ARCH=amd64
@@ -27,31 +74,27 @@ export DOCKER_ARCH=amd64
 docker-compose up
 ```
 
-## Downloading NeRF datasets and checkpoints
+## Usage
 
-**Datasets**
+### Training NeRFs
 
-1. Download `nerf_synthetic.zip` from https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1
-2. Unzip `nerf_synthetic.zip` and update the `data_root` variable in the scripts.
+Use the `accelerating_nerfs/train_nerf_synthetic.py` script to train NeRFs on the NeRF synthetic dataset.
 
-**Checkpoints**
+### Rendering NeRFs
 
-1. Download checkpoints from https://drive.google.com/file/d/1vw9H-5xXYr6Q_tHcpVc0Kri96i6Do4vE/view?usp=share_link
-2. Unzip to the project directory (at the level of README.md)
+Use the `accelerating_nerfs/render_nerf_synthetic.py` script to render images from a trained NeRF.
 
-**Expected Directory Structure**
+### Evaluating Designs
 
-```
-accelerating-nerfs (project root)
-├── accelerating_nerfs/
-├── README.md
-├── nerf_synthetic/
-├── nerf-synthetic-checkpoints/
-```
+TODO: Add instructions for evaluating designs.
 
-## Profiling Rendering Code
+## Tips
+
+### Profiling Rendering Code
 
 1. Set `CUDA_LAUNCH_BLOCKING=1` to force CPU-GPU synchronization.
 2. Run the `accelerating_nerfs/render_nerf_synthetic.py` script with `profile=True`
 3. Check the resulting `.pstat` file for profiling results, I recommend using Snakeviz for visualization
    (you can pip install it, `snakeviz profile.pstat`)
+
+If you're using PyCharm, it's suggested to use the `line_profiler_pycharm` package and plugin to profile.
