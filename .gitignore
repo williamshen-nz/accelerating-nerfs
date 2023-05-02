@@ -10,3 +10,11 @@ nerf-synthetic-checkpoints/
 accelerating_nerfs/results/
 results/
 .ipynb_checkpoints/
+
+*.cprof
+*.pstat
+*.pclprof
+
+.bashrc
+.profile
+.config/

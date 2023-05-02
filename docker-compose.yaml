@@ -33,8 +33,9 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./workspace:/home/workspace
+      - ./:/home/workspace
     environment:
       - USER_UID=1000
       - USER_GID=1000
-      - JUPYTER_SWITCHES=--NotebookApp.token=''
+      # Comment out so it doesn't expose on 0.0.0.0
+      # - JUPYTER_SWITCHES=--NotebookApp.token=''
