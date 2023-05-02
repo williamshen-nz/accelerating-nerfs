@@ -15,6 +15,11 @@ results/
 *.pstat
 *.pclprof
 
+# accelergy/timeloop docker cruft
 .bashrc
 .profile
 .config/
+.local/
+.cache/
+.ipython/
+.jupyter/

@@ -45,17 +45,13 @@ class MLP(nn.Module):
         self.hidden_layers = nn.ModuleList()
         in_features = self.input_dim
         for i in range(self.net_depth):
-            self.hidden_layers.append(
-                nn.Linear(in_features, self.net_width, bias=bias_enabled)
-            )
+            self.hidden_layers.append(nn.Linear(in_features, self.net_width, bias=bias_enabled))
             if (self.skip_layer is not None) and (i % self.skip_layer == 0) and (i > 0):
                 in_features = self.net_width + self.input_dim
             else:
                 in_features = self.net_width
         if self.output_enabled:
-            self.output_layer = nn.Linear(
-                in_features, self.output_dim, bias=bias_enabled
-            )
+            self.output_layer = nn.Linear(in_features, self.output_dim, bias=bias_enabled)
         else:
             self.output_dim = in_features
 
@@ -149,9 +145,9 @@ class NerfMLP(nn.Module):
         if condition is not None:
             if condition.shape[:-1] != x.shape[:-1]:
                 num_rays, n_dim = condition.shape
-                condition = condition.view(
-                    [num_rays] + [1] * (x.dim() - condition.dim()) + [n_dim]
-                ).expand(list(x.shape[:-1]) + [n_dim])
+                condition = condition.view([num_rays] + [1] * (x.dim() - condition.dim()) + [n_dim]).expand(
+                    list(x.shape[:-1]) + [n_dim]
+                )
             bottleneck = self.bottleneck_layer(x)
             x = torch.cat([bottleneck, condition], dim=-1)
         raw_rgb = self.rgb_layer(x)
@@ -167,9 +163,7 @@ class SinusoidalEncoder(nn.Module):
         self.min_deg = min_deg
         self.max_deg = max_deg
         self.use_identity = use_identity
-        self.register_buffer(
-            "scales", torch.tensor([2**i for i in range(min_deg, max_deg)])
-        )
+        self.register_buffer("scales", torch.tensor([2**i for i in range(min_deg, max_deg)]))
 
     @property
     def latent_dim(self) -> int:
