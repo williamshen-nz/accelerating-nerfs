@@ -109,7 +109,7 @@ def render_nerf_synthetic(
             f"Successfully quantized NeRF. Original size = {sizeof_fmt(og_size)}, "
             f"Quantized size = {sizeof_fmt(quantized_size)}"
         )
-        raise NotImplementedError("Quantization is broken right now")
+        raise NotImplementedError("Quantized is broken af")
     else:
         quantized_size = None
 
