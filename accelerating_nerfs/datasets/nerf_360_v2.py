@@ -1,7 +1,5 @@
 """
-Copyright (c) 2022 Ruilong Li, UC Berkeley.
-
-From: https://github.com/KAIR-BAIR/nerfacc
+Modified from https://github.com/KAIR-BAIR/nerfacc
 """
 
 import os

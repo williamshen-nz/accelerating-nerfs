@@ -1,3 +1,4 @@
-For loading NeRF datasets.
+# pycolmap
+For loading COLMAP data from NeRF datasets.
 
-Copied from: https://github.com/rmbrualla/pycolmap/tree/18c64d8fe9f888fdcc50b9e4170fcf9f7dc11eaa
+Taken from: https://github.com/rmbrualla/pycolmap/tree/18c64d8fe9f888fdcc50b9e4170fcf9f7dc11eaa

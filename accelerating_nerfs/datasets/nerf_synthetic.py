@@ -1,7 +1,5 @@
 """
-Copyright (c) 2022 Ruilong Li, UC Berkeley.
-
-From: https://github.com/KAIR-BAIR/nerfacc
+Modified from https://github.com/KAIR-BAIR/nerfacc
 """
 
 import json
@@ -19,15 +17,6 @@ from accelerating_nerfs.datasets.utils import Rays
 
 def _load_renderings(root_fp: str, subject_id: str, split: str):
     """Load images from disk."""
-    if not root_fp.startswith("/"):
-        # allow relative path. e.g., "./data/nerf_synthetic/"
-        root_fp = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)),
-            "..",
-            "..",
-            root_fp,
-        )
-
     data_dir = os.path.join(root_fp, subject_id)
     with open(os.path.join(data_dir, "transforms_{}.json".format(split)), "r") as fp:
         meta = json.load(fp)
@@ -156,6 +145,11 @@ class SubjectLoader(torch.utils.data.Dataset):
         }
 
     def downscale(self, num_downscales: int = 1):
+        """Downscale dataset by num_downscales."""
+        if num_downscales == 0:
+            print("No downsampling needed as num_downscales is 0.")
+            return
+
         assert num_downscales >= 1
         factor = 2**num_downscales
         device = self.images.device
