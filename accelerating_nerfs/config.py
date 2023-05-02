@@ -15,8 +15,13 @@ def nerf_synthetic_config(device):
     }
 
 
-def get_nerf_synthetic_dataset_dir() -> str:
+def get_project_root() -> Path:
     module_dir = Path(os.path.dirname(__file__))
     project_root = module_dir.parent
+    return project_root
+
+
+def get_nerf_synthetic_dataset_dir() -> Path:
+    project_root = get_project_root()
     dataset_dir = project_root / "nerf_synthetic"
-    return str(dataset_dir)
+    return dataset_dir

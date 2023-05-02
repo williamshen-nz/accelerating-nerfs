@@ -1,6 +1,7 @@
 import json
 import os
 from functools import lru_cache
+from pathlib import Path
 from typing import Tuple
 
 import imageio
@@ -61,7 +62,7 @@ def load_checkpoint(model_path: str) -> Tuple[VanillaNeRF, OccGridEstimator]:
 def load_test_dataset(scene: str, num_downscales: int) -> SubjectLoader:
     test_dataset = SubjectLoader(
         subject_id=scene,
-        root_fp=get_nerf_synthetic_dataset_dir(),
+        root_fp=str(get_nerf_synthetic_dataset_dir()),
         split="test",
         num_rays=None,
         device=device,
@@ -73,7 +74,7 @@ def load_test_dataset(scene: str, num_downscales: int) -> SubjectLoader:
 def render_nerf_synthetic(
     scene: str,
     checkpoint: str,
-    result_dir: str,
+    result_dir: Path,
     num_downscales: int = 0,
     profile: bool = False,
     video_fps: int = 24,
@@ -92,7 +93,11 @@ def render_nerf_synthetic(
     # Load test dataset
     test_dataset = load_test_dataset(scene, num_downscales)
     psnrs, lpips = [], []
-    rgbs = []
+
+    # RGB images
+    rgb_dir = os.path.join(result_dir, "rgb")
+    os.makedirs(rgb_dir, exist_ok=True)
+    rgbs, rgb_paths = [], []
 
     # Render frames
     for idx in tqdm(range(len(test_dataset)), f"Rendering {scene} test images"):
@@ -114,7 +119,13 @@ def render_nerf_synthetic(
             test_chunk_size=4096,
         )
         # TODO: save depths?
-        rgbs.append((rgb.cpu().numpy() * 255).astype(np.uint8))
+        rgb_image = (rgb.cpu().numpy() * 255).astype(np.uint8)
+        rgbs.append(rgb_image)
+
+        # Save RGB frame
+        rgb_path = os.path.join(rgb_dir, f"rgb_{idx:04d}.png")
+        imageio.imwrite(rgb_path, rgb_image)
+        rgb_paths.append(rgb_path)
 
         # Calculate metrics
         mse = F.mse_loss(rgb, pixels)
@@ -141,15 +152,6 @@ def render_nerf_synthetic(
     metrics_path = os.path.join(result_dir, "metrics.json")
     with open(metrics_path, "w") as f:
         json.dump(metrics, f, indent=4)
-
-    # Save RGB images
-    rgb_dir = os.path.join(result_dir, "rgb")
-    os.makedirs(rgb_dir, exist_ok=True)
-    rgb_paths = []
-    for idx, rgb in enumerate(rgbs):
-        rgb_path = os.path.join(rgb_dir, f"rgb_{idx:04d}.png")
-        imageio.imwrite(rgb_path, rgb)
-        rgb_paths.append(rgb_path)
 
     # Create video from RGB images
     video_path = os.path.join(result_dir, "video.mp4")

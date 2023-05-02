@@ -5,6 +5,8 @@
 *.zip
 *.pt
 nerf_synthetic/
+nerf-synthetic-checkpoints/
 
 accelerating_nerfs/results/
+results/
 .ipynb_checkpoints/
