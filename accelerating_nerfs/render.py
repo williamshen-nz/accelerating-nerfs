@@ -1,55 +1,22 @@
-import argparse
+import json
 import os
+from functools import lru_cache
+from typing import Tuple
 
 import imageio
-import moviepy
 import numpy as np
 import torch
 import torch.nn.functional as F
-from datasets.nerf_synthetic import SubjectLoader
 from lpips import LPIPS
-from moviepy.video.io.ImageSequenceClip import ImageSequenceClip
-from moviepy.video.VideoClip import ImageClip, VideoClip
-from nerfacc.estimators.occ_grid import OccGridEstimator
+from nerfacc import OccGridEstimator
 from tqdm import tqdm
 
 from accelerating_nerfs.config import nerf_synthetic_config
+from accelerating_nerfs.datasets.nerf_synthetic import SubjectLoader
 from accelerating_nerfs.models import VanillaNeRF
-from accelerating_nerfs.utils import (
-    NERF_SYNTHETIC_SCENES,
-    render_image_with_occgrid,
-    set_random_seed,
-)
+from accelerating_nerfs.utils import render_image_with_occgrid
 
-device = "cuda:0"
-set_random_seed(42)
-
-parser = argparse.ArgumentParser()
-parser.add_argument(
-    "--data_root",
-    type=str,
-    default="/home/william/workspace/dl-hardware/nerfacc/nerf_synthetic",
-    help="the root dir of the dataset",
-)
-parser.add_argument(
-    "--model_path",
-    type=str,
-    default="results/chair/nerf_20000.pt",
-    help="the path of the pretrained model",
-)
-parser.add_argument(
-    "--scene",
-    type=str,
-    default="chair",
-    choices=NERF_SYNTHETIC_SCENES,
-    help="which scene to use",
-)
-parser.add_argument(
-    "--test_chunk_size",
-    type=int,
-    default=4096,
-)
-args = parser.parse_args()
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load config
 config = nerf_synthetic_config(device)
@@ -66,50 +33,74 @@ grid_nlvl = config["grid_nlvl"]
 # Render parameters
 render_step_size = config["render_step_size"]
 
-# setup the dataset
-test_dataset = SubjectLoader(
-    subject_id=args.scene,
-    root_fp=args.data_root,
-    split="test",
-    num_rays=None,
-    device=device,
-)
-test_dataset.downscale(num_downscales=1)
 
-# Load from checkpoint
-checkpoint = torch.load(args.model_path)
-radiance_field = VanillaNeRF().to(device)
-radiance_field.load_state_dict(checkpoint["radiance_field_state_dict"])
+@lru_cache(maxsize=1)
+def load_lpips() -> LPIPS:
+    lpips_net = LPIPS(net="vgg").to(device)
+    return lpips_net
 
-estimator = OccGridEstimator(
-    roi_aabb=aabb, resolution=grid_resolution, levels=grid_nlvl
-).to(device)
-estimator.load_state_dict(checkpoint["estimator_state_dict"])
 
-radiance_field.eval()
-estimator.eval()
+def load_checkpoint(model_path: str) -> Tuple[VanillaNeRF, OccGridEstimator]:
+    checkpoint = torch.load(model_path)
+    # Load NeRF
+    radiance_field = VanillaNeRF().to(device)
+    radiance_field.load_state_dict(checkpoint["radiance_field_state_dict"])
 
-lpips_net = LPIPS(net="vgg").to(device)
-lpips_norm_fn = lambda x: x[None, ...].permute(0, 3, 1, 2) * 2 - 1
-lpips_fn = lambda x, y: lpips_net(lpips_norm_fn(x), lpips_norm_fn(y)).mean()
+    # Load OccGridEstimator
+    estimator = OccGridEstimator(
+        roi_aabb=aabb, resolution=grid_resolution, levels=grid_nlvl
+    ).to(device)
+    estimator.load_state_dict(checkpoint["estimator_state_dict"])
 
-psnrs = []
-lpips = []
+    radiance_field.eval()
+    estimator.eval()
+    return radiance_field, estimator
 
-render_dir = f"renders/{args.scene}"
-os.makedirs(render_dir, exist_ok=True)
-image_dir = os.path.join(render_dir, "images")
-os.makedirs(image_dir, exist_ok=True)
-image_paths = []
 
-with torch.no_grad():
-    for i in tqdm(range(len(test_dataset)), desc="Rendering image"):
-        data = test_dataset[i]
+def load_test_dataset(scene: str, num_downscales: int) -> SubjectLoader:
+    test_dataset = SubjectLoader(
+        subject_id=scene,
+        root_fp="../nerf_synthetic",
+        split="test",
+        num_rays=None,
+        device=device,
+    )
+    test_dataset.downscale(num_downscales=num_downscales)
+    return test_dataset
+
+
+def render_nerf_synthetic(
+    scene: str,
+    checkpoint: str,
+    result_dir: str,
+    num_downscales: int = 0,
+    profile: bool = False,
+    video_fps: int = 24,
+):
+    assert num_downscales >= 0
+    os.makedirs(result_dir, exist_ok=True)
+
+    # Setup LPIPS
+    lpips_net = LPIPS(net="vgg").to(device)
+    lpips_norm_fn = lambda x: x[None, ...].permute(0, 3, 1, 2) * 2 - 1
+    lpips_fn = lambda x, y: lpips_net(lpips_norm_fn(x), lpips_norm_fn(y)).mean()
+
+    # Load checkpoint
+    radiance_field, estimator = load_checkpoint(checkpoint)
+
+    # Load test dataset
+    test_dataset = load_test_dataset(scene, num_downscales)
+    psnrs, lpips = [], []
+    rgbs = []
+
+    # Render frames
+    for idx in tqdm(range(len(test_dataset)), f"Rendering {scene} test images"):
+        data = test_dataset[idx]
         render_bkgd = data["color_bkgd"]
         rays = data["rays"]
         pixels = data["pixels"]
 
-        # rendering
+        # Render
         rgb, acc, depth, _ = render_image_with_occgrid(
             radiance_field,
             estimator,
@@ -119,33 +110,47 @@ with torch.no_grad():
             render_step_size=render_step_size,
             render_bkgd=render_bkgd,
             # test options
-            test_chunk_size=args.test_chunk_size,
+            test_chunk_size=4096,
         )
+        # TODO: save depths?
+        rgbs.append((rgb.cpu().numpy() * 255).astype(np.uint8))
+
+        # Calculate metrics
         mse = F.mse_loss(rgb, pixels)
         psnr = -10.0 * torch.log(mse) / np.log(10.0)
         psnrs.append(psnr.item())
         lpips.append(lpips_fn(rgb, pixels).item())
-        image_path = os.path.join(image_dir, f"rgb_{i:04d}.png")
-        imageio.imwrite(
-            image_path,
-            (rgb.cpu().numpy() * 255).astype(np.uint8),
-        )
-        image_paths.append(image_path)
 
-# concat images into video at 24fps
-video_path = os.path.join(render_dir, "video.mp4")
-clip = ImageSequenceClip(image_paths, fps=24)
-clip.write_videofile(video_path)
-print(f"video saved to {video_path}")
+    print(f"Successfully rendered {len(test_dataset)} images")
 
-# metrics
-psnr_avg = sum(psnrs) / len(psnrs)
-lpips_avg = sum(lpips) / len(lpips)
-print(f"evaluation: psnr_avg={psnr_avg}, lpips_avg={lpips_avg}")
+    # Save metrics
+    psnr_avg = np.mean(psnrs)
+    lpips_avg = np.mean(lpips)
+    print(f"PSNR: {psnr_avg:.4f}, LPIPS: {lpips_avg:.4f}")
 
-metrics = {
-    "psnr_avg": psnr_avg,
-    "lpips_avg": lpips_avg,
-    "psnrs": psnrs,
-    "lpips": lpips,
-}
+    metrics = {
+        "scene": scene,
+        "checkpoint": checkpoint,
+        "num_downscales": num_downscales,
+        "psnr_avg": psnr_avg,
+        "lpips_avg": lpips_avg,
+        "psnrs": psnrs,
+        "lpips": lpips,
+    }
+    metrics_path = os.path.join(result_dir, "metrics.json")
+    with open(metrics_path, "w") as f:
+        json.dump(metrics, f, indent=4)
+
+    # Save RGB images
+    rgb_dir = os.path.join(result_dir, "rgb")
+    os.makedirs(rgb_dir, exist_ok=True)
+    rgb_paths = []
+    for idx, rgb in enumerate(rgbs):
+        rgb_path = os.path.join(rgb_dir, f"rgb_{idx:04d}.png")
+        imageio.imwrite(rgb_path, rgb)
+        rgb_paths.append(rgb_path)
+
+    # Create video from RGB images
+    video_path = os.path.join(result_dir, "video.mp4")
+    imageio.mimwrite(video_path, rgbs, fps=video_fps)
+    print(f"Saved results to {result_dir}")
