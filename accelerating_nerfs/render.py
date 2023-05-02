@@ -8,6 +8,7 @@ import imageio
 import numpy as np
 import torch
 import torch.nn.functional as F
+from line_profiler import LineProfiler
 from lpips import LPIPS
 from nerfacc import OccGridEstimator
 from tqdm import tqdm
@@ -99,6 +100,15 @@ def render_nerf_synthetic(
     os.makedirs(rgb_dir, exist_ok=True)
     rgbs, rgb_paths = [], []
 
+    if profile:
+        pr = LineProfiler()
+        pr.enable()
+        # pr = cProfile.Profile()
+        # pr.enable()
+        print("Profiling enabled")
+    else:
+        pr = None
+
     # Render frames
     for idx in tqdm(range(len(test_dataset)), f"Rendering {scene} test images"):
         data = test_dataset[idx]
@@ -135,6 +145,13 @@ def render_nerf_synthetic(
 
     print(f"Successfully rendered {len(test_dataset)} images")
 
+    # Stop profiling
+    if pr is not None:
+        pr.disable()
+        profile_path = os.path.join(result_dir, "profile.pstat")
+        pr.dump_stats(profile_path)
+        print(f"Profiling disabled, stats saved to {profile_path}")
+
     # Save metrics
     psnr_avg = np.mean(psnrs)
     lpips_avg = np.mean(lpips)
@@ -149,7 +166,7 @@ def render_nerf_synthetic(
         "psnrs": psnrs,
         "lpips": lpips,
     }
-    metrics_path = os.path.join(result_dir, "metrics.json")
+    metrics_path = os.path.join(result_dir, "render_metrics.json")
     with open(metrics_path, "w") as f:
         json.dump(metrics, f, indent=4)
 

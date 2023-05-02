@@ -28,6 +28,7 @@ def render_nerf_synthetic_all(num_downscales: int, max_num_scenes: Optional[int]
     assert max_num_scenes is None or max_num_scenes > 0, "max_num_scenes must be None or > 0"
     if profile:
         check_cuda_launch_blocking()
+        print("Profiling enabled and CUDA_LAUNCH_BLOCKING=1, expect a slowdown.")
 
     set_random_seed(random_seed)
     checkpoint_pattern = get_checkpoint_pattern()
@@ -47,4 +48,4 @@ def render_nerf_synthetic_all(num_downscales: int, max_num_scenes: Optional[int]
 
 if __name__ == "__main__":
     # When profiling, you need to set CUDA_LAUNCH_BLOCKING=1 to get accurate numbers
-    render_nerf_synthetic_all(num_downscales=1, max_num_scenes=1, profile=False)
+    render_nerf_synthetic_all(num_downscales=1, max_num_scenes=1, profile=True)
