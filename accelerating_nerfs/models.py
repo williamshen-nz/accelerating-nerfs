@@ -11,6 +11,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from accelerating_nerfs.profiler import profiler
+
 
 class MLP(nn.Module):
     def __init__(
@@ -210,21 +212,30 @@ class VanillaNeRF(nn.Module):
             net_width_condition=net_width_condition,
         )
 
-    def query_opacity(self, x, step_size):
-        density = self.query_density(x)
-        # if the density is small enough those two are the same.
-        # opacity = 1.0 - torch.exp(-density * step_size)
-        opacity = density * step_size
-        return opacity
+    # def query_opacity(self, x, step_size):
+    #     density = self.query_density(x)
+    #     # if the density is small enough those two are the same.
+    #     # opacity = 1.0 - torch.exp(-density * step_size)
+    #     opacity = density * step_size
+    #     return opacity
 
     def query_density(self, x):
-        x = self.posi_encoder(x)
-        sigma = self.mlp.query_density(x)
+        with profiler.profile("nerf.query_density.posi_encoder", x.shape[0]):
+            x = self.posi_encoder(x)
+        with profiler.profile("nerf.query_density.mlp_query_density", x.shape[0]):
+            sigma = self.mlp.query_density(x)
         return F.relu(sigma)
 
     def forward(self, x, condition=None):
-        x = self.posi_encoder(x)
+        with profiler.profile("nerf.forward.posi_encoder", x.shape[0]):
+            x = self.posi_encoder(x)
         if condition is not None:
-            condition = self.view_encoder(condition)
-        rgb, sigma = self.mlp(x, condition=condition)
-        return torch.sigmoid(rgb), F.relu(sigma)
+            with profiler.profile("nerf.forward.view_encoder", x.shape[0]):
+                condition = self.view_encoder(condition)
+        with profiler.profile("nerf.forward.mlp_forward", x.shape[0]):
+            rgb, sigma = self.mlp(x, condition=condition)
+        with profiler.profile("nerf.forward.sigmoid", rgb.shape[0]):
+            rgb_act = torch.sigmoid(rgb)
+        with profiler.profile("nerf.forward.relu", sigma.shape[0]):
+            sigma_act = F.relu(sigma)
+        return rgb_act, sigma_act
