@@ -27,4 +27,13 @@ docker-compose up
 
 **Checkpoints**
 1. Download checkpoints from https://drive.google.com/file/d/1vw9H-5xXYr6Q_tHcpVc0Kri96i6Do4vE/view?usp=share_link
-2. Unzip to the project directory, and point the appropriate variables...
+2. Unzip to the project directory (at the level of README.md)
+
+**Expected Directory Structure**
+```
+accelerating-nerfs (project root)
+├── accelerating_nerfs/
+├── README.md
+├── nerf_synthetic/
+├── nerf-synthetic-checkpoints/
+```

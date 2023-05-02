@@ -11,7 +11,10 @@ from lpips import LPIPS
 from nerfacc import OccGridEstimator
 from tqdm import tqdm
 
-from accelerating_nerfs.config import nerf_synthetic_config
+from accelerating_nerfs.config import (
+    get_nerf_synthetic_dataset_dir,
+    nerf_synthetic_config,
+)
 from accelerating_nerfs.datasets.nerf_synthetic import SubjectLoader
 from accelerating_nerfs.models import VanillaNeRF
 from accelerating_nerfs.utils import render_image_with_occgrid
@@ -47,9 +50,7 @@ def load_checkpoint(model_path: str) -> Tuple[VanillaNeRF, OccGridEstimator]:
     radiance_field.load_state_dict(checkpoint["radiance_field_state_dict"])
 
     # Load OccGridEstimator
-    estimator = OccGridEstimator(
-        roi_aabb=aabb, resolution=grid_resolution, levels=grid_nlvl
-    ).to(device)
+    estimator = OccGridEstimator(roi_aabb=aabb, resolution=grid_resolution, levels=grid_nlvl).to(device)
     estimator.load_state_dict(checkpoint["estimator_state_dict"])
 
     radiance_field.eval()
@@ -60,7 +61,7 @@ def load_checkpoint(model_path: str) -> Tuple[VanillaNeRF, OccGridEstimator]:
 def load_test_dataset(scene: str, num_downscales: int) -> SubjectLoader:
     test_dataset = SubjectLoader(
         subject_id=scene,
-        root_fp="../nerf_synthetic",
+        root_fp=get_nerf_synthetic_dataset_dir(),
         split="test",
         num_rays=None,
         device=device,
