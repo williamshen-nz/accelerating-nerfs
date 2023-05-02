@@ -19,6 +19,7 @@ from accelerating_nerfs.config import (
 from accelerating_nerfs.datasets.nerf_synthetic import SubjectLoader
 from accelerating_nerfs.models import VanillaNeRF
 from accelerating_nerfs.profiler import profiler
+from accelerating_nerfs.quantize import quantize_vanilla_nerf
 from accelerating_nerfs.utils import render_image_with_occgrid
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -78,6 +79,7 @@ def render_nerf_synthetic(
     result_dir: Path,
     num_downscales: int = 0,
     profile: bool = False,
+    quantize: bool = False,
     video_fps: int = 24,
 ):
     assert num_downscales >= 0
@@ -92,6 +94,11 @@ def render_nerf_synthetic(
 
     # Load checkpoint
     radiance_field, estimator = load_checkpoint(checkpoint)
+    if quantize:
+        radiance_field = quantize_vanilla_nerf(radiance_field)
+        radiance_field.to(device)
+        print("Quantized NeRF")
+        raise NotImplementedError("Quantization implementation in-progress...")
 
     # Load test dataset
     test_dataset = load_test_dataset(scene, num_downscales)

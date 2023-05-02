@@ -19,6 +19,7 @@ results/
 .bashrc
 .bash_history
 .profile
+.wget-hsts
 .config/
 .local/
 .cache/
