@@ -151,6 +151,7 @@ class Profiler(object):
         sub_dir,
         top_dir,
         timeloop_dir,
+        arch_name,
         model,
         input_size,
         batch_size,
@@ -163,6 +164,7 @@ class Profiler(object):
         self.top_dir = top_dir
         self.model = model
         self.timeloop_dir = timeloop_dir
+        self.arch_name = arch_name
         self.input_size = input_size
         self.batch_size = batch_size
         self.convert_fc = convert_fc
@@ -253,9 +255,10 @@ class Profiler(object):
                 # depthwise
                 constraint_pth = self.base_dir / self.timeloop_dir / "constraints_dw/*.yaml"
 
+            arch_fname = f"{self.arch_name}.yaml"
             timeloopcmd = (
                 f"timeloop-mapper "
-                f"{self.base_dir / self.timeloop_dir / 'arch/simple_weight_stationary.yaml'} "
+                f"{self.base_dir / self.timeloop_dir / 'arch' / arch_fname} "
                 f"{self.base_dir / self.timeloop_dir / 'arch/components/*.yaml'} "
                 f"{self.base_dir / self.timeloop_dir / 'mapper/mapper.yaml'} "
                 f"{constraint_pth} "
