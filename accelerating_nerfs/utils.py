@@ -5,6 +5,9 @@ Copyright (c) 2022 Ruilong Li, UC Berkeley.
 import random
 from typing import Optional
 
+from accelerating_nerfs.profiler import profiler
+from accelerating_nerfs.volrend import rendering
+
 try:
     from typing import Literal
 except ImportError:
@@ -14,7 +17,6 @@ import numpy as np
 import torch
 from datasets.utils import Rays, namedtuple_map
 from nerfacc.estimators.occ_grid import OccGridEstimator
-from nerfacc.volrend import rendering
 
 NERF_SYNTHETIC_SCENES = [
     "chair",
@@ -58,8 +60,6 @@ def render_image_with_occgrid(
     alpha_thre: float = 0.0,
     # test options
     test_chunk_size: int = 8192,
-    # only useful for dnerf
-    timestamps: Optional[torch.Tensor] = None,
 ):
     """Render the pixels of an image."""
     rays_shape = rays.origins.shape
@@ -71,28 +71,26 @@ def render_image_with_occgrid(
         num_rays, _ = rays_shape
 
     def sigma_fn(t_starts, t_ends, ray_indices):
-        t_origins = chunk_rays.origins[ray_indices]
-        t_dirs = chunk_rays.viewdirs[ray_indices]
-        positions = t_origins + t_dirs * (t_starts + t_ends)[:, None] / 2.0
-        if timestamps is not None:
-            # dnerf
-            t = timestamps[ray_indices] if radiance_field.training else timestamps.expand_as(positions[:, :1])
-            sigmas = radiance_field.query_density(positions, t)
-        else:
-            sigmas = radiance_field.query_density(positions)
-        return sigmas.squeeze(-1)
+        with profiler.profile("sigma_fn", len(ray_indices)):
+            with profiler.profile(f"sigma_fn.ray_to_positions", len(ray_indices)):
+                t_origins = rays.origins[ray_indices]
+                t_dirs = rays.viewdirs[ray_indices]
+                positions = t_origins + t_dirs * (t_starts + t_ends)[:, None] / 2.0
+            with profiler.profile(f"sigma_fn.radiance_field.query_density", len(positions)):
+                sigmas = radiance_field.query_density(positions)
+                sigmas = sigmas.squeeze(-1)
+        return sigmas
 
     def rgb_sigma_fn(t_starts, t_ends, ray_indices):
-        t_origins = chunk_rays.origins[ray_indices]
-        t_dirs = chunk_rays.viewdirs[ray_indices]
-        positions = t_origins + t_dirs * (t_starts + t_ends)[:, None] / 2.0
-        if timestamps is not None:
-            # dnerf
-            t = timestamps[ray_indices] if radiance_field.training else timestamps.expand_as(positions[:, :1])
-            rgbs, sigmas = radiance_field(positions, t, t_dirs)
-        else:
-            rgbs, sigmas = radiance_field(positions, t_dirs)
-        return rgbs, sigmas.squeeze(-1)
+        with profiler.profile("rgb_sigma_fn", len(ray_indices)):
+            with profiler.profile("rgb_sigma_fn.ray_to_positions", len(ray_indices)):
+                t_origins = chunk_rays.origins[ray_indices]
+                t_dirs = chunk_rays.viewdirs[ray_indices]
+                positions = t_origins + t_dirs * (t_starts + t_ends)[:, None] / 2.0
+            with profiler.profile("rgb_sigma_fn.radiance_field", len(positions)):
+                rgbs, sigmas = radiance_field(positions, t_dirs)
+                sigmas = sigmas.squeeze(-1)
+        return rgbs, sigmas
 
     results = []
     chunk = torch.iinfo(torch.int32).max if radiance_field.training else test_chunk_size
@@ -109,14 +107,15 @@ def render_image_with_occgrid(
             cone_angle=cone_angle,
             alpha_thre=alpha_thre,
         )
-        rgb, opacity, depth, extras = rendering(
-            t_starts,
-            t_ends,
-            ray_indices,
-            n_rays=chunk_rays.origins.shape[0],
-            rgb_sigma_fn=rgb_sigma_fn,
-            render_bkgd=render_bkgd,
-        )
+        with profiler.profile("rendering", len(ray_indices)):
+            rgb, opacity, depth, extras = rendering(
+                t_starts,
+                t_ends,
+                ray_indices,
+                n_rays=chunk_rays.origins.shape[0],
+                rgb_sigma_fn=rgb_sigma_fn,
+                render_bkgd=render_bkgd,
+            )
         chunk_results = [rgb, opacity, depth, len(t_starts)]
         results.append(chunk_results)
     colors, opacities, depths, n_rendering_samples = [

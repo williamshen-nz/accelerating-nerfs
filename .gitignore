@@ -17,7 +17,9 @@ results/
 
 # accelergy/timeloop docker cruft
 .bashrc
+.bash_history
 .profile
+.wget-hsts
 .config/
 .local/
 .cache/
