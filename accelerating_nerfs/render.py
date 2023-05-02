@@ -19,7 +19,11 @@ from accelerating_nerfs.config import (
 from accelerating_nerfs.datasets.nerf_synthetic import SubjectLoader
 from accelerating_nerfs.models import VanillaNeRF
 from accelerating_nerfs.profiler import profiler
-from accelerating_nerfs.quantize import quantize_vanilla_nerf
+from accelerating_nerfs.quantize import (
+    get_size_of_model,
+    quantize_vanilla_nerf,
+    sizeof_fmt,
+)
 from accelerating_nerfs.utils import render_image_with_occgrid
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -94,11 +98,20 @@ def render_nerf_synthetic(
 
     # Load checkpoint
     radiance_field, estimator = load_checkpoint(checkpoint)
+
+    # Quantize model if required
+    og_size = get_size_of_model(radiance_field)
     if quantize:
-        radiance_field = quantize_vanilla_nerf(radiance_field)
+        radiance_field = quantize_vanilla_nerf(radiance_field, estimator, scene)
         radiance_field.to(device)
-        print("Quantized NeRF")
-        raise NotImplementedError("Quantization implementation in-progress...")
+        quantized_size = get_size_of_model(radiance_field)
+        print(
+            f"Successfully quantized NeRF. Original size = {sizeof_fmt(og_size)}, "
+            f"Quantized size = {sizeof_fmt(quantized_size)}"
+        )
+        raise NotImplementedError("Quantization is broken right now")
+    else:
+        quantized_size = None
 
     # Load test dataset
     test_dataset = load_test_dataset(scene, num_downscales)
@@ -162,6 +175,8 @@ def render_nerf_synthetic(
         "lpips_avg": lpips_avg,
         "psnrs": psnrs,
         "lpips": lpips,
+        "og_size": og_size,
+        "quantized_size": quantized_size,
     }
     metrics_path = os.path.join(result_dir, "render_metrics.json")
     with open(metrics_path, "w") as f:
