@@ -75,5 +75,5 @@ mapping:
     permutation: NMCRSPQ
   - target: DRAM
     type: temporal
-    factors: C29 M1 R1 S1 N128 P1 Q1
-    permutation: CNMRSPQ
+    factors: C29 M1 R1 S1 N1 P1 Q1
+    permutation: CMRSNPQ
