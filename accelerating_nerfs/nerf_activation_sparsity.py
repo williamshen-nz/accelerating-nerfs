@@ -78,7 +78,7 @@ def get_activation_sparsity():
         # Register hooks
         remove_hooks, num_zeros, totals, sparsities = register_hooks(radiance_field)
 
-        # Load test dataset, use num_downscales = 2 otherwise run OOM
+        # Load test dataset, use num_downscales = 2 otherwise run OOM.
         test_dataset = load_test_dataset(scene, num_downscales=2)
 
         # Render frames

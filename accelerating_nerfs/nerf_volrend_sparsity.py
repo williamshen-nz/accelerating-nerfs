@@ -81,8 +81,8 @@ def get_volrend_sparsity():
         # Monkey patch
         results = monkey_patch_volrend()
 
-        # Load test dataset, use num_downscales = 2 otherwise run OOM
-        test_dataset = load_test_dataset(scene, num_downscales=2)
+        # Load test dataset, use num_downscales = 1 to match renders
+        test_dataset = load_test_dataset(scene, num_downscales=1)
 
         # Render frames
         for idx in tqdm(range(len(test_dataset)), f"Rendering {scene} test images"):
