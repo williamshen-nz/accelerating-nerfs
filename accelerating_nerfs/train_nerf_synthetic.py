@@ -30,7 +30,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "--data_root",
     type=str,
-    default="/home/william/workspace/dl-hardware/nerfacc/nerf_synthetic",
+    default="/home/william/workspace/dl-hardware/accelerating-nerfs/nerf_synthetic",
     help="the root dir of the dataset",
 )
 parser.add_argument(
@@ -48,8 +48,8 @@ parser.add_argument(
 args = parser.parse_args()
 
 # training parameters
-max_steps = 20000
-eval_every = 2000
+max_steps = 50000
+eval_every = 10000
 init_batch_size = 1024
 target_sample_batch_size = 1 << 16
 # scene parameters
@@ -63,9 +63,6 @@ grid_nlvl = 1
 render_step_size = 5e-3
 
 for scene in NERF_SYNTHETIC_SCENES:
-    if scene in {"chair", "drums"}:
-        continue
-
     print(f"Training on {scene}")
     exp_dir = f"results/{scene}"
     os.makedirs(exp_dir, exist_ok=True)
