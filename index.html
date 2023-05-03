@@ -52,10 +52,43 @@
         </div>
     </div>
     <hr>
-    <h4 class="abstract">Abstract</h4>
-    <p>We want to make NeRFs go brrrr 🏎️🏎️🏎️</p>
+    <div class="abstract justify-content-center text-left">
+        <h4 class="text-center">Abstract</h4>
+        <p>
+            Neural Radiance Fields (NeRFs) have recently seen an explosion in interest, with significant interest not
+            only from computer vision and graphics researchers but also cinematographers, visual effects artists, and
+            roboticists.
+        </p>
+        <p>
+            Substantial efforts have been made to improve training and inference speeds, including algorithmic
+            improvements such as multiresolution hash tables (Instant NGP) and voxel grids (DVGO), as well as
+            architectural improvements such as using thousands of tiny MLPs (KiloNeRF) or extracting traditional 3D
+            representations such as polygons from a NeRF (MobileNeRF).
+        </p>
+        <p>
+            Despite this remarkable progress, limited attention has been paid to optimizing the dataflow and
+            investigating the hardware acceleration potential of NeRFs, particularly during inference.
+            The motivation of our project is to explore this untapped potential and decrease the computational
+            requirements of NeRF models.
+            We aim to answer the following key questions:
+        </p>
+        <ol>
+            <li>Which components of the NeRF pipeline (e.g. positional encoding, ray sampling, MLP, volumetric
+                rendering) are bottlenecks that are amenable to optimization and acceleration?
+            </li>
+            <li>Can we design hardware acceleration architectures to overcome these bottlenecks and better exploit
+                NeRF dataflows?
+            </li>
+            <li>How does this affect the performance of NeRF for metrics such as rendering quality, computational
+                resources, and energy usage?
+            </li>
+        </ol>
+    </div>
+    <hr>
     <div class="nerf-videos">
-        <div class="row justify-content-center">
+        <h4>Videos</h4>
+        Rendered from our NeRF implementation.
+        <div class="row justify-content-center" id="videos">
             <div class="col-sm-2 col-md-2 video-container">
                 <video src="assets/chair.mp4" autoplay loop muted></video>
                 <div class="video-title">Chair</div>

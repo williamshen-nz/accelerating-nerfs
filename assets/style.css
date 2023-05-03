@@ -6,6 +6,10 @@ p {
     margin-bottom: 0.5rem;
 }
 
+h4 {
+    font-weight: 600;
+}
+
 .main {
     margin-top: 3rem;
     margin-bottom: 4rem;
@@ -49,13 +53,17 @@ p {
 }
 
 .abstract {
-    margin-top: 2rem;
-    font-weight: 600;
+    max-width: 750px;
+    margin: 2rem auto;
 }
 
 .nerf-videos {
     max-width: 1300px;
-    margin: 1rem auto;
+    margin: 2rem auto;
+}
+
+#videos {
+    margin-top: 1rem;
 }
 
 /* Customize video layout */
