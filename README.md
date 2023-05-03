@@ -15,6 +15,7 @@ ___
     - [Training NeRFs](#training-nerfs)
     - [Rendering NeRFs](#rendering-nerfs)
     - [Evaluating Designs](#evaluating-designs)
+    - [Analysis](#analysis)
 - [Tips](#tips)
     - [Profiling Rendering Code](#profiling-rendering-code)
 
