@@ -1,4 +1,5 @@
 def load_mpl_style():
+    """Load a nicer matplotlib style"""
     import matplotlib as mpl
     import matplotlib.font_manager as font_manager
 

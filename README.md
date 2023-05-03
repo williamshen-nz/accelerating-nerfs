@@ -101,9 +101,12 @@ e.g. run `notebooks/Profile NeRF.ipynb` notebook in the Timeloop/Accelergy docke
 - NeRF Input Activation Sparsity
     1. Run the `accelerating_nerfs/nerf_activation_sparsity.py` script (this adds hooks to the FC layers)
     2. Process results in `notebooks/NeRF Activation Sparsity.ipynb` notebook
-- NeRF Weight Sparsity (we find that the weights are **not** sparse)
+- NeRF MLP Weight Sparsity (we find that the weights are **not** sparse)
     1. Run the `notebooks/NeRF Weight Sparsity.ipynb` notebook, which loads checkpoints and checks the sparsity of the
        weights.
+- NeRF Volumetric Rendering Weight Sparsity
+    1. Run the `accelerating_nerfs/nerf_volrend_sparsity.py` script
+    2. Process results in `notebooks/NeRF Volumetric Rendering Sparsity.ipynb` notebook
 
 ## Tips
 
