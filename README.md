@@ -118,3 +118,7 @@ e.g. run `notebooks/Profile NeRF.ipynb` notebook in the Timeloop/Accelergy docke
    (you can pip install it, `snakeviz profile.pstat`)
 
 If you're using PyCharm, it's suggested to use the `line_profiler_pycharm` package and plugin to profile.
+
+## Acknowledgements
+
+Our codebase uses the [nerfacc](https://github.com/KAIR-BAIR/nerfacc/) project to speed up NeRF training and rendering.
