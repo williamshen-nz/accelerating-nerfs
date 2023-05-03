@@ -86,7 +86,21 @@ Use the `accelerating_nerfs/render_nerf_synthetic.py` script to render images fr
 
 ### Evaluating Designs
 
-TODO: Add instructions for evaluating designs.
+TODO: Add instructions for evaluating designs in Timeloop and Accelergy.
+
+e.g. run `notebooks/Profile NeRF.ipynb` notebook in the Timeloop/Accelergy docker environment.
+
+### Analysis
+
+- NeRF Time Breakdown
+    1. Run the `accelerating_nerfs/render_nerf_synthetic.py` script
+    2. Process results in `notebooks/Time Breakdown.ipynb` notebook
+- NeRF Input Activation Sparsity
+    1. Run the `accelerating_nerfs/nerf_activation_sparsity.py` script (this adds hooks to the FC layers)
+    2. Process results in `notebooks/NeRF Activation Sparsity.ipynb` notebook
+- NeRF Weight Sparsity (we find that the weights are **not** sparse)
+    1. Run the `notebooks/NeRF Weight Sparsity.ipynb` notebook, which loads checkpoints and checks the sparsity of the
+       weights.
 
 ## Tips
 
