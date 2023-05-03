@@ -11,7 +11,7 @@ from accelerating_nerfs.utils import NERF_SYNTHETIC_SCENES, set_random_seed
 def get_checkpoint_pattern() -> str:
     project_root = get_project_root()
     checkpoint_dir = project_root / "nerf-synthetic-checkpoints/results"
-    checkpoint_pattern = f"{checkpoint_dir}/{{scene}}/nerf_20000.pt"
+    checkpoint_pattern = f"{checkpoint_dir}/{{scene}}/nerf_50000.pt"
     return checkpoint_pattern
 
 
@@ -51,4 +51,4 @@ def render_nerf_synthetic_all(
 
 if __name__ == "__main__":
     # When profiling, you need to set CUDA_LAUNCH_BLOCKING=1 to get accurate numbers
-    render_nerf_synthetic_all(num_downscales=1, max_num_scenes=1, profile=True, quantize=True)
+    render_nerf_synthetic_all(num_downscales=1, max_num_scenes=None, profile=False, quantize=False)

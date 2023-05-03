@@ -2,6 +2,7 @@
 Check number of zeros in the activations.
 """
 import json
+import os
 from collections import Counter, defaultdict
 from datetime import datetime
 
@@ -62,7 +63,8 @@ def get_activation_sparsity():
     checkpoint_pattern = get_checkpoint_pattern()
     scene_sparsity_results = {}
     now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    sparsity_path = f"{now}_sparsity.json"
+    os.makedirs("sparsity", exist_ok=True)
+    sparsity_path = f"sparsity/{now}_sparsity.json"
     all_layer_sparsities = defaultdict(list)
 
     for scene in NERF_SYNTHETIC_SCENES:
