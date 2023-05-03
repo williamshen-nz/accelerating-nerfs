@@ -1,6 +1,7 @@
 """
 Check number of zeros in the activations.
 """
+import json
 from collections import defaultdict
 
 import torch
@@ -58,11 +59,11 @@ def entrypoint(scene: str = "lego"):
             near_plane=near_plane,
             render_step_size=render_step_size,
             render_bkgd=render_bkgd,
-            # test options
+            # test optionss
             test_chunk_size=4096,
         )
 
-    print("Done")
+    print(num_non_zeros)
 
 
 if __name__ == "__main__":
