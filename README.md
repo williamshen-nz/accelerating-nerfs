@@ -31,6 +31,7 @@ and the other for Timeloop and Accelergy.
 Use this environment for training NeRFs and rendering images.
 
 **Python Environment**
+
 Create a virtual environment and install the dependencies. We suggest using conda.
 
 ```
@@ -50,6 +51,7 @@ pip install -r requirements.txt
 2. Unzip to the project root directory (at the level of README.md).
 
 **Expected directory structure**
+
 After you have downloaded the datasets and checkpoints, your directory structure should look like this:
 
 ```
