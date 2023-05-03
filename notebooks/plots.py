@@ -12,7 +12,8 @@ def load_mpl_style():
     mpl.rcParams["text.latex.preamble"] = r"\usepackage{amsmath}\usepackage{amssymb}"
     mpl.rcParams["axes.formatter.use_mathtext"] = True
     # set fontsize
-    mpl.rcParams["xtick.labelsize"] = 11
-    mpl.rcParams["ytick.labelsize"] = 11
-    mpl.rcParams["axes.labelsize"] = 11
-    mpl.rcParams["axes.titlesize"] = 12
+    mpl.rcParams["xtick.labelsize"] = 12
+    mpl.rcParams["ytick.labelsize"] = 12
+    mpl.rcParams["axes.labelsize"] = 12
+    mpl.rcParams["legend.fontsize"] = 12
+    mpl.rcParams["axes.titlesize"] = 14
