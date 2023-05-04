@@ -1,18 +1,18 @@
 
 DRAM [ Weights:256 (256) Inputs:32768 (32768) Outputs:128 (128) ] 
 -----------------------------------------------------------------
-| for N in [0:2)
+| for N in [0:4)
 
 shared_glb [ ] 
 --------------
-|   for N in [0:8)
-|     for N in [0:4) (Spatial-Y)
-|       for C in [0:8) (Spatial-X)
+|   for Q in [0:1)
+|     for N in [0:16) (Spatial-Y)
+|       for C in [0:16) (Spatial-X)
 
-pe_spad [ Weights:32 (32) ] 
+pe_spad [ Weights:16 (16) ] 
 ---------------------------
 |         for N in [0:2)
-|           for C in [0:32)
+|           for C in [0:16)
 
 weight_reg [ Weights:1 (1) ] 
 ----------------------------

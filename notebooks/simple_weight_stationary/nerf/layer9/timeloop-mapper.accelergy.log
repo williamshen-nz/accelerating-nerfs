@@ -26,10 +26,10 @@ Info: Parsing file /home/workspace/notebooks/simple_weight_stationary/arch/compo
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/soc_primitives.lib.yaml 
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/primitive_component.lib.yaml 
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/pim_primitive_component.lib.yaml 
-Info: Found non-numeric expression 5ns. Available bindings: {'datawidth': 16, 'meshX': 9, 'technology': '45nm', 'num_pipeline_stages': 2, 'latency': '5ns'} 
-WARN: Failed to evaluate "5ns". Setting system.simple_ws.PE[0..53].mac.latency="5ns". Available bindings: {'datawidth': 16, 'meshX': 9, 'technology': '45nm', 'num_pipeline_stages': 2, 'latency': '5ns'}
-Info: Found non-numeric expression 1ns. Available bindings: {'depth': 1, 'width': 16, 'meshX': 9, 'technology': '45nm', 'latency': '1ns'} 
-WARN: Failed to evaluate "1ns". Setting system.simple_ws.PE[0..53].weight_reg.latency="1ns". Available bindings: {'depth': 1, 'width': 16, 'meshX': 9, 'technology': '45nm', 'latency': '1ns'}
+Info: Found non-numeric expression 5ns. Available bindings: {'datawidth': 16, 'meshX': 16, 'technology': '45nm', 'num_pipeline_stages': 2, 'latency': '5ns'} 
+WARN: Failed to evaluate "5ns". Setting system.simple_ws.PE[0..255].mac.latency="5ns". Available bindings: {'datawidth': 16, 'meshX': 16, 'technology': '45nm', 'num_pipeline_stages': 2, 'latency': '5ns'}
+Info: Found non-numeric expression 1ns. Available bindings: {'depth': 1, 'width': 16, 'meshX': 16, 'technology': '45nm', 'latency': '1ns'} 
+WARN: Failed to evaluate "1ns". Setting system.simple_ws.PE[0..255].weight_reg.latency="1ns". Available bindings: {'depth': 1, 'width': 16, 'meshX': 16, 'technology': '45nm', 'latency': '1ns'}
 Info: Found non-numeric expression 65nm. Available bindings: {'type': 'LPDDR4', 'width': 64, 'block-size': 4, 'word-bits': 16, 'technology': '65nm'} 
 WARN: Failed to evaluate "65nm". Setting system.DRAM.technology="65nm". Available bindings: {'type': 'LPDDR4', 'width': 64, 'block-size': 4, 'word-bits': 16, 'technology': '65nm'}
 Info: Calculated "log(memory_depth)" = 5.2574953720277815 
@@ -43,8 +43,8 @@ table-based-plug-ins Identifies a set of tables named:  test_tables
 Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/dummy_tables/dummy.estimator.yaml 
 Info: CACTI plug-in... Querying CACTI for request:
  {'class_name': 'SRAM', 'attributes': OrderedDict([('technology', '45nm'), ('width', 64), ('depth', 16384), ('n_rdwr_ports', 2), ('n_banks', 32), ('n_rd_ports', 0), ('n_wr_ports', 0), ('latency', '5ns')]), 'action_name': 'write', 'arguments': {'data_delta': 0, 'address_delta': 0}}
-copy  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/default_SRAM.cfg  to  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_02_22_33_04_SRAM.cfg
-CACTI plug-in removing temp file:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_02_22_33_04_SRAM.cfg
+copy  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/default_SRAM.cfg  to  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_04_19_57_28_SRAM.cfg
+CACTI plug-in removing temp file:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_04_19_57_28_SRAM.cfg
 Warn: No action counts are specified as yaml input 
 Info: flattened architecture is saved to: ./timeloop-mapper.flattened_architecture.yaml 
 Info: energy reference table is saved to: ./timeloop-mapper.ERT.yaml 

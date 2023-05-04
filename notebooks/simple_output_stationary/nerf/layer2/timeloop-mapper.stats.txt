@@ -151,7 +151,7 @@ Level 3
     MAPPING
     -------
     Loop nest:
-      for N in [0:4)
+      for N in [0:64)
 
     STATS
     -----
@@ -207,7 +207,7 @@ Level 4
     -------
     Loop nest:
       for C in [0:4)
-        for N in [0:32)
+        for N in [0:2)
 
     STATS
     -----
@@ -262,7 +262,7 @@ Level 5
     MAPPING
     -------
     Loop nest:
-      for M in [0:4)
+      for M in [0:2)
         for C in [0:4)
           for M in [0:16) (Spatial-Y)
             for C in [0:16) (Spatial-X)
@@ -320,7 +320,7 @@ Level 6
     MAPPING
     -------
     Loop nest:
-      for M in [0:4)
+      for M in [0:8)
 
     STATS
     -----

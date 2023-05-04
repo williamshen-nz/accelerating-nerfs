@@ -1,0 +1,244 @@
+{
+    "eyeriss_like": {
+        "summary": {
+            "total_area": 0.0,
+            "total_energy": 1211.45,
+            "total_cycle": 1136384.0,
+            "num_params": 595844,
+            "macs": 593450,
+            "activation_size": 2300.0
+        },
+        "layer_summary": {
+            "1": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer1",
+                "total_area": 0.0,
+                "total_energy": 21.38,
+                "total_cycle": 21504,
+                "num": 1,
+                "energy": 21.38,
+                "area": 0.0,
+                "cycle": 21504,
+                "gflops": 190.48,
+                "utilization": 0.57,
+                "edp": 0.46,
+                "shape": {
+                    "C": 63,
+                    "M": 256,
+                    "N": 128
+                }
+            },
+            "2": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer2",
+                "total_area": 0.0,
+                "total_energy": 442.53999999999996,
+                "total_cycle": 917504,
+                "num": 7,
+                "energy": 63.22,
+                "area": 0.0,
+                "cycle": 131072,
+                "gflops": 127.75,
+                "utilization": 0.38,
+                "edp": 8.29,
+                "shape": {
+                    "C": 256,
+                    "M": 256,
+                    "N": 128
+                }
+            },
+            "6": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer6",
+                "total_area": 0.0,
+                "total_energy": 107.75,
+                "total_cycle": 118784,
+                "num": 1,
+                "energy": 107.75,
+                "area": 0.0,
+                "cycle": 118784,
+                "gflops": 175.72,
+                "utilization": 0.52,
+                "edp": 12.8,
+                "shape": {
+                    "C": 319,
+                    "M": 256,
+                    "N": 128
+                }
+            },
+            "9": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer9",
+                "total_area": 0.0,
+                "total_energy": 5.64,
+                "total_cycle": 4096,
+                "num": 1,
+                "energy": 5.64,
+                "area": 0.0,
+                "cycle": 4096,
+                "gflops": 15.97,
+                "utilization": 0.05,
+                "edp": 0.0231,
+                "shape": {
+                    "C": 256,
+                    "M": 1,
+                    "N": 128
+                }
+            },
+            "11": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer11",
+                "total_area": 0.0,
+                "total_energy": 631.07,
+                "total_cycle": 72448,
+                "num": 1,
+                "energy": 631.07,
+                "area": 0.0,
+                "cycle": 72448,
+                "gflops": 127.77,
+                "utilization": 0.38,
+                "edp": 45.7,
+                "shape": {
+                    "C": 283,
+                    "M": 128,
+                    "N": 128
+                }
+            },
+            "12": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer12",
+                "total_area": 0.0,
+                "total_energy": 3.07,
+                "total_cycle": 2048,
+                "num": 1,
+                "energy": 3.07,
+                "area": 0.0,
+                "cycle": 2048,
+                "gflops": 47.81,
+                "utilization": 0.14,
+                "edp": 0.00629,
+                "shape": {
+                    "C": 128,
+                    "M": 3,
+                    "N": 128
+                }
+            }
+        },
+        "results": "/home/workspace/notebooks/profile_results/eyeriss_like_results.json"
+    },
+    "simple_weight_stationary": {
+        "summary": {
+            "total_area": 0.0,
+            "total_energy": 1143.2300000000002,
+            "total_cycle": 4059456.0,
+            "num_params": 595844,
+            "macs": 593450,
+            "activation_size": 2300.0
+        },
+        "layer_summary": {
+            "1": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer1",
+                "total_area": 0.0,
+                "total_energy": 39.18,
+                "total_cycle": 57344,
+                "num": 1,
+                "energy": 39.18,
+                "area": 0.0,
+                "cycle": 57344,
+                "gflops": 71.43,
+                "utilization": 0.67,
+                "edp": 2.25,
+                "shape": {
+                    "C": 63,
+                    "M": 256,
+                    "N": 128
+                }
+            },
+            "2": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer2",
+                "total_area": 0.0,
+                "total_energy": 756.35,
+                "total_cycle": 229376,
+                "num": 7,
+                "energy": 108.05,
+                "area": 0.0,
+                "cycle": 32768,
+                "gflops": 511.0,
+                "utilization": 1.0,
+                "edp": 3.54,
+                "shape": {
+                    "C": 256,
+                    "M": 256,
+                    "N": 128
+                }
+            },
+            "6": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer6",
+                "total_area": 0.0,
+                "total_energy": 183.72,
+                "total_cycle": 2613248,
+                "num": 1,
+                "energy": 183.72,
+                "area": 0.0,
+                "cycle": 2613248,
+                "gflops": 7.99,
+                "utilization": 0.07,
+                "edp": 480.0,
+                "shape": {
+                    "C": 319,
+                    "M": 256,
+                    "N": 128
+                }
+            },
+            "9": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer9",
+                "total_area": 0.0,
+                "total_energy": 4.57,
+                "total_cycle": 128,
+                "num": 1,
+                "energy": 4.57,
+                "area": 0.0,
+                "cycle": 128,
+                "gflops": 511.0,
+                "utilization": 1.0,
+                "edp": 0.000584,
+                "shape": {
+                    "C": 256,
+                    "M": 1,
+                    "N": 128
+                }
+            },
+            "11": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer11",
+                "total_area": 0.0,
+                "total_energy": 156.03,
+                "total_cycle": 1159168,
+                "num": 1,
+                "energy": 156.03,
+                "area": 0.0,
+                "cycle": 1159168,
+                "gflops": 7.99,
+                "utilization": 0.07,
+                "edp": 181.0,
+                "shape": {
+                    "C": 283,
+                    "M": 128,
+                    "N": 128
+                }
+            },
+            "12": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer12",
+                "total_area": 0.0,
+                "total_energy": 3.38,
+                "total_cycle": 192,
+                "num": 1,
+                "energy": 3.38,
+                "area": 0.0,
+                "cycle": 192,
+                "gflops": 510.0,
+                "utilization": 1.0,
+                "edp": 0.000648,
+                "shape": {
+                    "C": 128,
+                    "M": 3,
+                    "N": 128
+                }
+            }
+        },
+        "results": "/home/workspace/notebooks/profile_results/simple_weight_stationary_results.json"
+    }
+}

@@ -1,0 +1,47 @@
+    _                _                      
+   / \   ___ ___ ___| | ___ _ __ __ _ _   _ 
+  / _ \ / __/ __/ _ \ |/ _ \ '__/ _` | | | |
+ / ___ \ (_| (_|  __/ |  __/ | | (_| | |_| |
+/_/   \_\___\___\___|_|\___|_|  \__, |\__, |
+                                |___/ |___/ 
+
+Info: generating outputs according to the following specified output flags... 
+ Please use the -f flag to update the preference (default to all output files) 
+{'ERT': 1, 'ERT_summary': 1, 'ART': 1, 'ART_summary': 1, 'energy_estimation': 1, 'flattened_arch': 1}
+Info: config file located: /home/workspace/.config/accelergy/accelergy_config.yaml 
+config file content: 
+ {'version': 0.3, 'compound_components': [], 'estimator_plug_ins': ['/usr/local/share/accelergy/estimation_plug_ins'], 'primitive_components': ['/usr/local/share/accelergy/primitive_component_libs'], 'table_plug_ins': {'roots': ['/usr/local/share/accelergy/estimation_plug_ins/accelergy-table-based-plug-ins/set_of_table_templates']}}
+Warn: Cannot recognize the top key "mapper" in file /home/workspace/notebooks/simba_like/mapper/mapper.yaml 
+Warn: Cannot recognize the top key "architecture_constraints" in file /home/workspace/notebooks/simba_like/constraints/simba_like_arch_constraints.yaml 
+Warn: Cannot recognize the top key "mapspace_constraints" in file /home/workspace/notebooks/simba_like/constraints/simba_like_map_constraints.yaml 
+Warn: Cannot recognize the top key "problem" in file /home/workspace/notebooks/workloads/nerf/nerf_layer2.yaml 
+Info: Parsing file /home/workspace/notebooks/simba_like/arch/simba_like.yaml for architecture info 
+Info: Found non-numeric expression 45nm. Available bindings: {'datawidth': 8, 'word-bits': 8, 'technology': '45nm'} 
+WARN: Failed to evaluate "45nm". Setting System.technology="45nm". Available bindings: {'datawidth': 8, 'word-bits': 8, 'technology': '45nm'}
+Info: Found non-numeric expression LPDDR4. Available bindings: {'type': 'LPDDR4', 'width': 64, 'block-size': 4, 'word-bits': 16, 'datawidth': 8, 'technology': '45nm'} 
+WARN: Failed to evaluate "LPDDR4". Setting variables.type="LPDDR4". Available bindings: {'name': 'DRAM', 'class': 'DRAM', 'attributes': {'type': 'LPDDR4', 'width': 64, 'block-size': 4, 'word-bits': 16, 'datawidth': 8, 'technology': '45nm'}}
+Info: Parsing file /home/workspace/notebooks/simba_like/arch/components/lmac.yaml for compound_components info 
+Info: Parsing file /home/workspace/notebooks/simba_like/arch/components/reg_storage.yaml for compound_components info 
+Info: Parsing file /home/workspace/notebooks/simba_like/arch/components/smartbuffer_RF.yaml for compound_components info 
+Info: Parsing file /home/workspace/notebooks/simba_like/arch/components/smartbuffer_SRAM.yaml for compound_components info 
+Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/soc_primitives.lib.yaml 
+Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/primitive_component.lib.yaml 
+Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/pim_primitive_component.lib.yaml 
+Info: Found non-numeric expression 1ns. Available bindings: {'depth': 1, 'word-bits': 8, 'cluster-size': 64, 'num-ports': 2, 'meshX': 16, 'datawidth': 8, 'technology': '45nm', 'latency': '1ns', 'width': 16} 
+WARN: Failed to evaluate "1ns". Setting System.ws.PE[0..15].PEWeightRegs[0..15].latency="1ns". Available bindings: {'depth': 1, 'word-bits': 8, 'cluster-size': 64, 'num-ports': 2, 'meshX': 16, 'datawidth': 8, 'technology': '45nm', 'latency': '1ns', 'width': 16}
+Info: Found non-numeric expression 5ns. Available bindings: OrderedDict([('technology', '45nm'), ('width', 16), ('depth', 12), ('n_rdwr_ports', 2), ('n_banks', 1), ('n_ports', 2), ('latency', '5ns')]) 
+WARN: Failed to evaluate "5ns". Setting storage.latency="5ns". Available bindings: OrderedDict([('technology', '45nm'), ('width', 16), ('depth', 12), ('n_rdwr_ports', 2), ('n_banks', 1), ('n_ports', 2), ('latency', '5ns')])
+Info: Calculated "log(memory_depth)" = 2.4849066497880004 
+Info: Calculated "n_banks" = 1 
+Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti.estimator.yaml 
+Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-aladdin-plug-in/aladdin.estimator.yaml 
+Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-table-based-plug-ins/table.estimator.yaml 
+table-based-plug-ins Identifies a set of tables named:  test_tables
+Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/dummy_tables/dummy.estimator.yaml 
+Warn: No action counts are specified as yaml input 
+Info: flattened architecture is saved to: ./timeloop-mapper.flattened_architecture.yaml 
+Info: energy reference table is saved to: ./timeloop-mapper.ERT.yaml 
+Info: energy reference table summary is saved to: ./timeloop-mapper.ERT_summary.yaml 
+Warn: no runtime energy estimations are generated... not generating energy_estimation.yaml 
+Info: area reference table is saved to: ./timeloop-mapper.ART.yaml 
+Info: area reference table summary is saved to: ./timeloop-mapper.ART_summary.yaml 

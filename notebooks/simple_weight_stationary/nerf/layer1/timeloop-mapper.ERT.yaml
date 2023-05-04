@@ -1,7 +1,7 @@
 ERT:
   version: 0.3
   tables:
-  - name: system.simple_ws.PE[0..53].mac
+  - name: system.simple_ws.PE[0..255].mac
     actions:
     - name: mac_random
       arguments: null
@@ -26,7 +26,7 @@ ERT:
     - name: idle
       arguments: null
       energy: 0
-  - name: system.simple_ws.PE[0..53].pe_spad
+  - name: system.simple_ws.PE[0..255].pe_spad
     actions:
     - name: write
       arguments:
@@ -71,17 +71,17 @@ ERT:
     - name: idle
       arguments: null
       energy: 0.02363
-  - name: system.simple_ws.PE[0..53].weight_reg
+  - name: system.simple_ws.PE[0..255].weight_reg
     actions:
     - name: access
       arguments: null
       energy: 0.009
-  - name: system.simple_ws.PE[0..53].input_activation_reg
+  - name: system.simple_ws.PE[0..255].input_activation_reg
     actions:
     - name: access
       arguments: null
       energy: 0.009
-  - name: system.simple_ws.PE[0..53].output_activation_reg
+  - name: system.simple_ws.PE[0..255].output_activation_reg
     actions:
     - name: access
       arguments: null
