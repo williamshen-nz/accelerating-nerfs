@@ -1,0 +1,32 @@
+Traceback (most recent call last):
+  File "/usr/local/bin/accelergy", line 5, in <module>
+    from accelergy.accelergy_console import main
+  File "/usr/local/lib/python3.8/dist-packages/accelergy/accelergy_console.py", line 23, in <module>
+    from accelergy.raw_inputs_2_dicts import RawInputs2Dicts
+  File "/usr/local/lib/python3.8/dist-packages/accelergy/raw_inputs_2_dicts.py", line 1, in <module>
+    from yaml import load
+  File "/usr/local/lib/python3.8/dist-packages/yaml/__init__.py", line 8, in <module>
+    from .loader import *
+  File "/usr/local/lib/python3.8/dist-packages/yaml/loader.py", line 8, in <module>
+    from .constructor import *
+  File "/usr/local/lib/python3.8/dist-packages/yaml/constructor.py", line 163, in <module>
+    class SafeConstructor(BaseConstructor):
+  File "/usr/local/lib/python3.8/dist-packages/yaml/constructor.py", line 302, in SafeConstructor
+    timestamp_regexp = re.compile(
+  File "/usr/lib/python3.8/re.py", line 252, in compile
+    return _compile(pattern, flags)
+  File "/usr/lib/python3.8/re.py", line 304, in _compile
+    p = sre_compile.compile(pattern, flags)
+  File "/usr/lib/python3.8/sre_compile.py", line 764, in compile
+    p = sre_parse.parse(p, flags)
+  File "/usr/lib/python3.8/sre_parse.py", line 948, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+  File "/usr/lib/python3.8/sre_parse.py", line 443, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+  File "/usr/lib/python3.8/sre_parse.py", line 511, in _parse
+    sourceget()
+  File "/usr/lib/python3.8/sre_parse.py", line 256, in get
+    self.__next()
+  File "/usr/lib/python3.8/sre_parse.py", line 236, in __next
+    char = self.decoded_string[index]
+KeyboardInterrupt

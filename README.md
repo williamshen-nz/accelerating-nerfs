@@ -1,8 +1,10 @@
 # Accelerating NeRFs: Optimizing Neural Radiance Fields with Specialized Hardware Architectures
 
-#### [Project Website](https://williamshen-nz.github.io/accelerating-nerfs/)
+### [Project Website](https://williamshen-nz.github.io/accelerating-nerfs/)
 
 NeRFs are slow, we are trying to accelerate them! 🏎💨
+
+<img src="assets/nerf.gif" max-width="100%" height="auto" />
 
 ___
 
@@ -28,7 +30,9 @@ and the other for Timeloop and Accelergy.
 
 ### NeRF Setup
 
-Use this environment for training NeRFs and rendering images.
+Use this environment for training NeRFs and rendering images. You will need a NVIDIA GPU to train and render NeRFs in
+a feasible amount of time. CPU is not supported (though it may work with some modifications). The codebase was tested on
+Ubuntu 20.04 with Python 3.9 and a RTX3090 running CUDA 11.7.
 
 **Python Environment**
 
@@ -77,34 +81,43 @@ export DOCKER_ARCH=amd64
 docker-compose up
 ```
 
+Open the Jupyter notebook via the URL printed in the terminal. The notebooks are located in the `notebooks` directory.
+
 ## Usage
 
 ### Training NeRFs
 
-Use the `accelerating_nerfs/train_nerf_synthetic.py` script to train NeRFs on the NeRF synthetic dataset.
+Use the `accelerating_nerfs/train_nerf_synthetic.py` script to train NeRFs on the NeRF synthetic dataset. Follow the
+instructions in [NeRF Setup](#nerf-setup) to download the dataset. You can also download the trained checkpoints
+(trained for 50k steps) using the link above.
 
 ### Rendering NeRFs
 
-Use the `accelerating_nerfs/render_nerf_synthetic.py` script to render images from a trained NeRF.
+Use the `accelerating_nerfs/render_nerf_synthetic.py` script to render images from a trained NeRF. You need to have
+the dataset downloaded and NeRFs trained to run this script.
 
 ### Evaluating Designs
 
-TODO: Add instructions for evaluating designs in Timeloop and Accelergy.
+Use the `notebooks/Profile NeRF.ipynb` notebook to evaluate designs. You need to use the Timeloop and Accelergy docker
+environment to run this notebook. To do so, follow the instructions
+in [Timeloop and Accelergy Setup](#timeloop-and-accelergy-setup).
 
-e.g. run `notebooks/Profile NeRF.ipynb` notebook in the Timeloop/Accelergy docker environment.
+You can check out the architecture designs in the `notebooks/designs` directory.
 
-### Analysis
+### NeRF Analysis
 
-- NeRF Time Breakdown
+The analysis notebooks will save the figures to the `notebooks/figures` directory.
+
+- NeRF Rendering Time Breakdown
     1. Run the `accelerating_nerfs/render_nerf_synthetic.py` script
     2. Process results in `notebooks/Time Breakdown.ipynb` notebook
-- NeRF Input Activation Sparsity
+- NeRF Input Activation Sparsity (activations are sparse)
     1. Run the `accelerating_nerfs/nerf_activation_sparsity.py` script (this adds hooks to the FC layers)
     2. Process results in `notebooks/NeRF Activation Sparsity.ipynb` notebook
 - NeRF MLP Weight Sparsity (we find that the weights are **not** sparse)
     1. Run the `notebooks/NeRF Weight Sparsity.ipynb` notebook, which loads checkpoints and checks the sparsity of the
        weights.
-- NeRF Volumetric Rendering Weight Sparsity
+- NeRF Volumetric Rendering Weight Sparsity (weights are somewhat sparse)
     1. Run the `accelerating_nerfs/nerf_volrend_sparsity.py` script
     2. Process results in `notebooks/NeRF Volumetric Rendering Sparsity.ipynb` notebook
 

@@ -5,6 +5,7 @@ Vanilla NeRF that uses MLP.
 """
 
 import math
+import warnings
 from typing import Callable, Optional
 
 import torch
@@ -239,3 +240,27 @@ class VanillaNeRF(nn.Module):
         with profiler.profile("nerf.forward.relu", sigma.shape[0]):
             sigma_act = F.relu(sigma)
         return rgb_act, sigma_act
+
+
+def patch_forward(model: VanillaNeRF) -> None:
+    """Patch the forward of VanillaNeRF to also pass the condition. Use only for debugging purposes."""
+    assert isinstance(model, VanillaNeRF)
+    model.old_forward = model.forward
+
+    def new_forward(self, x):
+        return self.old_forward(x, x)
+
+    model.forward = new_forward.__get__(model)
+    warnings.warn(
+        "patched forward of VanillaNeRF to also pass the condition. "
+        "You should only use this for debugging or with Timeloop and Accelergy"
+    )
+
+
+if __name__ == "__main__":
+    from torchsummary import summary
+
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    nerf = VanillaNeRF().to(device)
+    patch_forward(nerf)
+    summary(nerf, input_size=(1, 3))

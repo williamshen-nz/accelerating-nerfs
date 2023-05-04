@@ -1,0 +1,76 @@
+    _                _                      
+   / \   ___ ___ ___| | ___ _ __ __ _ _   _ 
+  / _ \ / __/ __/ _ \ |/ _ \ '__/ _` | | | |
+ / ___ \ (_| (_|  __/ |  __/ | | (_| | |_| |
+/_/   \_\___\___\___|_|\___|_|  \__, |\__, |
+                                |___/ |___/ 
+
+Info: generating outputs according to the following specified output flags... 
+ Please use the -f flag to update the preference (default to all output files) 
+{'ERT': 1, 'ERT_summary': 1, 'ART': 1, 'ART_summary': 1, 'energy_estimation': 1, 'flattened_arch': 1}
+Info: config file located: /home/workspace/.config/accelergy/accelergy_config.yaml 
+config file content: 
+ {'version': 0.3, 'compound_components': [], 'estimator_plug_ins': ['/usr/local/share/accelergy/estimation_plug_ins'], 'primitive_components': ['/usr/local/share/accelergy/primitive_component_libs'], 'table_plug_ins': {'roots': ['/usr/local/share/accelergy/estimation_plug_ins/accelergy-table-based-plug-ins/set_of_table_templates']}}
+Warn: Cannot recognize the top key "mapper" in file /home/workspace/notebooks/eyeriss_like/mapper/mapper.yaml 
+Warn: Cannot recognize the top key "architecture_constraints" in file /home/workspace/notebooks/eyeriss_like/constraints/eyeriss_like_arch_constraints.yaml 
+Warn: Cannot recognize the top key "mapspace_constraints" in file /home/workspace/notebooks/eyeriss_like/constraints/eyeriss_like_map_constraints.yaml 
+Warn: Cannot recognize the top key "problem" in file /home/workspace/notebooks/workloads/nerf/nerf_layer2.yaml 
+Info: Parsing file /home/workspace/notebooks/eyeriss_like/arch/eyeriss_like.yaml for architecture info 
+Info: Found non-numeric expression 45nm. Available bindings: {'technology': '45nm'} 
+WARN: Failed to evaluate "45nm". Setting system.eyeriss.technology="45nm". Available bindings: {'technology': '45nm'}
+Info: Found non-numeric expression LPDDR4. Available bindings: {'type': 'LPDDR4', 'width': 64, 'block-size': 4, 'word-bits': 16} 
+WARN: Failed to evaluate "LPDDR4". Setting variables.type="LPDDR4". Available bindings: {'name': 'DRAM', 'class': 'DRAM', 'attributes': {'type': 'LPDDR4', 'width': 64, 'block-size': 4, 'word-bits': 16}}
+Info: Parsing file /home/workspace/notebooks/eyeriss_like/arch/components/smartbuffer_RF.yaml for compound_components info 
+Info: Parsing file /home/workspace/notebooks/eyeriss_like/arch/components/smartbuffer_SRAM.yaml for compound_components info 
+Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/soc_primitives.lib.yaml 
+Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/primitive_component.lib.yaml 
+Traceback (most recent call last):
+  File "/usr/local/bin/accelergy", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/dist-packages/accelergy/accelergy_console.py", line 164, in main
+    run()
+  File "/usr/local/lib/python3.8/dist-packages/accelergy/accelergy_console.py", line 73, in run
+    raw_dicts = RawInputs2Dicts(raw_input_info)
+  File "/usr/local/lib/python3.8/dist-packages/accelergy/raw_inputs_2_dicts.py", line 21, in __init__
+    self.load_and_construct_dicts()
+  File "/usr/local/lib/python3.8/dist-packages/accelergy/raw_inputs_2_dicts.py", line 111, in load_and_construct_dicts
+    self.primitive_classes_input_parser()
+  File "/usr/local/lib/python3.8/dist-packages/accelergy/raw_inputs_2_dicts.py", line 370, in primitive_classes_input_parser
+    self.expand_primitive_component_lib_info(pc_path)
+  File "/usr/local/lib/python3.8/dist-packages/accelergy/raw_inputs_2_dicts.py", line 378, in expand_primitive_component_lib_info
+    primitive_component_list = load(primitive_component_list_obj, accelergy_loader)
+  File "/usr/local/lib/python3.8/dist-packages/yaml/__init__.py", line 114, in load
+    return loader.get_single_data()
+  File "/usr/local/lib/python3.8/dist-packages/yaml/constructor.py", line 41, in get_single_data
+    node = self.get_single_node()
+  File "/usr/local/lib/python3.8/dist-packages/yaml/composer.py", line 36, in get_single_node
+    document = self.compose_document()
+  File "/usr/local/lib/python3.8/dist-packages/yaml/composer.py", line 55, in compose_document
+    node = self.compose_node(None, None)
+  File "/usr/local/lib/python3.8/dist-packages/yaml/composer.py", line 84, in compose_node
+    node = self.compose_mapping_node(anchor)
+  File "/usr/local/lib/python3.8/dist-packages/yaml/composer.py", line 133, in compose_mapping_node
+    item_value = self.compose_node(node, item_key)
+  File "/usr/local/lib/python3.8/dist-packages/yaml/composer.py", line 82, in compose_node
+    node = self.compose_sequence_node(anchor)
+  File "/usr/local/lib/python3.8/dist-packages/yaml/composer.py", line 111, in compose_sequence_node
+    node.value.append(self.compose_node(node, index))
+  File "/usr/local/lib/python3.8/dist-packages/yaml/composer.py", line 84, in compose_node
+    node = self.compose_mapping_node(anchor)
+  File "/usr/local/lib/python3.8/dist-packages/yaml/composer.py", line 127, in compose_mapping_node
+    while not self.check_event(MappingEndEvent):
+  File "/usr/local/lib/python3.8/dist-packages/yaml/parser.py", line 98, in check_event
+    self.current_event = self.state()
+  File "/usr/local/lib/python3.8/dist-packages/yaml/parser.py", line 425, in parse_block_mapping_first_key
+    return self.parse_block_mapping_key()
+  File "/usr/local/lib/python3.8/dist-packages/yaml/parser.py", line 432, in parse_block_mapping_key
+    return self.parse_block_node_or_indentless_sequence()
+  File "/usr/local/lib/python3.8/dist-packages/yaml/parser.py", line 271, in parse_block_node_or_indentless_sequence
+    return self.parse_node(block=True, indentless_sequence=True)
+  File "/usr/local/lib/python3.8/dist-packages/yaml/parser.py", line 319, in parse_node
+    if indentless_sequence and self.check_token(BlockEntryToken):
+  File "/usr/local/lib/python3.8/dist-packages/yaml/scanner.py", line 115, in check_token
+    while self.need_more_tokens():
+  File "/usr/local/lib/python3.8/dist-packages/yaml/scanner.py", line 152, in need_more_tokens
+    self.stale_possible_simple_keys()
+KeyboardInterrupt

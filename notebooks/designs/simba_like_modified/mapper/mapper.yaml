@@ -1,0 +1,8 @@
+mapper:
+  optimization-metrics: [ delay, energy ]
+  live-status: True
+  num-threads: 8
+  timeout: 30000  # was 15000
+  victory-condition: 10000  # was 3000
+  algorithm: random-pruned
+  max-permutations-per-if-visit: 16
