@@ -189,11 +189,13 @@ class Profiler:
         if os.path.exists(self.profiled_lib_dir):
             with open(self.profiled_lib_dir, "r") as fid:
                 self.profiled_lib = json.load(fid)
+            print(f"Loaded profiled lib from {self.profiled_lib_dir}")
 
     def write_profiled_lib(self):
         """Write profiled results to a json file."""
         with open(self.profiled_lib_dir, "w") as fid:
             json.dump(self.profiled_lib, fid, sort_keys=True, indent=4)
+        print(f"Saved profiled lib to {self.profiled_lib_dir}")
 
     def convert_model(self) -> Path:
         """Convert model to timeloop files and return mapped layer directory."""
@@ -231,6 +233,7 @@ class Profiler:
             f"{constraint_pth} "
             f"{self.base_dir / self.top_dir / self.sub_dir / self.sub_dir}_layer{layer_id}.yaml > /dev/null 2>&1"
         )
+        # print(timeloopcmd)
         return cwd, timeloopcmd
 
     def run_timeloop(self, layer_info: dict):

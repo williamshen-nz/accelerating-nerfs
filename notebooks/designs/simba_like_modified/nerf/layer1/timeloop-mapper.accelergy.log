@@ -11,19 +11,19 @@ Info: generating outputs according to the following specified output flags...
 Info: config file located: /home/workspace/.config/accelergy/accelergy_config.yaml 
 config file content: 
  {'version': 0.3, 'compound_components': [], 'estimator_plug_ins': ['/usr/local/share/accelergy/estimation_plug_ins'], 'primitive_components': ['/usr/local/share/accelergy/primitive_component_libs'], 'table_plug_ins': {'roots': ['/usr/local/share/accelergy/estimation_plug_ins/accelergy-table-based-plug-ins/set_of_table_templates']}}
-Warn: Cannot recognize the top key "mapper" in file /home/workspace/notebooks/designs/simba_like/mapper/mapper.yaml 
-Warn: Cannot recognize the top key "architecture_constraints" in file /home/workspace/notebooks/designs/simba_like/constraints/simba_like_arch_constraints.yaml 
-Warn: Cannot recognize the top key "mapspace_constraints" in file /home/workspace/notebooks/designs/simba_like/constraints/simba_like_map_constraints.yaml 
+Warn: Cannot recognize the top key "mapper" in file /home/workspace/notebooks/designs/simba_like_modified/mapper/mapper.yaml 
+Warn: Cannot recognize the top key "architecture_constraints" in file /home/workspace/notebooks/designs/simba_like_modified/constraints/simba_like_modified_arch_constraints.yaml 
+Warn: Cannot recognize the top key "mapspace_constraints" in file /home/workspace/notebooks/designs/simba_like_modified/constraints/simba_like_modified_map_constraints.yaml 
 Warn: Cannot recognize the top key "problem" in file /home/workspace/notebooks/workloads/nerf/nerf_layer1.yaml 
-Info: Parsing file /home/workspace/notebooks/designs/simba_like/arch/simba_like.yaml for architecture info 
+Info: Parsing file /home/workspace/notebooks/designs/simba_like_modified/arch/simba_like_modified.yaml for architecture info 
 Info: Found non-numeric expression 45nm. Available bindings: {'datawidth': 8, 'word-bits': 8, 'technology': '45nm'} 
 WARN: Failed to evaluate "45nm". Setting System.technology="45nm". Available bindings: {'datawidth': 8, 'word-bits': 8, 'technology': '45nm'}
 Info: Found non-numeric expression LPDDR4. Available bindings: {'type': 'LPDDR4', 'width': 64, 'block-size': 4, 'word-bits': 16, 'datawidth': 8, 'technology': '45nm'} 
 WARN: Failed to evaluate "LPDDR4". Setting variables.type="LPDDR4". Available bindings: {'name': 'DRAM', 'class': 'DRAM', 'attributes': {'type': 'LPDDR4', 'width': 64, 'block-size': 4, 'word-bits': 16, 'datawidth': 8, 'technology': '45nm'}}
-Info: Parsing file /home/workspace/notebooks/designs/simba_like/arch/components/lmac.yaml for compound_components info 
-Info: Parsing file /home/workspace/notebooks/designs/simba_like/arch/components/reg_storage.yaml for compound_components info 
-Info: Parsing file /home/workspace/notebooks/designs/simba_like/arch/components/smartbuffer_RF.yaml for compound_components info 
-Info: Parsing file /home/workspace/notebooks/designs/simba_like/arch/components/smartbuffer_SRAM.yaml for compound_components info 
+Info: Parsing file /home/workspace/notebooks/designs/simba_like_modified/arch/components/lmac.yaml for compound_components info 
+Info: Parsing file /home/workspace/notebooks/designs/simba_like_modified/arch/components/reg_storage.yaml for compound_components info 
+Info: Parsing file /home/workspace/notebooks/designs/simba_like_modified/arch/components/smartbuffer_RF.yaml for compound_components info 
+Info: Parsing file /home/workspace/notebooks/designs/simba_like_modified/arch/components/smartbuffer_SRAM.yaml for compound_components info 
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/soc_primitives.lib.yaml 
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/primitive_component.lib.yaml 
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/pim_primitive_component.lib.yaml 
