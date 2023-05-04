@@ -387,7 +387,7 @@ def test():
     profiler = Profiler(
         top_dir="workloads",
         sub_dir="alexnet",
-        timeloop_dir="simple_weight_stationary",
+        timeloop_dir="designs/simple_weight_stationary",
         arch_name="simple_weight_stationary",
         model=torchvision.models.alexnet(),
         input_size=(3, 224, 224),
