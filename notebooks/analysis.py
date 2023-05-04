@@ -13,7 +13,7 @@ from notebooks.notebook_utils import natural_sort
 
 
 def convert_nerf_to_timeloop(
-    model: VanillaNeRF, batch_size: int, top_dir: str = "workload", sub_dir: str = "nerf"
+    model: VanillaNeRF, batch_size: int, top_dir: str = "workloads", sub_dir: str = "nerf"
 ) -> str:
     """
     Convert a NeRF model to Timeloop problems using pytorch2timeloop.
@@ -38,6 +38,7 @@ def convert_nerf_to_timeloop(
         import pytorch2timeloop
     except ImportError:
         raise ImportError("Could not import pytorch2timeloop. Please make sure you are using the Docker environment.")
+    assert isinstance(model, VanillaNeRF), f"model must be a VanillaNeRF, got {type(model)}"
 
     layer_dir = Path(top_dir) / Path(sub_dir)
     # clear previous conversion results
@@ -54,10 +55,14 @@ def convert_nerf_to_timeloop(
         convert_fc=True,  # must convert FC as NeRF is all FCs
         exception_module_names=[],
     )
+
+    # Check layer directory is not empty
+    assert len(os.listdir(layer_dir)) > 0, f"Layer directory {layer_dir} is empty"
+    print(f"Converted VanillaNeRF model to Timeloop problems in {layer_dir}")
     return str(layer_dir)
 
 
-def load_nerf_layer_shapes(layer_dir: str = "workload/nerf") -> Dict[int, Dict[str, int]]:
+def load_nerf_layer_shapes(layer_dir: str = "workloads/nerf") -> Dict[int, Dict[str, int]]:
     """
     Load layer shape info from the result of the pytorch2timeloop converter.
 
@@ -168,7 +173,7 @@ def compute_layer_sparsities(sparsity_results: Dict[str, Dict[int, Dict[str, flo
 
 
 def add_sparsity_to_nerf_layers(
-    layer_to_avg_sparsity: Dict[int, float], layer_dir: str = "workload_nerf", dry_run: bool = False
+    layer_to_avg_sparsity: Dict[int, float], layer_dir: str = "workloads/nerf", dry_run: bool = False
 ) -> None:
     """
     Add sparsity (it's actually density) to the workload problems for each of the NeRF layers so Timeloop and Accelergy

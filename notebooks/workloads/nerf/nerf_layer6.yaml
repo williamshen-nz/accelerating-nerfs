@@ -11,6 +11,10 @@ problem:
     S: 1
     Wdilation: 1
     Wstride: 1
+    densities:
+      Inputs: 0.5034462237266509
+      Outputs: 0.5034462237266509
+      Weights: 1.0
   shape:
     coefficients:
     - default: 1
