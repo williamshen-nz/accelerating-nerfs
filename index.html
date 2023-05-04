@@ -53,7 +53,7 @@
         </div>
     </div>
     <hr>
-    <div class="abstract justify-content-center text-left">
+    <div class="text justify-content-center text-left" id="abstract">
         <h4 class="text-center">Abstract</h4>
         <p>
             Neural Radiance Fields (NeRFs) have recently seen an explosion in interest, with significant interest not
@@ -125,6 +125,24 @@
                 <div class="video-title">Ship</div>
             </div>
         </div>
+    </div>
+    <hr>
+    <div class="text-left" id="sparsity">
+        <h4 class="text-center">Activation Sparsity</h4>
+        <div class="text justify-content-center">
+            <p>
+                We depict the average and standard deviation of the input activation sparsities of the fully-connected
+                (FC) layers of NeRFs trained on the synthetic datasets.
+
+                Note that all FC layers use the ReLU activation function except fc_10, which does not have an
+                activation function.
+            </p>
+            <p>
+                We find the overall average sparsity is 60.3% across the FC layers, excluding fc_1 and fc_11.
+                Note that fc_1 receives the position-encoded ray samples while fc_11 receives the output from fc_10.
+            </p>
+        </div>
+        <img src="assets/activation-sparsity.png" alt="Activation Sparsity" class="img-fluid">
     </div>
     <hr>
     <p class="small-text">
