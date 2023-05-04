@@ -1,8 +1,13 @@
+"""
+Modified from Lab 1.
+"""
+
 import copy
 import json
 import os
 import shutil
 from pathlib import Path
+from typing import ClassVar, List, Optional, Tuple
 
 import pytorch2timeloop
 import torch
@@ -140,24 +145,27 @@ def count_activation_size(net, input_size=(1, 3, 224, 224), require_backward=Fal
 
 def profile_memory_cost(net, input_size=(1, 3, 224, 224), require_backward=False, activation_bits=32, batch_size=1):
     activation_size = count_activation_size(net, input_size, require_backward, activation_bits)
-
     memory_cost = activation_size * batch_size
     return memory_cost
 
 
-class Profiler(object):
+class Profiler:
+
+    # Metrics per layer to track
+    layer_metric_keys: ClassVar[List[str]] = ["energy", "area", "cycle", "gflops", "utilization", "edp"]
+
     def __init__(
         self,
-        sub_dir,
-        top_dir,
-        timeloop_dir,
-        arch_name,
-        model,
-        input_size,
-        batch_size,
-        convert_fc,
-        exception_module_names=None,
-        profiled_lib_dir="./profiled_lib.json",
+        sub_dir: str,
+        top_dir: str,
+        timeloop_dir: str,
+        arch_name: str,
+        model: torch.nn.Module,
+        input_size: Tuple[int, ...],
+        batch_size: int,
+        convert_fc: bool,
+        exception_module_names: Optional[List[str]] = None,
+        profiled_lib_dir_pattern: str = "./{arch_name}_profiled_lib.json",
     ):
         self.base_dir = Path(os.getcwd())
         self.sub_dir = sub_dir
@@ -170,20 +178,24 @@ class Profiler(object):
         self.convert_fc = convert_fc
         self.exception_module_names = exception_module_names
 
+        profiled_lib_dir = profiled_lib_dir_pattern.format(arch_name=self.arch_name)
         self.profiled_lib_dir = profiled_lib_dir
         self.profiled_lib = {}
         self.load_profiled_lib()
 
     def load_profiled_lib(self):
+        """Load existing profiled results in-place."""
         if os.path.exists(self.profiled_lib_dir):
             with open(self.profiled_lib_dir, "r") as fid:
                 self.profiled_lib = json.load(fid)
 
     def write_profiled_lib(self):
+        """Write profiled results to a json file."""
         with open(self.profiled_lib_dir, "w") as fid:
-            json.dump(self.profiled_lib, fid, sort_keys=True)
+            json.dump(self.profiled_lib, fid, sort_keys=True, indent=4)
 
-    def profile(self):
+    def convert_model(self) -> Path:
+        """Convert model to timeloop files and return mapped layer directory."""
         # clear previous conversion results
         layer_dir = self.base_dir / self.top_dir / self.sub_dir
         if layer_dir.exists():
@@ -198,7 +210,96 @@ class Profiler(object):
             self.convert_fc,
             self.exception_module_names,
         )
-        layer_files = os.listdir(layer_dir)
+        return layer_dir
+
+    def get_timeloop_cmd(self, layer_id: int, layer_info: dict) -> Tuple[str, str]:
+        """Get timeloop working directory and command."""
+        cwd = f"{self.base_dir / self.timeloop_dir / self.sub_dir / f'layer{layer_id}'}"
+        if "M" in layer_info[layer_id]["layer_dict"]["problem"]["instance"]:
+            constraint_pth = self.base_dir / self.timeloop_dir / "constraints/*.yaml"
+        else:
+            # depthwise
+            constraint_pth = self.base_dir / self.timeloop_dir / "constraints_dw/*.yaml"
+
+        arch_fname = f"{self.arch_name}.yaml"
+        timeloopcmd = (
+            f"timeloop-mapper "
+            f"{self.base_dir / self.timeloop_dir / 'arch' / arch_fname} "
+            f"{self.base_dir / self.timeloop_dir / 'arch/components/*.yaml'} "
+            f"{self.base_dir / self.timeloop_dir / 'mapper/mapper.yaml'} "
+            f"{constraint_pth} "
+            f"{self.base_dir / self.top_dir / self.sub_dir / self.sub_dir}_layer{layer_id}.yaml > /dev/null 2>&1"
+        )
+        return cwd, timeloopcmd
+
+    def run_timeloop(self, layer_info: dict):
+        """Run Timeloop and Accelergy in the required layers."""
+        # need to run timeloop on layers that are not already in the profiled_lib
+        for layer_id in layer_info.keys():
+            os.makedirs(self.base_dir / self.timeloop_dir / self.sub_dir / f"layer{layer_id}", exist_ok=True)
+        cmds_list = [
+            self.get_timeloop_cmd(layer_id, layer_info)
+            for layer_id in layer_info
+            if "energy" not in layer_info[layer_id]
+        ]
+        for cwd, cmd in tqdm(cmds_list, desc="running timeloop to get energy and latency..."):
+            os.chdir(cwd)
+            os.system(cmd)
+        os.chdir(self.base_dir)
+
+    def process_results(self, layer_info: dict):
+        """Process the timeloop results and update layer_info in-place."""
+        # process the results into layer_info
+        for layer_id in layer_info:
+            cur_layer_info = layer_info[layer_id]
+            if "energy" in cur_layer_info:
+                # the layer is in the profiler lib
+                continue
+
+            # check if results for the layer exists, skip if not (weird stuff going on)
+            stats_fname = (
+                self.base_dir / self.timeloop_dir / self.sub_dir / f"layer{layer_id}" / "timeloop-mapper.stats.txt"
+            )
+            if not stats_fname.exists():
+                print(f"CRITICAL WARNING: {stats_fname} does not exist, skipping...")
+                continue
+
+            if any(key in cur_layer_info for key in self.layer_metric_keys):
+                raise RuntimeError("check with willshen@. layer info already has some metrics")
+
+            # process results
+            with open(stats_fname, "r") as fid:
+                lines = fid.read().split("\n")[-50:]
+                for line in lines:
+                    line = line.lower()
+                    for key in self.layer_metric_keys:
+                        if not line.startswith(key):
+                            continue
+                        metric = line.split(": ")[1].split(" ")[0]
+                        cur_layer_info[key] = eval(metric)
+
+            # check all metrics are there
+            for key in self.layer_metric_keys:
+                if key not in cur_layer_info:
+                    raise RuntimeError(f"missing metric {key} for layer {layer_id}")
+
+    def populate_profiled_lib(self, layer_info: dict):
+        """Populate the profiled lib with the layer info."""
+        keys_to_include = (
+            ["layer_dict"]
+            + self.layer_metric_keys
+            + ["mapper_timeout", "mapper_algo", "mapper_victory_condition", "mapper_max_permutations"]
+        )
+        for layer_id in layer_info:
+            layer_name = layer_info[layer_id]["name"]
+            if layer_name not in self.profiled_lib:
+                info = {key: layer_info[layer_id][key] for key in keys_to_include}
+                self.profiled_lib[layer_name] = info
+
+    def profile(self):
+        """Profile the model."""
+        # Run the pytorch2timeloop converter
+        layer_dir = self.convert_model()
 
         # check duplicated layer info
         layer_info = {}
@@ -224,10 +325,8 @@ class Profiler(object):
                 layer_info[layer_id]["mapper_victory_condition"] = mapper_dict["mapper"]["victory-condition"]
                 layer_info[layer_id]["mapper_max_permutations"] = mapper_dict["mapper"]["max-permutations-per-if-visit"]
 
-        # check whether some layers have been profiled before and exist in the
-        # profiled_lib.
-        # sometimes the layer_dict are the same but name will be different, in
-        # that case make their name the same
+        # check whether some layers have been profiled before and exist in the profiled_lib.
+        # sometimes the layer_dict are the same but name will be different, in that case make their name the same
         for layer_id, info in layer_info.items():
             for profiled_name, profiled_info in self.profiled_lib.items():
                 if (
@@ -237,87 +336,19 @@ class Profiler(object):
                     and info["mapper_victory_condition"] == profiled_info["mapper_victory_condition"]
                     and info["mapper_max_permutations"] == profiled_info["mapper_max_permutations"]
                 ):
-                    layer_info[layer_id]["energy"] = profiled_info["energy"]
-                    layer_info[layer_id]["area"] = profiled_info["area"]
-                    layer_info[layer_id]["cycle"] = profiled_info["cycle"]
                     layer_info[layer_id]["name"] = profiled_name
+                    for key in self.layer_metric_keys:
+                        layer_info[layer_id][key] = profiled_info[key]
 
-        # run timeloop
-        print(f"running timeloop to get energy and latency...")
-        for layer_id in layer_info.keys():
-            os.makedirs(self.base_dir / self.timeloop_dir / self.sub_dir / f"layer{layer_id}", exist_ok=True)
+        # Run timeloop and process the results
+        self.run_timeloop(layer_info)
+        self.process_results(layer_info)
 
-        def get_cmd(layer_id):
-            cwd = f"{self.base_dir / self.timeloop_dir / self.sub_dir / f'layer{layer_id}'}"
-            if "M" in layer_info[layer_id]["layer_dict"]["problem"]["instance"]:
-                constraint_pth = self.base_dir / self.timeloop_dir / "constraints/*.yaml"
-            else:
-                # depthwise
-                constraint_pth = self.base_dir / self.timeloop_dir / "constraints_dw/*.yaml"
-
-            arch_fname = f"{self.arch_name}.yaml"
-            timeloopcmd = (
-                f"timeloop-mapper "
-                f"{self.base_dir / self.timeloop_dir / 'arch' / arch_fname} "
-                f"{self.base_dir / self.timeloop_dir / 'arch/components/*.yaml'} "
-                f"{self.base_dir / self.timeloop_dir / 'mapper/mapper.yaml'} "
-                f"{constraint_pth} "
-                f"{self.base_dir / self.top_dir / self.sub_dir / self.sub_dir}_layer{layer_id}.yaml > /dev/null 2>&1"
-            )
-            return [cwd, timeloopcmd]
-
-        cmds_list = []
-        for layer_id in layer_info.keys():
-            if "energy" in layer_info[layer_id].keys():
-                # the layer is in the profiler lib
-                continue
-            else:
-                cmds_list.append(get_cmd(layer_id))
-
-        for cwd, cmd in tqdm(cmds_list):
-            os.chdir(cwd)
-            os.system(cmd)
-        os.chdir(self.base_dir)
-
-        print(f"timeloop running finished!")
-
-        for layer_id in layer_info.keys():
-            if "energy" in layer_info[layer_id].keys():
-                # the layer is in the profiler lib
-                continue
-            with open(
-                self.base_dir / self.timeloop_dir / self.sub_dir / f"layer{layer_id}" / f"timeloop-mapper.stats.txt",
-                "r",
-            ) as fid:
-                lines = fid.read().split("\n")[-50:]
-                for line in lines:
-                    if line.startswith("Energy"):
-                        energy = line.split(": ")[1].split(" ")[0]
-                        layer_info[layer_id]["energy"] = eval(energy)
-                    elif line.startswith("Area"):
-                        area = line.split(": ")[1].split(" ")[0]
-                        layer_info[layer_id]["area"] = eval(area)
-                    elif line.startswith("Cycles"):
-                        cycle = line.split(": ")[1]
-                        layer_info[layer_id]["cycle"] = eval(cycle)
-
-        for layer_id in layer_info.keys():
-            layer_name = layer_info[layer_id]["name"]
-            if layer_name not in self.profiled_lib.keys():
-                info = {
-                    "layer_dict": layer_info[layer_id]["layer_dict"],
-                    "energy": layer_info[layer_id]["energy"],
-                    "area": layer_info[layer_id]["area"],
-                    "cycle": layer_info[layer_id]["cycle"],
-                    "mapper_timeout": layer_info[layer_id]["mapper_timeout"],
-                    "mapper_algo": layer_info[layer_id]["mapper_algo"],
-                    "mapper_victory_condition": layer_info[layer_id]["mapper_victory_condition"],
-                    "mapper_max_permutations": layer_info[layer_id]["mapper_max_permutations"],
-                }
-                self.profiled_lib[layer_name] = info
-
+        # Process layer info into profiled_lib and write to file
+        self.populate_profiled_lib(layer_info)
         self.write_profiled_lib()
 
+        # Create overall summary
         overall = {}
         total_energy = 0
         total_cycle = 0
@@ -345,6 +376,7 @@ def test():
         top_dir="workloads",
         sub_dir="alexnet",
         timeloop_dir="simple_weight_stationary",
+        arch_name="simple_weight_stationary",
         model=torchvision.models.alexnet(),
         input_size=(3, 224, 224),
         batch_size=1,
