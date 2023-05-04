@@ -14,7 +14,7 @@ config file content:
 Warn: Cannot recognize the top key "mapper" in file /home/workspace/notebooks/simple_output_stationary/mapper/mapper.yaml 
 Warn: Cannot recognize the top key "architecture_constraints" in file /home/workspace/notebooks/simple_output_stationary/constraints/simple_output_stationary_arch_constraints.yaml 
 Warn: Cannot recognize the top key "mapspace_constraints" in file /home/workspace/notebooks/simple_output_stationary/constraints/simple_output_stationary_map_constraints.yaml 
-Warn: Cannot recognize the top key "problem" in file /home/workspace/notebooks/workloads/nerf/nerf_layer2.yaml 
+Warn: Cannot recognize the top key "problem" in file /home/workspace/notebooks/workloads/nerf/nerf_layer9.yaml 
 Info: Parsing file /home/workspace/notebooks/simple_output_stationary/arch/simple_output_stationary.yaml for architecture info 
 Info: Found non-numeric expression 45nm. Available bindings: {'technology': '45nm'} 
 WARN: Failed to evaluate "45nm". Setting system.simple_ws.technology="45nm". Available bindings: {'technology': '45nm'}
@@ -43,12 +43,12 @@ table-based-plug-ins Identifies a set of tables named:  test_tables
 Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/dummy_tables/dummy.estimator.yaml 
 Info: CACTI plug-in... Querying CACTI for request:
  {'class_name': 'SRAM', 'attributes': OrderedDict([('technology', '45nm'), ('width', 16), ('depth', 192), ('n_rdwr_ports', 2), ('n_banks', 1), ('n_rd_ports', 0), ('n_wr_ports', 0), ('latency', '5ns')]), 'action_name': 'write', 'arguments': {'data_delta': 0, 'address_delta': 0}}
-copy  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/default_SRAM.cfg  to  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_04_16_36_33_SRAM.cfg
-CACTI plug-in removing temp file:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_04_16_36_33_SRAM.cfg
+copy  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/default_SRAM.cfg  to  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_04_16_37_09_SRAM.cfg
+CACTI plug-in removing temp file:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_04_16_37_09_SRAM.cfg
 Info: CACTI plug-in... Querying CACTI for request:
  {'class_name': 'SRAM', 'attributes': OrderedDict([('technology', '45nm'), ('width', 64), ('depth', 16384), ('n_rdwr_ports', 2), ('n_banks', 32), ('n_rd_ports', 0), ('n_wr_ports', 0), ('latency', '5ns')]), 'action_name': 'write', 'arguments': {'data_delta': 0, 'address_delta': 0}}
-copy  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/default_SRAM.cfg  to  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_04_16_36_33_SRAM.cfg
-CACTI plug-in removing temp file:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_04_16_36_33_SRAM.cfg
+copy  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/default_SRAM.cfg  to  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_04_16_37_09_SRAM.cfg
+CACTI plug-in removing temp file:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_04_16_37_09_SRAM.cfg
 Warn: No action counts are specified as yaml input 
 Info: flattened architecture is saved to: ./timeloop-mapper.flattened_architecture.yaml 
 Info: energy reference table is saved to: ./timeloop-mapper.ERT.yaml 
