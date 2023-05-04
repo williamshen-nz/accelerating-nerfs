@@ -30,7 +30,9 @@ and the other for Timeloop and Accelergy.
 
 ### NeRF Setup
 
-Use this environment for training NeRFs and rendering images.
+Use this environment for training NeRFs and rendering images. You will need a NVIDIA GPU to train and render NeRFs in
+a feasible amount of time. CPU is not supported (though it may work with some modifications). The codebase was tested on
+Ubuntu 20.04 with Python 3.9 and a RTX3090 running CUDA 11.7.
 
 **Python Environment**
 
