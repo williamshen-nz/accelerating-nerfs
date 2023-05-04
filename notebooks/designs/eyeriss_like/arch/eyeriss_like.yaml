@@ -71,6 +71,8 @@ architecture:
                   read_bandwidth: 2
                   write_bandwidth: 2
               - name: mac
+                # TODO: replace with a big regfile
+                #   might take more energy but be faster
                 class: intmac
                 attributes:
                   datawidth: 16

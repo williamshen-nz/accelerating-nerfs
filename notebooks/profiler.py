@@ -151,7 +151,6 @@ def profile_memory_cost(net, input_size=(1, 3, 224, 224), require_backward=False
 
 
 class Profiler:
-
     # Metrics per layer to track
     layer_metric_keys: ClassVar[List[str]] = ["energy", "area", "cycle", "gflops", "utilization", "edp"]
 
@@ -224,6 +223,12 @@ class Profiler:
             # depthwise
             constraint_pth = self.base_dir / self.timeloop_dir / "constraints_dw/*.yaml"
 
+        # Check if sparse_opt is enabled
+        sparse_opt_dir = self.base_dir / self.timeloop_dir / "sparse_opt"
+        include_sparse_opt = os.path.exists(sparse_opt_dir)
+        if include_sparse_opt:
+            print(f"Sparse optimization is enabled for {self.arch_name} and layer {layer_id}")
+
         arch_fname = f"{self.arch_name}.yaml"
         timeloopcmd = (
             f"timeloop-mapper "
@@ -231,9 +236,10 @@ class Profiler:
             f"{self.base_dir / self.timeloop_dir / 'arch/components/*.yaml'} "
             f"{self.base_dir / self.timeloop_dir / 'mapper/mapper.yaml'} "
             f"{constraint_pth} "
+            f"{sparse_opt_dir / '*.yaml'} " if include_sparse_opt else " "  # Important: keep the space at the end
             f"{self.base_dir / self.top_dir / self.sub_dir / self.sub_dir}_layer{layer_id}.yaml > /dev/null 2>&1"
         )
-        # print(timeloopcmd)
+        print(timeloopcmd)
         return cwd, timeloopcmd
 
     def run_timeloop(self, layer_info: dict):
