@@ -6,6 +6,7 @@ import copy
 import json
 import os
 import shutil
+from collections import defaultdict
 from pathlib import Path
 from typing import ClassVar, List, Optional, Tuple
 
@@ -296,7 +297,7 @@ class Profiler:
                 info = {key: layer_info[layer_id][key] for key in keys_to_include}
                 self.profiled_lib[layer_name] = info
 
-    def profile(self):
+    def profile(self) -> Tuple[dict, dict, dict]:
         """Profile the model."""
         # Run the pytorch2timeloop converter
         layer_dir = self.convert_model()
@@ -348,22 +349,33 @@ class Profiler:
         self.populate_profiled_lib(layer_info)
         self.write_profiled_lib()
 
-        # Create overall summary
-        overall = {}
-        total_energy = 0
-        total_cycle = 0
-
+        # Create overall summary and per-layer metrics
+        # Since we deduplicated layer info, we need to multiply the num back to get the totals
+        total_metrics = defaultdict(float)
+        layer_metrics = {}
         for layer_id, info in layer_info.items():
-            total_energy += info["energy"] * info["num"]
-            total_cycle += info["cycle"] * info["num"]
+            layer_metrics[layer_id] = {"name": info["name"]}
+            for metric in ["area", "energy", "cycle"]:
+                layer_total = info[metric] * info["num"]
+                total_metrics[f"total_{metric}"] += layer_total
+                layer_metrics[layer_id][f"total_{metric}"] = layer_total
 
-        overall["total_energy"] = total_energy
-        overall["total_cycle"] = total_cycle
-        overall["num_params"] = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
-        overall["macs"] = profile_macs(self.model, torch.randn([1] + list(self.input_size)))
-        overall["activation_size"] = count_activation_size(self.model, [1] + list(self.input_size))
+            # Add other layer metrics
+            layer_metrics[layer_id]["num"] = info["num"]
+            for key in self.layer_metric_keys:
+                layer_metrics[layer_id][key] = info[key]
 
-        return layer_info, overall
+        overall = {
+            **total_metrics,
+            # num_params for the whole model
+            "num_params": sum(p.numel() for p in self.model.parameters() if p.requires_grad),
+            # MACs for batch size 1
+            "macs": profile_macs(self.model, torch.randn([1] + list(self.input_size))),
+            # Activation size for batch size 1
+            "activation_size": count_activation_size(self.model, [1] + list(self.input_size)),
+        }
+
+        return layer_info, overall, layer_metrics
 
 
 def test():
