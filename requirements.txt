@@ -1,8 +1,9 @@
 numpy
-torch<2.0
+torch < 2.0
+torchsummary
 
 pycolmap
-opencv-python
+opencv - python
 imageio
 tqdm
 scipy
