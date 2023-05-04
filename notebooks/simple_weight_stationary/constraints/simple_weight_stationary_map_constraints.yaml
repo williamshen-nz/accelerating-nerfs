@@ -10,9 +10,9 @@ mapspace_constraints:
       type: temporal
       factors: R=1 S=1
     # intuitive optimization according to architecture dimensions
-    #- target: shared_glb
-    #  type: spatial
-    #  factors:  M=16 C=16
+    - target: shared_glb
+      type: spatial
+      factors:  M=16 C=16
     # intuitive optimization to not tile R and S at the DRAM level
     - target: DRAM
       type: temporal

@@ -29,7 +29,7 @@ architecture:
                 read_bandwidth: 16
                 write_bandwidth: 16
           subtree:
-          - name: PE[0..53]
+          - name: PE[0..255]
             local:
               - name: pe_spad
                 class: smartbuffer_RF
@@ -38,28 +38,28 @@ architecture:
                   memory_width: 16
                   block-size: 1
                   word-bits: 16
-                  meshX: 9
+                  meshX: 16
               - name: mac
                 class: intmac
                 attributes:
                   datawidth: 16
-                  meshX : 9
+                  meshX : 16
               # input and output registers for the mac unit
               - name: weight_reg
                 class: reg_storage
                 attributes:
                   depth: 1
                   width: 16           # width in bits
-                  meshX: 9
+                  meshX: 16
               - name: input_activation_reg
                 class: reg_storage
                 attributes:
                   depth: 1
                   width: 16           # width in bits
-                  meshX: 9
+                  meshX: 16
               - name: output_activation_reg
                 class: reg_storage
                 attributes:
                   depth: 1
                   width: 16           # width in bits
-                  meshX: 9
+                  meshX: 16
