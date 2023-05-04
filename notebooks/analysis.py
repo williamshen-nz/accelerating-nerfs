@@ -1,15 +1,63 @@
 """ Common analysis helpers to make the notebooks more readable. """
 import json
 import os
+import shutil
 from collections import defaultdict
+from pathlib import Path
 from typing import Dict, List
 
 import yaml
 
+from accelerating_nerfs.models import VanillaNeRF
 from notebooks.notebook_utils import natural_sort
 
 
-def load_nerf_layer_shapes(layer_dir: str) -> Dict[int, Dict[str, int]]:
+def convert_nerf_to_timeloop(
+    model: VanillaNeRF, batch_size: int, top_dir: str = "workload", sub_dir: str = "nerf"
+) -> str:
+    """
+    Convert a NeRF model to Timeloop problems using pytorch2timeloop.
+
+    Parameters
+    ----------
+    model: VanillaNeRF
+        NeRF model to convert.
+    batch_size: int
+        Batch size to use for the conversion.
+    top_dir: str
+        Top directory to store the converted Timeloop problems.
+    sub_dir: str
+        Subdirectory to store the converted Timeloop problems.
+
+    Returns
+    -------
+    str
+        Mapped layer directory
+    """
+    try:
+        import pytorch2timeloop
+    except ImportError:
+        raise ImportError("Could not import pytorch2timeloop. Please make sure you are using the Docker environment.")
+
+    layer_dir = Path(top_dir) / Path(sub_dir)
+    # clear previous conversion results
+    if layer_dir.exists():
+        shutil.rmtree(layer_dir, ignore_errors=True)
+
+    # convert the model to timeloop files
+    pytorch2timeloop.convert_model(
+        model=model,
+        input_size=(1, 3),
+        batch_size=batch_size,
+        model_name=sub_dir,
+        save_dir=top_dir,
+        convert_fc=True,  # must convert FC as NeRF is all FCs
+        exception_module_names=[],
+    )
+    return str(layer_dir)
+
+
+def load_nerf_layer_shapes(layer_dir: str = "workload/nerf") -> Dict[int, Dict[str, int]]:
     """
     Load layer shape info from the result of the pytorch2timeloop converter.
 
@@ -119,17 +167,19 @@ def compute_layer_sparsities(sparsity_results: Dict[str, Dict[int, Dict[str, flo
     return layer_to_avg_sparsity
 
 
-def add_sparsity_to_nerf_layers(layer_dir: str, layer_to_avg_sparsity: Dict[int, float], dry_run: bool = False) -> None:
+def add_sparsity_to_nerf_layers(
+    layer_to_avg_sparsity: Dict[int, float], layer_dir: str = "workload_nerf", dry_run: bool = False
+) -> None:
     """
     Add sparsity (it's actually density) to the workload problems for each of the NeRF layers so Timeloop and Accelergy
     can use them. This updates the problem YAML files in-place.
 
     Parameters
     ----------
-    layer_dir: str
-        Path to the directory containing the layer shape info output by pytorch2timeloop.
     layer_to_avg_sparsity: Dict[str, float]
         Mapping of layer ID to average sparsity.
+    layer_dir: str
+        Path to the directory containing the layer shape info output by pytorch2timeloop.
     dry_run: bool
         If True, don't actually write the updated YAML files.
 
@@ -137,6 +187,11 @@ def add_sparsity_to_nerf_layers(layer_dir: str, layer_to_avg_sparsity: Dict[int,
     -------
     None
     """
+    # Check layer_dir is not empty
+    assert os.listdir(layer_dir), f"Layer directory {layer_dir} is empty"
+    if dry_run:
+        print("=== add_sparsity_to_nerf_layers dry-run: not writing updated YAML files ===")
+
     for layer_path in natural_sort(os.listdir(layer_dir)):
         layer_path = os.path.join(layer_dir, layer_path)
         layer_id = int(layer_path.split("layer")[1].split(".")[0])
@@ -170,6 +225,7 @@ if __name__ == "__main__":
     s_dict = load_nerf_sparsities("../accelerating_nerfs/sparsity/2023-05-03_00-21-28_sparsity.json")
     print(s_dict)
     print(50 * "-")
-    print(compute_layer_sparsities(s_dict))
+    s_layer = compute_layer_sparsities(s_dict)
+    print(s_layer)
     print(50 * "-")
-    add_sparsity_to_nerf_layers("workloads/nerf", compute_layer_sparsities(s_dict), dry_run=True)
+    add_sparsity_to_nerf_layers(s_layer, "workloads/nerf", dry_run=True)
