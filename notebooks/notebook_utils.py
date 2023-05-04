@@ -1,3 +1,6 @@
+import re
+
+
 def load_mpl_style():
     """Load a nicer matplotlib style"""
     import matplotlib as mpl
@@ -18,3 +21,10 @@ def load_mpl_style():
     mpl.rcParams["axes.labelsize"] = 12
     mpl.rcParams["legend.fontsize"] = 12
     mpl.rcParams["axes.titlesize"] = 14
+
+
+def natural_sort(l):
+    """https://stackoverflow.com/a/4836734"""
+    convert = lambda text: int(text) if text.isdigit() else text.lower()
+    alphanum_key = lambda key: [convert(c) for c in re.split("([0-9]+)", key)]
+    return sorted(l, key=alphanum_key)
