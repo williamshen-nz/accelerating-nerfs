@@ -1,3 +1,5 @@
+# Note: architectures moved to notebooks under top-level directory
+
 Final Project Baselines
 ------------------------------------------
 This repo contains some baseline implementations of an Eyeriss-like architecture,a simba-like (NVDLA style) architecture,
