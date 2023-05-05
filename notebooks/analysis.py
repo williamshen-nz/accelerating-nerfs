@@ -4,7 +4,7 @@ import os
 import shutil
 from collections import defaultdict
 from pathlib import Path
-from typing import TYPE_CHECKING, Dict, List
+from typing import TYPE_CHECKING, Any, Dict, List
 
 import numpy as np
 import yaml
@@ -124,14 +124,17 @@ def load_nerf_sparsities(sparsity_dir: str) -> Dict[str, Dict]:
     return scene_to_sparsity_results
 
 
-def compute_layer_sparsities(sparsity_results) -> Dict[int, Dict[str, Dict[str, float]]]:
+def compute_layer_sparsities(
+    sparsity_results, include_sparsity_list: bool = False
+) -> Dict[int, Dict[str, Dict[str, Any]]]:
     """
     Compute the average sparsity across all layers across all scenes.
 
     Parameters
     ----------
-    sparsity_results: Dict[str, Dict[str, Dict[str, float]]]
-        Mapping of scene name to layer ID to sparsity dict
+    sparsity_results
+    include_sparsity_list: bool
+        Whether to include the list of sparsities for each layer in the output.
 
     Returns
     -------
@@ -158,7 +161,7 @@ def compute_layer_sparsities(sparsity_results) -> Dict[int, Dict[str, Dict[str, 
     assert all(tup[0] == tup[1] for tup in num_sparsities)
 
     # Compute mean and std sparsity
-    layer_to_sparsity: Dict[int, Dict[str, Dict[str, float]]] = {}
+    layer_to_sparsity: Dict[int, Dict[str, Dict[str, Any]]] = {}
     for layer_id, sparsities in layer_to_all_sparsities.items():
         layer_to_sparsity[layer_id] = {}
         for key, sparsities in sparsities.items():
@@ -167,7 +170,56 @@ def compute_layer_sparsities(sparsity_results) -> Dict[int, Dict[str, Dict[str, 
                 "std": np.std(sparsities).item(),
                 "num": len(sparsities),
             }
+            if include_sparsity_list:
+                layer_to_sparsity[layer_id][key]["sparsities"] = sparsities
     return layer_to_sparsity
+
+
+def compute_overall_sparsity(sparsity_results, sparsity_threshold: float = 0.1) -> Dict[str, Dict[str, float]]:
+    """
+    Compute the overall sparsity across all layers across all scenes.
+
+    Parameters
+    ----------
+    sparsity_results
+    sparsity_threshold: float
+        Threshold below which a sparsity is considered 0.
+
+    Returns
+    -------
+    Mapping of sparsity type to average sparsity.
+    """
+    layer_to_sparsity = compute_layer_sparsities(sparsity_results, include_sparsity_list=True)
+    input_sparsities = []
+    output_sparsities = []
+
+    # Delete sparsities below threshold
+    for layer_id, sparsities in layer_to_sparsity.items():
+        if sparsities["input_sparsity"]["mean"] < sparsity_threshold:
+            print(f"Deleting input sparsity for layer {layer_id} with mean {sparsities['input_sparsity']['mean']}")
+            del sparsities["input_sparsity"]
+        else:
+            input_sparsities.extend(sparsities["input_sparsity"]["sparsities"])
+
+        if sparsities["output_sparsity"]["mean"] < sparsity_threshold:
+            print(f"Deleting output sparsity for layer {layer_id} with mean {sparsities['output_sparsity']['mean']}")
+            del sparsities["output_sparsity"]
+        else:
+            output_sparsities.extend(sparsities["output_sparsity"]["sparsities"])
+
+    overall_sparsity = {
+        "input_sparsity": {
+            "mean": np.mean(input_sparsities).item(),
+            "std": np.std(input_sparsities).item(),
+            "num": len(input_sparsities),
+        },
+        "output_sparsity": {
+            "mean": np.mean(output_sparsities).item(),
+            "std": np.std(output_sparsities).item(),
+            "num": len(output_sparsities),
+        },
+    }
+    return overall_sparsity
 
 
 def add_sparsity_to_nerf_layers(
@@ -181,7 +233,7 @@ def add_sparsity_to_nerf_layers(
 
     Parameters
     ----------
-    layer_to_sparsity: Dict[str, float]
+    layer_to_sparsity: Dict[int, Dict[str, Dict[str, float]]]
         Mapping of layer ID to input and output sparsity.
     layer_dir: str
         Path to the directory containing the layer shape info output by pytorch2timeloop.
@@ -233,5 +285,7 @@ if __name__ == "__main__":
     print(50 * "-")
     s_layer = compute_layer_sparsities(s_dict)
     print(s_layer)
+    print(50 * "-")
+    print(compute_overall_sparsity(s_dict))
     print(50 * "-")
     add_sparsity_to_nerf_layers(s_layer, "workloads/nerf", dry_run=True)
