@@ -1,5 +1,5 @@
 """
-Check number of zeros in the input activations.
+Check number of zeros in the input and output activations.
 """
 import json
 import os
@@ -23,10 +23,12 @@ from accelerating_nerfs.render_nerf_synthetic import get_checkpoint_pattern
 from accelerating_nerfs.utils import NERF_SYNTHETIC_SCENES, render_image_with_occgrid
 
 
-def register_hooks(model: VanillaNeRF) -> Tuple[Callable, Dict[str, Any]]:
+def register_hooks(model: VanillaNeRF, scene: str) -> Tuple[Callable, Dict[str, Any]]:
     """Register hooks to collect metrics about the input and output activations."""
     layer_metrics = {
+        "scene": scene,
         "layers": [],
+        "fc_labels": [],
         "batch_sizes": defaultdict(list),
         "input": {
             "num_zeros": defaultdict(int),
@@ -40,27 +42,32 @@ def register_hooks(model: VanillaNeRF) -> Tuple[Callable, Dict[str, Any]]:
             "activation": {},  # activation function
         },
     }
+    layer_count = Counter()
+    layer_to_id = {}
+    layer_to_activation = {}
 
     def get_output_activation(nn_module):
         """Get output activation function for given module"""
-        if nn_module in layer_metrics["output"]["activation"]:
-            return layer_metrics["output"]["activation"][nn_module]
+        if nn_module in layer_to_activation:
+            return layer_to_activation[nn_module]
 
         for layers, activation in [
             (model.mlp.base.hidden_layers, model.mlp.base.hidden_activation),
-            ([model.mlp.sigma_layer.output_layer], model.mlp.sigma_layer.output_activation),
+            ([model.mlp.sigma_layer.output_layer], F.relu),
             ([model.mlp.bottleneck_layer.output_layer], model.mlp.bottleneck_layer.output_activation),
             (model.mlp.rgb_layer.hidden_layers, model.mlp.rgb_layer.hidden_activation),
-            ([model.mlp.rgb_layer.output_layer], model.mlp.rgb_layer.output_activation),
+            ([model.mlp.rgb_layer.output_layer], F.sigmoid),
         ]:
             if nn_module in layers:
-                layer_metrics["output"]["activation"][nn_module] = activation
+                layer_id = layer_to_id[nn_module]
+                layer_to_activation[nn_module] = activation
+                layer_metrics["output"]["activation"][layer_id] = str(activation)
                 return activation
         else:
             raise ValueError(f"Activation function not found for {nn_module}")
 
     def hook(nn_module, input_tensor, output_tensor):
-        """ Count zeros in input and output activations"""
+        """Count zeros in input and output activations"""
         # Only consider linear layers
         if not isinstance(nn_module, torch.nn.Linear):
             return
@@ -78,20 +85,27 @@ def register_hooks(model: VanillaNeRF) -> Tuple[Callable, Dict[str, Any]]:
             assert output_tensor.numel() == 0
             return
 
-        if nn_module not in layer_metrics["layers"]:
-            layer_metrics["layers"].append(nn_module)
+        if nn_module not in layer_to_id:
+            layer_name = str(nn_module)
+            layer_id = f"{layer_name}_{layer_count[layer_name]}"
+            layer_metrics["layers"].append(layer_id)
+            layer_metrics["fc_labels"].append(f"fc_{len(layer_metrics['fc_labels']) + 1}")
+            layer_count[layer_name] += 1
+            layer_to_id[nn_module] = layer_id
+        else:
+            layer_id = layer_to_id[nn_module]
 
         # Batch size
         assert input_tensor.shape[0] == output_tensor.shape[0], "batch size mismatch"
-        layer_metrics["batch_sizes"][nn_module].append(input_tensor.shape[0])
+        layer_metrics["batch_sizes"][layer_id].append(input_tensor.shape[0])
 
         # Input activations
         num_non_zero_input = torch.count_nonzero(input_tensor).item()
         total_input = input_tensor.numel()
         num_zero_input = total_input - num_non_zero_input
-        layer_metrics["input"]["num_zeros"][nn_module] += num_zero_input
-        layer_metrics["input"]["totals"][nn_module] += total_input
-        layer_metrics["input"]["sparsities"][nn_module].append(num_zero_input / total_input)
+        layer_metrics["input"]["num_zeros"][layer_id] += num_zero_input
+        layer_metrics["input"]["totals"][layer_id] += total_input
+        layer_metrics["input"]["sparsities"][layer_id].append(num_zero_input / total_input)
 
         # Output activations, find the activation function and then apply it
         activation = get_output_activation(nn_module)
@@ -99,9 +113,9 @@ def register_hooks(model: VanillaNeRF) -> Tuple[Callable, Dict[str, Any]]:
         num_non_zero_output = torch.count_nonzero(output_activations).item()
         total_output = output_activations.numel()
         num_zero_output = total_output - num_non_zero_output
-        layer_metrics["output"]["num_zeros"][nn_module] += num_zero_output
-        layer_metrics["output"]["totals"][nn_module] += total_output
-        layer_metrics["output"]["sparsities"][nn_module].append(num_zero_output / total_output)
+        layer_metrics["output"]["num_zeros"][layer_id] += num_zero_output
+        layer_metrics["output"]["totals"][layer_id] += total_output
+        layer_metrics["output"]["sparsities"][layer_id].append(num_zero_output / total_output)
 
     # Register hooks
     hooks = []
@@ -119,12 +133,9 @@ def register_hooks(model: VanillaNeRF) -> Tuple[Callable, Dict[str, Any]]:
 def get_activation_sparsity():
     """Get input and output activation sparsity over NeRF synthetic datasets."""
     checkpoint_pattern = get_checkpoint_pattern()
-    scene_sparsity_results = {}
-    now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     os.makedirs("sparsity", exist_ok=True)
-    sparsity_path = f"sparsity/{now}_sparsity.json"
 
-    for scene in NERF_SYNTHETIC_SCENES[:2]:
+    for scene in NERF_SYNTHETIC_SCENES:
         print(f"====== Processing {scene} ======")
         # Load model
         checkpoint_path = checkpoint_pattern.format(scene=scene)
@@ -133,7 +144,7 @@ def get_activation_sparsity():
         estimator.eval()
 
         # Register hooks
-        remove_hooks, layer_metrics = register_hooks(radiance_field)
+        remove_hooks, layer_metrics = register_hooks(radiance_field, scene)
 
         # Load test dataset, use num_downscales = 2 otherwise run OOM.
         test_dataset = load_test_dataset(scene, num_downscales=2)
@@ -160,57 +171,12 @@ def get_activation_sparsity():
         # Remove hooks
         remove_hooks()
 
-        # Add layer metrics to scene results
-        scene_sparsity_results[scene] = layer_metrics
-
-        # Massage results
-        sparsity_results = {}
-        layer_count = Counter()
-        for idx, (layer, num_zero) in enumerate(num_zeros.items()):
-            total = totals[layer]
-            layer_sparsities = sparsities[layer]  # within layer batch sparsities
-
-            layer_name = str(layer)
-            layer_id = f"{layer_name}_{layer_count[layer_name]}"
-            sparsity_results[layer_id] = {
-                "sparsity": num_zero / total,  # overall sparsity
-                "avg_sparsity": np.mean(layer_sparsities),
-                "std_sparsity": np.std(layer_sparsities),
-                "num_zero": num_zero,
-                "total": total,
-                "avg_batch_size": np.mean(batch_sizes[layer]),
-                "std_batch_size": np.std(batch_sizes[layer]),
-                "fc_label": f"fc_{idx:02d}",
-            }
-            all_layer_num_zeros[layer_id] += num_zero
-            all_layer_totals[layer_id] += total
-            all_layer_sparsities[layer_id].extend(layer_sparsities)
-            all_batch_sizes[layer_id].extend(batch_sizes[layer])
-            layer_count[layer_name] += 1
-        scene_sparsity_results[scene] = sparsity_results
-
-        # Write partial results
+        # Write results for scene
+        sparsity_path = f"sparsity/{scene}_sparsity.json"
         with open(sparsity_path, "w") as f:
-            json.dump(scene_sparsity_results, f, indent=4)
+            json.dump(layer_metrics, f, indent=4)
 
-    # Collate overall results
-    # overall_results = {
-    #     layer_name: {
-    #         "sparsity": all_layer_num_zeros[layer_name] / all_layer_totals[layer_name],  # overall sparsity
-    #         "avg_sparsity": np.mean(all_layer_sparsities[layer_name]),
-    #         "std_sparsity": np.std(all_layer_sparsities[layer_name]),
-    #         "num_zero": all_layer_num_zeros[layer_name],
-    #         "total": all_layer_totals[layer_name],
-    #         "avg_batch_size": np.mean(all_batch_sizes[layer_name]),
-    #         "std_batch_size": np.std(all_batch_sizes[layer_name]),
-    #         "fc_label": f"fc_{idx:02d}",
-    #     }
-    #     for idx, layer_name in enumerate(all_layer_num_zeros.keys())
-    # }
-    # scene_sparsity_results["overall"] = overall_results
-    # with open(sparsity_path, "w") as f:
-    #     json.dump(scene_sparsity_results, f, indent=4)
-    print(f"Done, check results at {sparsity_path}")
+    print("Done, check results at sparsity/*.json")
 
 
 if __name__ == "__main__":
