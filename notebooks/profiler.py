@@ -365,6 +365,9 @@ class Profiler:
             for key in self.layer_metric_keys:
                 layer_metrics[layer_id][key] = info[key]
 
+            # Add path to stats file
+            layer_metrics[layer_id]["stats_fname"] = str(self.stats_fname(layer_id))
+
         if self.model is not None:
             model_metrics = {
                 # num_params for the whole model

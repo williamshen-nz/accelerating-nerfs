@@ -45,16 +45,16 @@ mapping:
       []
   - target: psum_spad
     type: temporal
-    factors: C1 M8 R1 S1 N1 P1 Q1
-    permutation: MCRSNPQ
+    factors: C1 M2 R1 S1 N2 P1 Q1
+    permutation: MNCRSPQ
   - target: weights_spad
     type: temporal
-    factors: C7 M1 R1 S1 N1 P1 Q1
+    factors: C3 M1 R1 S1 N1 P1 Q1
     permutation: CMRSNPQ
   - target: ifmap_spad
     type: temporal
-    factors: C1 M1 R1 S1 N1 P1 Q1
-    permutation: CMRSNPQ
+    factors: C1 M1 R1 S1 N2 P1 Q1
+    permutation: NCMRSPQ
   - target: DummyBuffer
     type: spatial
     factors: C3 M4 R1 S1 N1 P1 Q1
@@ -71,9 +71,9 @@ mapping:
     split: 1
   - target: shared_glb
     type: temporal
-    factors: C1 M1 R1 S1 N64 P1 Q1
-    permutation: NCMRSPQ
+    factors: C1 M4 R1 S1 N16 P1 Q1
+    permutation: NMCRSPQ
   - target: DRAM
     type: temporal
-    factors: C3 M1 R1 S1 N2 P1 Q1
-    permutation: CNMRSPQ
+    factors: C7 M1 R1 S1 N1 P1 Q1
+    permutation: CMRSNPQ
