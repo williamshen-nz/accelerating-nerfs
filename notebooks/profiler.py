@@ -158,7 +158,7 @@ class Profiler:
         top_dir: str,
         timeloop_dir: str,
         arch_name: str,
-        model: torch.nn.Module,
+        model: Optional[torch.nn.Module],
         input_size: Tuple[int, ...],
         profiled_lib_dir_pattern: str = "./profiled_libs/{arch_name}_profiled_lib.json",
     ):
@@ -364,16 +364,19 @@ class Profiler:
             for key in self.layer_metric_keys:
                 layer_metrics[layer_id][key] = info[key]
 
-        overall = {
-            **total_metrics,
-            # num_params for the whole model
-            "num_params": sum(p.numel() for p in self.model.parameters() if p.requires_grad),
-            # MACs for batch size 1
-            "macs": profile_macs(self.model, torch.randn([1] + list(self.input_size))),
-            # Activation size for batch size 1
-            "activation_size": count_activation_size(self.model, [1] + list(self.input_size)),
-        }
+        if self.model is not None:
+            model_metrics = {
+                # num_params for the whole model
+                "num_params": sum(p.numel() for p in self.model.parameters() if p.requires_grad),
+                # MACs for batch size 1
+                "macs": profile_macs(self.model, torch.randn([1] + list(self.input_size))),
+                # Activation size for batch size 1
+                "activation_size": count_activation_size(self.model, [1] + list(self.input_size)),
+            }
+        else:
+            model_metrics = {}
 
+        overall = {**total_metrics, **model_metrics}
         return layer_info, overall, layer_metrics
 
 
