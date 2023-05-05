@@ -225,7 +225,7 @@ def add_sparsity_to_nerf_layers(
 if __name__ == "__main__":
     print(load_nerf_layer_shapes("workloads/nerf"))
     print(50 * "-")
-    s_dict = load_nerf_sparsities("../accelerating_nerfs/sparsity/2023-05-03_00-21-28_sparsity.json")
+    s_dict = load_nerf_sparsities("../accelerating_nerfs/sparsity/2023-05-03_00-21-28_input_sparsity.json")
     print(s_dict)
     print(50 * "-")
     s_layer = compute_layer_sparsities(s_dict)
