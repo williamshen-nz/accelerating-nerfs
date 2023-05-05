@@ -6,6 +6,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import TYPE_CHECKING, Dict, List
 
+import numpy as np
 import yaml
 from notebook_utils import natural_sort
 
@@ -123,7 +124,7 @@ def load_nerf_sparsities(sparsity_dir: str) -> Dict[str, Dict]:
     return scene_to_sparsity_results
 
 
-def compute_layer_sparsities(sparsity_results: Dict[str, Dict[int, Dict[str, float]]]) -> Dict[int, float]:
+def compute_layer_sparsities(sparsity_results) -> Dict[int, Dict[str, Dict[str, float]]]:
     """
     Compute the average sparsity across all layers across all scenes.
 
@@ -134,27 +135,45 @@ def compute_layer_sparsities(sparsity_results: Dict[str, Dict[int, Dict[str, flo
 
     Returns
     -------
-    Mapping of layer ID to average sparsity
+    Mapping of layer ID to average sparsity for input and output activations.
     """
-    layer_to_sparsities: Dict[int, List[float]] = defaultdict(list)
+    layer_to_all_sparsities: Dict[int, Dict[str, List[float]]] = defaultdict(dict)
 
-    for layer_results in sparsity_results.values():
-        for layer_name, layer_result in layer_results.items():
-            layer_to_sparsities[layer_name].append(layer_result["sparsity"])
+    for scene, results in sparsity_results.items():
+        for layer, fc_label in zip(results["layers"], results["fc_labels"]):
+            layer_id = int(fc_label.split("_")[1])
+            if "input_sparsity" not in layer_to_all_sparsities[layer_id]:
+                layer_to_all_sparsities[layer_id]["input_sparsity"] = []
+            layer_to_all_sparsities[layer_id]["input_sparsity"].extend(results["input"]["sparsities"][layer])
+
+            if "output_sparsity" not in layer_to_all_sparsities[layer_id]:
+                layer_to_all_sparsities[layer_id]["output_sparsity"] = []
+            layer_to_all_sparsities[layer_id]["output_sparsity"].extend(results["output"]["sparsities"][layer])
 
     # Check that all layers have the same number of sparsities
-    num_sparsities = [len(sparsities) for sparsities in layer_to_sparsities.values()]
-    assert len(set(num_sparsities)) == 1, f"Number of sparsities should be the same across all layers: {num_sparsities}"
+    num_sparsities = [
+        (len(sparsities["input_sparsity"]), len(sparsities["output_sparsity"]))
+        for sparsities in layer_to_all_sparsities.values()
+    ]
+    assert all(tup[0] == tup[1] for tup in num_sparsities)
 
-    # Compute mean sparsity
-    layer_to_avg_sparsity = {
-        layer_name: sum(sparsities) / len(sparsities) for layer_name, sparsities in layer_to_sparsities.items()
-    }
-    return layer_to_avg_sparsity
+    # Compute mean and std sparsity
+    layer_to_sparsity: Dict[int, Dict[str, Dict[str, float]]] = {}
+    for layer_id, sparsities in layer_to_all_sparsities.items():
+        layer_to_sparsity[layer_id] = {}
+        for key, sparsities in sparsities.items():
+            layer_to_sparsity[layer_id][key] = {
+                "mean": np.mean(sparsities).item(),
+                "std": np.std(sparsities).item(),
+                "num": len(sparsities),
+            }
+    return layer_to_sparsity
 
 
 def add_sparsity_to_nerf_layers(
-    layer_to_avg_sparsity: Dict[int, float], layer_dir: str = "workloads/nerf-sparse", dry_run: bool = False
+    layer_to_sparsity: Dict[int, Dict[str, Dict[str, float]]],
+    layer_dir: str = "workloads/nerf-sparse",
+    dry_run: bool = False,
 ) -> None:
     """
     Add sparsity (it's actually density) to the workload problems for each of the NeRF layers so Timeloop and Accelergy
@@ -162,8 +181,8 @@ def add_sparsity_to_nerf_layers(
 
     Parameters
     ----------
-    layer_to_avg_sparsity: Dict[str, float]
-        Mapping of layer ID to average sparsity.
+    layer_to_sparsity: Dict[str, float]
+        Mapping of layer ID to input and output sparsity.
     layer_dir: str
         Path to the directory containing the layer shape info output by pytorch2timeloop.
     dry_run: bool
@@ -186,15 +205,16 @@ def add_sparsity_to_nerf_layers(
             layer_config = yaml.safe_load(f)
 
         # Get density = 1 - sparsity for layer
-        sparsity = layer_to_avg_sparsity[layer_id]
-        density = 1 - sparsity
+        input_sparsity = layer_to_sparsity[layer_id]["input_sparsity"]["mean"]
+        input_density = 1 - input_sparsity
+        output_sparsity = layer_to_sparsity[layer_id]["output_sparsity"]["mean"]
+        output_density = 1 - output_sparsity
 
         # Add densities to problem instance for layer
         layer_config["problem"]["instance"]["densities"] = {
-            "Inputs": density,
-            "Weights": 1.0,
-            # TODO: compute the actual output density in the NeRF activation script
-            "Outputs": density,
+            "Inputs": input_density,
+            "Weights": 1.0,  # we showed that weights are fully dense
+            "Outputs": output_density,
         }
 
         # Write updated layer config

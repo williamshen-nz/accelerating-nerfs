@@ -12,8 +12,8 @@ problem:
     Wdilation: 1
     Wstride: 1
     densities:
-      Inputs: 0.44228697869979383
-      Outputs: 0.44228697869979383
+      Inputs: 0.3499051030453799
+      Outputs: 0.3061052845077121
       Weights: 1.0
   shape:
     coefficients:
