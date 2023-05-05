@@ -420,15 +420,15 @@
 						</write_bandwidth>
 						<energy_per_algorithmic_access>
 							<PerDataSpace>
-								<item>-nan</item>
-								<item>-nan</item>
+								<item>nan</item>
+								<item>nan</item>
 								<item>9.50407142857143006e-01</item>
 							</PerDataSpace>
 						</energy_per_algorithmic_access>
 						<energy_per_access>
 							<PerDataSpace>
-								<item>-nan</item>
-								<item>-nan</item>
+								<item>nan</item>
+								<item>nan</item>
 								<item>9.50407142857143006e-01</item>
 							</PerDataSpace>
 						</energy_per_access>
@@ -867,15 +867,15 @@
 						<energy_per_algorithmic_access>
 							<PerDataSpace>
 								<item>7.13369844961240340e-01</item>
-								<item>-nan</item>
-								<item>-nan</item>
+								<item>nan</item>
+								<item>nan</item>
 							</PerDataSpace>
 						</energy_per_algorithmic_access>
 						<energy_per_access>
 							<PerDataSpace>
 								<item>7.13369844961240340e-01</item>
-								<item>-nan</item>
-								<item>-nan</item>
+								<item>nan</item>
+								<item>nan</item>
 							</PerDataSpace>
 						</energy_per_access>
 						<energy>
@@ -1312,16 +1312,16 @@
 						</write_bandwidth>
 						<energy_per_algorithmic_access>
 							<PerDataSpace>
-								<item>-nan</item>
+								<item>nan</item>
 								<item>1.87519999999999992e-01</item>
-								<item>-nan</item>
+								<item>nan</item>
 							</PerDataSpace>
 						</energy_per_algorithmic_access>
 						<energy_per_access>
 							<PerDataSpace>
-								<item>-nan</item>
+								<item>nan</item>
 								<item>1.87519999999999992e-01</item>
-								<item>-nan</item>
+								<item>nan</item>
 							</PerDataSpace>
 						</energy_per_access>
 						<energy>
@@ -1761,16 +1761,16 @@
 						</write_bandwidth>
 						<energy_per_algorithmic_access>
 							<PerDataSpace>
-								<item>-nan</item>
-								<item>-nan</item>
-								<item>-nan</item>
+								<item>nan</item>
+								<item>nan</item>
+								<item>nan</item>
 							</PerDataSpace>
 						</energy_per_algorithmic_access>
 						<energy_per_access>
 							<PerDataSpace>
-								<item>-nan</item>
-								<item>-nan</item>
-								<item>-nan</item>
+								<item>nan</item>
+								<item>nan</item>
+								<item>nan</item>
 							</PerDataSpace>
 						</energy_per_access>
 						<energy>
@@ -2214,14 +2214,14 @@
 						</write_bandwidth>
 						<energy_per_algorithmic_access>
 							<PerDataSpace>
-								<item>-nan</item>
+								<item>nan</item>
 								<item>1.07911625000000004e+01</item>
 								<item>1.04155843749999999e+01</item>
 							</PerDataSpace>
 						</energy_per_algorithmic_access>
 						<energy_per_access>
 							<PerDataSpace>
-								<item>-nan</item>
+								<item>nan</item>
 								<item>1.07911625000000004e+01</item>
 								<item>1.04155843749999999e+01</item>
 							</PerDataSpace>
@@ -3457,7 +3457,7 @@
 								<type>UNSET</type>
 							</DensityDistributionSpecs>
 							<type>fixed-structured</type>
-							<fixed_density>3.02037098159280815e-01</fixed_density>
+							<fixed_density>2.87887299892012616e-01</fixed_density>
 						</specs_>
 					</px>
 				</second>
@@ -3472,7 +3472,7 @@
 								<type>UNSET</type>
 							</DensityDistributionSpecs>
 							<type>fixed-structured</type>
-							<fixed_density>3.02037098159280815e-01</fixed_density>
+							<fixed_density>1.00000000000000000e+00</fixed_density>
 						</specs_>
 					</px>
 				</second>

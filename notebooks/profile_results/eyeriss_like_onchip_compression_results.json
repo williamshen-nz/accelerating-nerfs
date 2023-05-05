@@ -15,8 +15,8 @@
                     "Wdilation": 1,
                     "Wstride": 1,
                     "densities": {
-                        "Inputs": 0.9999999565305583,
-                        "Outputs": 0.9999999565305583,
+                        "Inputs": 0.999999956053383,
+                        "Outputs": 0.44577414285910133,
                         "Weights": 1.0
                     }
                 },
@@ -169,8 +169,8 @@
                     "Wdilation": 1,
                     "Wstride": 1,
                     "densities": {
-                        "Inputs": 0.47678422115014185,
-                        "Outputs": 0.47678422115014185,
+                        "Inputs": 0.44577414285910133,
+                        "Outputs": 0.3052761252170336,
                         "Weights": 1.0
                     }
                 },
@@ -323,8 +323,8 @@
                     "Wdilation": 1,
                     "Wstride": 1,
                     "densities": {
-                        "Inputs": 0.33934932537231965,
-                        "Outputs": 0.33934932537231965,
+                        "Inputs": 0.3052761252170336,
+                        "Outputs": 0.29951443951219237,
                         "Weights": 1.0
                     }
                 },
@@ -477,8 +477,8 @@
                     "Wdilation": 1,
                     "Wstride": 1,
                     "densities": {
-                        "Inputs": 0.32803850354498554,
-                        "Outputs": 0.32803850354498554,
+                        "Inputs": 0.29951443951219237,
+                        "Outputs": 0.3106220461071759,
                         "Weights": 1.0
                     }
                 },
@@ -631,8 +631,8 @@
                     "Wdilation": 1,
                     "Wstride": 1,
                     "densities": {
-                        "Inputs": 0.364672929116142,
-                        "Outputs": 0.364672929116142,
+                        "Inputs": 0.3106220461071759,
+                        "Outputs": 0.3248678330742185,
                         "Weights": 1.0
                     }
                 },
@@ -785,8 +785,8 @@
                     "Wdilation": 1,
                     "Wstride": 1,
                     "densities": {
-                        "Inputs": 0.5034462237266509,
-                        "Outputs": 0.5034462237266509,
+                        "Inputs": 0.458201136358505,
+                        "Outputs": 0.3499051030453799,
                         "Weights": 1.0
                     }
                 },
@@ -939,8 +939,8 @@
                     "Wdilation": 1,
                     "Wstride": 1,
                     "densities": {
-                        "Inputs": 0.44228697869979383,
-                        "Outputs": 0.44228697869979383,
+                        "Inputs": 0.3499051030453799,
+                        "Outputs": 0.3061052845077121,
                         "Weights": 1.0
                     }
                 },
@@ -1093,8 +1093,8 @@
                     "Wdilation": 1,
                     "Wstride": 1,
                     "densities": {
-                        "Inputs": 0.39111066942763406,
-                        "Outputs": 0.39111066942763406,
+                        "Inputs": 0.3061052845077121,
+                        "Outputs": 0.30124270859846225,
                         "Weights": 1.0
                     }
                 },
@@ -1247,8 +1247,8 @@
                     "Wdilation": 1,
                     "Wstride": 1,
                     "densities": {
-                        "Inputs": 0.40100656963406367,
-                        "Outputs": 0.40100656963406367,
+                        "Inputs": 0.30124270859846225,
+                        "Outputs": 0.3477407934631964,
                         "Weights": 1.0
                     }
                 },
@@ -1401,8 +1401,8 @@
                     "Wdilation": 1,
                     "Wstride": 1,
                     "densities": {
-                        "Inputs": 0.42147861478665427,
-                        "Outputs": 0.42147861478665427,
+                        "Inputs": 0.3129442400712461,
+                        "Outputs": 0.9999999978361654,
                         "Weights": 1.0
                     }
                 },
@@ -1555,8 +1555,8 @@
                     "Wdilation": 1,
                     "Wstride": 1,
                     "densities": {
-                        "Inputs": 0.9999999978053047,
-                        "Outputs": 0.9999999978053047,
+                        "Inputs": 0.9999999975027676,
+                        "Outputs": 0.28788729989201256,
                         "Weights": 1.0
                     }
                 },
@@ -1709,8 +1709,8 @@
                     "Wdilation": 1,
                     "Wstride": 1,
                     "densities": {
-                        "Inputs": 0.3020370981592808,
-                        "Outputs": 0.3020370981592808,
+                        "Inputs": 0.28788729989201256,
+                        "Outputs": 1.0,
                         "Weights": 1.0
                     }
                 },
