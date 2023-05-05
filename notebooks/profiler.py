@@ -160,7 +160,7 @@ class Profiler:
         arch_name: str,
         model: torch.nn.Module,
         input_size: Tuple[int, ...],
-        profiled_lib_dir_pattern: str = "./{arch_name}_profiled_lib.json",
+        profiled_lib_dir_pattern: str = "./profiled_libs/{arch_name}_profiled_lib.json",
     ):
         self.base_dir = Path(os.getcwd())
         self.sub_dir = sub_dir
@@ -171,6 +171,8 @@ class Profiler:
         self.input_size = input_size
 
         profiled_lib_dir = profiled_lib_dir_pattern.format(arch_name=self.arch_name)
+        # Create directory if required
+        os.makedirs(os.path.dirname(profiled_lib_dir), exist_ok=True)
         self.profiled_lib_dir = profiled_lib_dir
         self.profiled_lib = {}
         self.load_profiled_lib()
@@ -215,7 +217,7 @@ class Profiler:
         # Insert sparse_opt before constraint_pth if enabled
         if self.sparsity_enabled:
             timeloop_cmd.insert(-1, f"{self.base_dir / self.timeloop_dir / 'sparse_opt/*.yaml'}")
-            print(f"Sparse optimization is enabled for {self.arch_name} and layer {layer_id}")
+            print(f"Sparse optimization is enabled for layer {layer_id}")
 
         timeloop_cmd = " ".join(timeloop_cmd)
         timeloop_cmd += " > /dev/null 2>&1"

@@ -6,8 +6,6 @@ NeRFs are slow, we are trying to accelerate them! 🏎💨
 
 <img src="assets/nerf.gif" max-width="100%" height="auto" />
 
-___
-
 ## Table of Contents
 
 - [Installation Instructions](#installation-instructions)
@@ -20,8 +18,6 @@ ___
     - [Analysis](#analysis)
 - [Tips](#tips)
     - [Profiling Rendering Code](#profiling-rendering-code)
-
-___
 
 ## Installation Instructions
 
