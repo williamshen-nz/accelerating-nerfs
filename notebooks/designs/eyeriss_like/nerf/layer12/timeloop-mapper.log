@@ -1,33 +1,33 @@
-[  7] Utilization = 0.01 | pJ/Compute =  301.860 | L5[WIO] M3 C4 - L4[IO] N64 C4 - L3[] Q1 - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
-[  3] Utilization = 0.01 | pJ/Compute =  301.866 | L5[WIO] M3 C4 - L4[IO] N64 C2 - L3[] Q1 C2Y - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
-[  1] Utilization = 0.01 | pJ/Compute =   90.728 | L5[WIO] N4 C32 - L4[IO] M3 N16 - L3[] Q1 - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
-[  5] Utilization = 0.05 | pJ/Compute =  301.901 | L5[WIO] M3 C4 - L4[IO] N64 C2 - L3[] Q1 C8Y - L2[I] Q1 - L1[W] C2 - L0[O] Q1 
 [  0] Utilization = 0.05 | pJ/Compute =  174.341 | L5[WIO] M3 C4 - L4[IO] N64 - L3[] Q1 C8Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
+[  3] Utilization = 0.01 | pJ/Compute =  301.866 | L5[WIO] M3 C4 - L4[IO] N64 C2 - L3[] Q1 C2Y - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
+[  7] Utilization = 0.01 | pJ/Compute =  301.860 | L5[WIO] M3 C4 - L4[IO] N64 C4 - L3[] Q1 - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
+[  5] Utilization = 0.05 | pJ/Compute =  301.901 | L5[WIO] M3 C4 - L4[IO] N64 C2 - L3[] Q1 C8Y - L2[I] Q1 - L1[W] C2 - L0[O] Q1 
+[  1] Utilization = 0.01 | pJ/Compute =   90.728 | L5[WIO] N4 C32 - L4[IO] M3 N16 - L3[] Q1 - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
 [  2] Utilization = 0.02 | pJ/Compute =  191.046 | L5[WIO] N16 C2 - L4[IO] N4 C64 - L3[] Q1 M3Y - L2[I] Q1 - L1[W] Q1 - L0[O] Q1 
 [  4] Utilization = 0.02 | pJ/Compute =  301.878 | L5[WIO] M3 C4 - L4[IO] N64 C2 - L3[] Q1 C4Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
+[  0] Utilization = 0.05 | pJ/Compute =  139.240 | L5[WIO] N32 C4 - L4[IO] M3 N2 - L3[] Q1 C8Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
 [  6] Utilization = 0.01 | pJ/Compute =  212.214 | L5[WIO] N4 C32 - L4[IO] M3 N16 C4 - L3[] Q1 - L2[I] Q1 - L1[W] Q1 - L0[O] Q1 
-[  7] Utilization = 0.01 | pJ/Compute =  203.991 | L5[WIO] N32 C4 - L4[IO] M3 N2 C4 - L3[] Q1 - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
 [  3] Utilization = 0.01 | pJ/Compute =  203.997 | L5[WIO] N32 C4 - L4[IO] M3 N2 C2 - L3[] Q1 C2Y - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
+[  7] Utilization = 0.01 | pJ/Compute =  203.991 | L5[WIO] N32 C4 - L4[IO] M3 N2 C4 - L3[] Q1 - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
 [  5] Utilization = 0.07 | pJ/Compute =  191.052 | L5[WIO] N16 C2 - L4[IO] N4 C4 - L3[] Q1 M3Y C4Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
-[  1] Utilization = 0.07 | pJ/Compute =  191.651 | L5[WIO] N8 C4 - L4[IO] N8 C4 M3X - L3[] Q1 C4Y - L2[I] Q1 - L1[W] C2 - L0[O] Q1 
+[  0] Utilization = 0.14 | pJ/Compute =  190.753 | L5[WIO] N64 C4 - L4[IO] Q1 M3X - L3[] Q1 C8Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
+[  3] Utilization = 0.04 | pJ/Compute =  190.753 | L5[WIO] N64 C4 - L4[IO] C2 M3X - L3[] Q1 C2Y - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
 [  7] Utilization = 0.02 | pJ/Compute =  190.753 | L5[WIO] N64 C4 - L4[IO] C4 M3X - L3[] Q1 - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
 [  4] Utilization = 0.04 | pJ/Compute =  191.048 | L5[WIO] N16 C2 - L4[IO] N4 C4 - L3[] Q1 M3Y C2Y - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
-[  0] Utilization = 0.05 | pJ/Compute =  139.240 | L5[WIO] N32 C4 - L4[IO] M3 N2 - L3[] Q1 C8Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
-[  3] Utilization = 0.04 | pJ/Compute =  190.753 | L5[WIO] N64 C4 - L4[IO] C2 M3X - L3[] Q1 C2Y - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
-[  0] Utilization = 0.14 | pJ/Compute =  190.753 | L5[WIO] N64 C4 - L4[IO] Q1 M3X - L3[] Q1 C8Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
+[  1] Utilization = 0.07 | pJ/Compute =  191.651 | L5[WIO] N8 C4 - L4[IO] N8 C4 M3X - L3[] Q1 C4Y - L2[I] Q1 - L1[W] C2 - L0[O] Q1 
 [  6] Utilization = 0.07 | pJ/Compute =  191.651 | L5[WIO] N8 C4 - L4[IO] N8 C8 M3X - L3[] Q1 C4Y - L2[I] Q1 - L1[W] Q1 - L0[O] Q1 
-[  2] Utilization = 0.14 | pJ/Compute =  191.675 | L5[WIO] N8 C4 - L4[IO] N8 C4 M3X - L3[] Q1 C8Y - L2[I] Q1 - L1[W] Q1 - L0[O] Q1 
-[  5] Utilization = 0.14 | pJ/Compute =  190.753 | L5[WIO] N64 C4 - L4[IO] C2 M3X - L3[] Q1 C8Y - L2[I] Q1 - L1[W] C2 - L0[O] Q1 
-[  4] Utilization = 0.07 | pJ/Compute =  190.753 | L5[WIO] N64 C4 - L4[IO] C2 M3X - L3[] Q1 C4Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
 [  7] Utilization = 0.04 | pJ/Compute =   67.627 | L5[WIO] C16 - L4[IO] N64 - L3[] Q1 M3Y C2Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
+[  5] Utilization = 0.14 | pJ/Compute =  190.753 | L5[WIO] N64 C4 - L4[IO] C2 M3X - L3[] Q1 C8Y - L2[I] Q1 - L1[W] C2 - L0[O] Q1 
+[  2] Utilization = 0.14 | pJ/Compute =  191.675 | L5[WIO] N8 C4 - L4[IO] N8 C4 M3X - L3[] Q1 C8Y - L2[I] Q1 - L1[W] Q1 - L0[O] Q1 
+[  4] Utilization = 0.07 | pJ/Compute =  190.753 | L5[WIO] N64 C4 - L4[IO] C2 M3X - L3[] Q1 C4Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
 [  3] Utilization = 0.05 | pJ/Compute =  190.595 | L5[WIO] Q1 - L4[IO] N64 C16 - L3[] Q1 C8Y - L2[I] Q1 - L1[W] Q1 - L0[O] M3 
 [  2] Utilization = 0.14 | pJ/Compute =   63.499 | L5[WIO] C2 - L4[IO] N64 M3X - L3[] Q1 C8Y - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
 [  6] Utilization = 0.07 | pJ/Compute =  191.052 | L5[WIO] C2 - L4[IO] N64 C2 M3X - L3[] Q1 C4Y - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
-[  1] Utilization = 0.07 | pJ/Compute =   79.462 | L5[WIO] N8 C8 - L4[IO] N8 - L3[] Q1 M3Y C4Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
 [  6] Utilization = 0.07 | pJ/Compute =   78.264 | L5[WIO] N8 C4 - L4[IO] N8 M3X - L3[] Q1 C4Y - L2[I] Q1 - L1[W] C8 - L0[O] Q1 
+[  1] Utilization = 0.07 | pJ/Compute =   79.462 | L5[WIO] N8 C8 - L4[IO] N8 - L3[] Q1 M3Y C4Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
 [  7] Utilization = 0.14 | pJ/Compute =  192.905 | L5[WIO] N4 C8 - L4[IO] N16 C2 M3X - L3[] Q1 C8Y - L2[I] Q1 - L1[W] Q1 - L0[O] Q1 
-[  1] Utilization = 0.07 | pJ/Compute =   71.363 | L5[WIO] N4 C8 - L4[IO] N16 M3X - L3[] Q1 C4Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
 [  3] Utilization = 0.07 | pJ/Compute =   74.503 | L5[WIO] N2 C32 - L4[IO] N32 M3X - L3[] Q1 C4Y - L2[I] Q1 - L1[W] Q1 - L0[O] Q1 
+[  1] Utilization = 0.07 | pJ/Compute =   71.363 | L5[WIO] N4 C8 - L4[IO] N16 M3X - L3[] Q1 C4Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
 [  6] Utilization = 0.14 | pJ/Compute =  190.753 | L5[WIO] N4 - L4[IO] N16 C4 M3X - L3[] Q1 C8Y - L2[I] Q1 - L1[W] C4 - L0[O] Q1 
 [  3] Utilization = 0.14 | pJ/Compute =  190.753 | L5[WIO] N32 - L4[IO] N2 C16 M3X - L3[] Q1 C8Y - L2[I] Q1 - L1[W] Q1 - L0[O] Q1 
 [  1] Utilization = 0.14 | pJ/Compute =   81.976 | L5[WIO] N8 C16 - L4[IO] N8 M3X - L3[] Q1 C8Y - L2[I] Q1 - L1[W] Q1 - L0[O] Q1 
