@@ -7,7 +7,7 @@ import json
 import os
 from collections import defaultdict
 from pathlib import Path
-from typing import ClassVar, List, Tuple
+from typing import ClassVar, List, Optional, Tuple
 
 import torch
 import torch.nn as nn
@@ -195,6 +195,9 @@ class Profiler:
         sparse_opt_dir = self.base_dir / self.timeloop_dir / "sparse_opt"
         return os.path.exists(sparse_opt_dir)
 
+    def stats_fname(self, layer_id: int) -> Path:
+        return self.base_dir / self.timeloop_dir / self.sub_dir / f"layer{layer_id}" / "timeloop-mapper.stats.txt"
+
     def get_timeloop_cmd(self, layer_id: int, layer_info: dict) -> Tuple[str, str]:
         """Get timeloop working directory and command."""
         cwd = f"{self.base_dir / self.timeloop_dir / self.sub_dir / f'layer{layer_id}'}"
@@ -258,9 +261,7 @@ class Profiler:
                 continue
 
             # check if results for the layer exists, skip if not (weird stuff going on)
-            stats_fname = (
-                self.base_dir / self.timeloop_dir / self.sub_dir / f"layer{layer_id}" / "timeloop-mapper.stats.txt"
-            )
+            stats_fname = self.stats_fname(layer_id)
             if not stats_fname.exists():
                 print(f"CRITICAL WARNING: {stats_fname} does not exist, skipping...")
                 continue
