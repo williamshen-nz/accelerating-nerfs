@@ -4,17 +4,13 @@ import os
 import shutil
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List
+from typing import TYPE_CHECKING, Dict, List
 
 import yaml
-
-from accelerating_nerfs.models import VanillaNeRF
-from notebooks.notebook_utils import natural_sort
+from notebook_utils import natural_sort
 
 
-def convert_nerf_to_timeloop(
-    model: VanillaNeRF, batch_size: int, top_dir: str = "workloads", sub_dir: str = "nerf"
-) -> str:
+def convert_nerf_to_timeloop(model, batch_size: int, top_dir: str = "workloads", sub_dir: str = "nerf") -> str:
     """
     Convert a NeRF model to Timeloop problems using pytorch2timeloop.
 
@@ -34,6 +30,8 @@ def convert_nerf_to_timeloop(
     str
         Mapped layer directory
     """
+    from accelerating_nerfs.models import VanillaNeRF
+
     try:
         import pytorch2timeloop
     except ImportError:
