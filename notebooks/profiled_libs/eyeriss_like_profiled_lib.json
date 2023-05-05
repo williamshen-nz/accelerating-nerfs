@@ -1,9 +1,9 @@
 {
     "/home/workspace/notebooks/workloads/nerf/nerf_layer1": {
         "area": 0.0,
-        "cycle": 21504,
-        "edp": 0.46,
-        "energy": 21.38,
+        "cycle": 10752,
+        "edp": 0.123,
+        "energy": 11.42,
         "gflops": 190.48,
         "layer_dict": {
             "problem": {
@@ -12,7 +12,7 @@
                     "Hdilation": 1,
                     "Hstride": 1,
                     "M": 256,
-                    "N": 128,
+                    "N": 64,
                     "P": 1,
                     "Q": 1,
                     "R": 1,
@@ -148,9 +148,9 @@
     },
     "/home/workspace/notebooks/workloads/nerf/nerf_layer11": {
         "area": 0.0,
-        "cycle": 72448,
-        "edp": 45.7,
-        "energy": 631.07,
+        "cycle": 36224,
+        "edp": 11.4,
+        "energy": 315.54,
         "gflops": 127.77,
         "layer_dict": {
             "problem": {
@@ -159,7 +159,7 @@
                     "Hdilation": 1,
                     "Hstride": 1,
                     "M": 128,
-                    "N": 128,
+                    "N": 64,
                     "P": 1,
                     "Q": 1,
                     "R": 1,
@@ -295,9 +295,9 @@
     },
     "/home/workspace/notebooks/workloads/nerf/nerf_layer12": {
         "area": 0.0,
-        "cycle": 2048,
-        "edp": 0.00629,
-        "energy": 3.07,
+        "cycle": 1024,
+        "edp": 0.0016,
+        "energy": 1.56,
         "gflops": 47.81,
         "layer_dict": {
             "problem": {
@@ -306,7 +306,7 @@
                     "Hdilation": 1,
                     "Hstride": 1,
                     "M": 3,
-                    "N": 128,
+                    "N": 64,
                     "P": 1,
                     "Q": 1,
                     "R": 1,
@@ -442,9 +442,9 @@
     },
     "/home/workspace/notebooks/workloads/nerf/nerf_layer2": {
         "area": 0.0,
-        "cycle": 131072,
-        "edp": 8.29,
-        "energy": 63.22,
+        "cycle": 65536,
+        "edp": 2.44,
+        "energy": 37.2,
         "gflops": 127.75,
         "layer_dict": {
             "problem": {
@@ -453,7 +453,7 @@
                     "Hdilation": 1,
                     "Hstride": 1,
                     "M": 256,
-                    "N": 128,
+                    "N": 64,
                     "P": 1,
                     "Q": 1,
                     "R": 1,
@@ -589,9 +589,9 @@
     },
     "/home/workspace/notebooks/workloads/nerf/nerf_layer6": {
         "area": 0.0,
-        "cycle": 118784,
-        "edp": 12.8,
-        "energy": 107.75,
+        "cycle": 59392,
+        "edp": 3.51,
+        "energy": 59.17,
         "gflops": 175.72,
         "layer_dict": {
             "problem": {
@@ -600,7 +600,7 @@
                     "Hdilation": 1,
                     "Hstride": 1,
                     "M": 256,
-                    "N": 128,
+                    "N": 64,
                     "P": 1,
                     "Q": 1,
                     "R": 1,
@@ -736,9 +736,9 @@
     },
     "/home/workspace/notebooks/workloads/nerf/nerf_layer9": {
         "area": 0.0,
-        "cycle": 4096,
-        "edp": 0.0231,
-        "energy": 5.64,
+        "cycle": 2048,
+        "edp": 0.00581,
+        "energy": 2.84,
         "gflops": 15.97,
         "layer_dict": {
             "problem": {
@@ -747,7 +747,7 @@
                     "Hdilation": 1,
                     "Hstride": 1,
                     "M": 1,
-                    "N": 128,
+                    "N": 64,
                     "P": 1,
                     "Q": 1,
                     "R": 1,

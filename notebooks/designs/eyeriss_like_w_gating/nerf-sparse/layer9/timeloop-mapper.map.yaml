@@ -49,7 +49,7 @@ mapping:
     permutation: CMRSNPQ
   - target: weights_spad
     type: temporal
-    factors: C8 M1 R1 S1 N1 P1 Q1
+    factors: C1 M1 R1 S1 N1 P1 Q1
     permutation: CMRSNPQ
   - target: ifmap_spad
     type: temporal
@@ -66,9 +66,9 @@ mapping:
     permutation: CMRSNPQ
   - target: shared_glb
     type: temporal
-    factors: C1 M1 R1 S1 N64 P1 Q1
-    permutation: NCMRSPQ
-  - target: DRAM
-    type: temporal
     factors: C4 M1 R1 S1 N1 P1 Q1
     permutation: CMRSNPQ
+  - target: DRAM
+    type: temporal
+    factors: C8 M1 R1 S1 N64 P1 Q1
+    permutation: CNMRSPQ

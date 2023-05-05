@@ -2,9 +2,9 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer1": {
         "area": 0.0,
         "cycle": 10752,
-        "edp": 0.121,
-        "energy": 11.26,
-        "gflops": 190.48,
+        "edp": 0.109,
+        "energy": 10.1,
+        "gflops": 191.32,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -153,10 +153,10 @@
     },
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer10": {
         "area": 0.0,
-        "cycle": 65536,
-        "edp": 2.3,
-        "energy": 35.13,
-        "gflops": 127.75,
+        "cycle": 32768,
+        "edp": 0.723,
+        "energy": 22.06,
+        "gflops": 79.61,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -301,14 +301,14 @@
         "mapper_max_permutations": 16,
         "mapper_timeout": 200,
         "mapper_victory_condition": 800,
-        "utilization": 0.38
+        "utilization": 0.24
     },
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer11": {
         "area": 0.0,
         "cycle": 36224,
-        "edp": 1.81,
-        "energy": 49.93,
-        "gflops": 127.77,
+        "edp": 1.78,
+        "energy": 49.19,
+        "gflops": 127.93,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -457,10 +457,10 @@
     },
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer12": {
         "area": 0.0,
-        "cycle": 1024,
-        "edp": 0.00144,
-        "energy": 1.41,
-        "gflops": 47.81,
+        "cycle": 536,
+        "edp": 0.000507,
+        "energy": 0.95,
+        "gflops": 26.04,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -605,14 +605,14 @@
         "mapper_max_permutations": 16,
         "mapper_timeout": 200,
         "mapper_victory_condition": 800,
-        "utilization": 0.14
+        "utilization": 0.08
     },
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer2": {
         "area": 0.0,
-        "cycle": 65536,
-        "edp": 2.3,
-        "energy": 35.13,
-        "gflops": 127.75,
+        "cycle": 32768,
+        "edp": 0.737,
+        "energy": 22.5,
+        "gflops": 113.97,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -757,14 +757,14 @@
         "mapper_max_permutations": 16,
         "mapper_timeout": 200,
         "mapper_victory_condition": 800,
-        "utilization": 0.38
+        "utilization": 0.34
     },
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer3": {
         "area": 0.0,
-        "cycle": 65536,
-        "edp": 2.3,
-        "energy": 35.13,
-        "gflops": 127.75,
+        "cycle": 32768,
+        "edp": 0.671,
+        "energy": 20.48,
+        "gflops": 78.0,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -909,14 +909,14 @@
         "mapper_max_permutations": 16,
         "mapper_timeout": 200,
         "mapper_victory_condition": 800,
-        "utilization": 0.38
+        "utilization": 0.23
     },
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer4": {
         "area": 0.0,
-        "cycle": 65536,
-        "edp": 2.3,
-        "energy": 35.13,
-        "gflops": 127.75,
+        "cycle": 32768,
+        "edp": 0.669,
+        "energy": 20.42,
+        "gflops": 76.52,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -1061,14 +1061,14 @@
         "mapper_max_permutations": 16,
         "mapper_timeout": 200,
         "mapper_victory_condition": 800,
-        "utilization": 0.38
+        "utilization": 0.23
     },
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer5": {
         "area": 0.0,
-        "cycle": 65536,
-        "edp": 2.3,
-        "energy": 35.13,
-        "gflops": 127.75,
+        "cycle": 32768,
+        "edp": 0.675,
+        "energy": 20.61,
+        "gflops": 79.36,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -1213,14 +1213,14 @@
         "mapper_max_permutations": 16,
         "mapper_timeout": 200,
         "mapper_victory_condition": 800,
-        "utilization": 0.38
+        "utilization": 0.24
     },
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer6": {
         "area": 0.0,
-        "cycle": 59392,
-        "edp": 2.79,
-        "energy": 46.94,
-        "gflops": 175.72,
+        "cycle": 29696,
+        "edp": 3.03,
+        "energy": 101.98,
+        "gflops": 161.09,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -1365,14 +1365,14 @@
         "mapper_max_permutations": 16,
         "mapper_timeout": 200,
         "mapper_victory_condition": 800,
-        "utilization": 0.52
+        "utilization": 0.48
     },
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer7": {
         "area": 0.0,
-        "cycle": 65536,
-        "edp": 2.3,
-        "energy": 35.13,
-        "gflops": 127.75,
+        "cycle": 32768,
+        "edp": 0.692,
+        "energy": 21.13,
+        "gflops": 89.42,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -1517,14 +1517,14 @@
         "mapper_max_permutations": 16,
         "mapper_timeout": 200,
         "mapper_victory_condition": 800,
-        "utilization": 0.38
+        "utilization": 0.27
     },
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer8": {
         "area": 0.0,
-        "cycle": 65536,
-        "edp": 2.3,
-        "energy": 35.13,
-        "gflops": 127.75,
+        "cycle": 32768,
+        "edp": 0.672,
+        "energy": 20.5,
+        "gflops": 78.21,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -1669,14 +1669,14 @@
         "mapper_max_permutations": 16,
         "mapper_timeout": 200,
         "mapper_victory_condition": 800,
-        "utilization": 0.38
+        "utilization": 0.23
     },
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer9": {
         "area": 0.0,
-        "cycle": 2048,
-        "edp": 0.00524,
-        "energy": 2.56,
-        "gflops": 15.97,
+        "cycle": 1027,
+        "edp": 0.00322,
+        "energy": 3.13,
+        "gflops": 9.59,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -1821,6 +1821,6 @@
         "mapper_max_permutations": 16,
         "mapper_timeout": 200,
         "mapper_victory_condition": 800,
-        "utilization": 0.05
+        "utilization": 0.03
     }
 }

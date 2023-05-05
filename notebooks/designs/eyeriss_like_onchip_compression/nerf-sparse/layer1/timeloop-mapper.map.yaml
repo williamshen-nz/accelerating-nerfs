@@ -45,8 +45,8 @@ mapping:
       []
   - target: psum_spad
     type: temporal
-    factors: C1 M2 R1 S1 N2 P1 Q1
-    permutation: MNCRSPQ
+    factors: C1 M4 R1 S1 N1 P1 Q1
+    permutation: MCRSNPQ
   - target: weights_spad
     type: temporal
     factors: C3 M1 R1 S1 N1 P1 Q1
@@ -71,9 +71,9 @@ mapping:
     split: 1
   - target: shared_glb
     type: temporal
-    factors: C1 M4 R1 S1 N16 P1 Q1
-    permutation: NMCRSPQ
+    factors: C1 M1 R1 S1 N32 P1 Q1
+    permutation: NCMRSPQ
   - target: DRAM
     type: temporal
-    factors: C7 M1 R1 S1 N1 P1 Q1
+    factors: C7 M2 R1 S1 N1 P1 Q1
     permutation: CMRSNPQ

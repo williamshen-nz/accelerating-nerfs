@@ -144,8 +144,8 @@
         "gflops": 190.48,
         "utilization": 0.57,
         "cycle": 10752,
-        "energy": 13.82,
-        "edp": 0.149,
+        "energy": 11.42,
+        "edp": 0.123,
         "area": 0.0
     },
     "2": {
