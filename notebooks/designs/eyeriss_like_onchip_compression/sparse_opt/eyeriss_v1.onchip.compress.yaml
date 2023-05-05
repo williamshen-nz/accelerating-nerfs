@@ -1,3 +1,4 @@
+# See: https://timeloop.csail.mit.edu/timeloop/input-formats/design/sparse-optimizations
 sparse_optimizations:
   targets:
     - name: DRAM
@@ -34,6 +35,7 @@ sparse_optimizations:
       action-optimization:
         - type: skipping
           options:
+            # If Inputs has zero value, we skip the read access to Weights
             - target: Weights
               condition-on: [ Inputs ]
     
