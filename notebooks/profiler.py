@@ -1,16 +1,14 @@
 """
-Modified from Lab 1.
+Modified heavily from Lab 1.
 """
 
 import copy
 import json
 import os
-import shutil
 from collections import defaultdict
 from pathlib import Path
-from typing import ClassVar, List, Optional, Tuple
+from typing import ClassVar, List, Tuple
 
-import pytorch2timeloop
 import torch
 import torch.nn as nn
 import yaml
@@ -162,9 +160,6 @@ class Profiler:
         arch_name: str,
         model: torch.nn.Module,
         input_size: Tuple[int, ...],
-        batch_size: int,
-        convert_fc: bool,
-        exception_module_names: Optional[List[str]] = None,
         profiled_lib_dir_pattern: str = "./{arch_name}_profiled_lib.json",
     ):
         self.base_dir = Path(os.getcwd())
@@ -174,9 +169,6 @@ class Profiler:
         self.timeloop_dir = timeloop_dir
         self.arch_name = arch_name
         self.input_size = input_size
-        self.batch_size = batch_size
-        self.convert_fc = convert_fc
-        self.exception_module_names = exception_module_names
 
         profiled_lib_dir = profiled_lib_dir_pattern.format(arch_name=self.arch_name)
         self.profiled_lib_dir = profiled_lib_dir
@@ -196,23 +188,10 @@ class Profiler:
             json.dump(self.profiled_lib, fid, sort_keys=True, indent=4)
         print(f"Saved profiled lib to {self.profiled_lib_dir}")
 
-    def convert_model(self) -> Path:
-        """Convert model to timeloop files and return mapped layer directory."""
-        # clear previous conversion results
-        layer_dir = self.base_dir / self.top_dir / self.sub_dir
-        if layer_dir.exists():
-            shutil.rmtree(layer_dir, ignore_errors=True)
-        # convert the model to timeloop files
-        pytorch2timeloop.convert_model(
-            self.model,
-            self.input_size,
-            self.batch_size,
-            self.sub_dir,
-            self.top_dir,
-            self.convert_fc,
-            self.exception_module_names,
-        )
-        return layer_dir
+    @property
+    def sparsity_enabled(self) -> bool:
+        sparse_opt_dir = self.base_dir / self.timeloop_dir / "sparse_opt"
+        return os.path.exists(sparse_opt_dir)
 
     def get_timeloop_cmd(self, layer_id: int, layer_info: dict) -> Tuple[str, str]:
         """Get timeloop working directory and command."""
@@ -223,23 +202,33 @@ class Profiler:
             # depthwise
             constraint_pth = self.base_dir / self.timeloop_dir / "constraints_dw/*.yaml"
 
-        # Check if sparse_opt is enabled
-        sparse_opt_dir = self.base_dir / self.timeloop_dir / "sparse_opt"
-        include_sparse_opt = os.path.exists(sparse_opt_dir)
-        if include_sparse_opt:
+        arch_fname = f"{self.arch_name}.yaml"
+        timeloop_cmd = [
+            "timeloop-mapper",
+            f"{self.base_dir / self.timeloop_dir / 'arch' / arch_fname}",
+            f"{self.base_dir / self.timeloop_dir / 'arch/components/*.yaml'}",
+            f"{self.base_dir / self.timeloop_dir / 'mapper/mapper.yaml'}",
+            f"{constraint_pth}",
+            f"{self.base_dir / self.top_dir / self.sub_dir / self.sub_dir}_layer{layer_id}.yaml",
+        ]
+
+        # Insert sparse_opt before constraint_pth if enabled
+        if self.sparsity_enabled:
+            timeloop_cmd.insert(-1, f"{self.base_dir / self.timeloop_dir / 'sparse_opt/*.yaml'}")
             print(f"Sparse optimization is enabled for {self.arch_name} and layer {layer_id}")
 
-        arch_fname = f"{self.arch_name}.yaml"
+        timeloop_cmd = " ".join(timeloop_cmd)
+        timeloop_cmd += " > /dev/null 2>&1"
+
         timeloopcmd = (
             f"timeloop-mapper "
             f"{self.base_dir / self.timeloop_dir / 'arch' / arch_fname} "
             f"{self.base_dir / self.timeloop_dir / 'arch/components/*.yaml'} "
             f"{self.base_dir / self.timeloop_dir / 'mapper/mapper.yaml'} "
             f"{constraint_pth} "
-            f"{sparse_opt_dir / '*.yaml'} " if include_sparse_opt else " "  # Important: keep the space at the end
             f"{self.base_dir / self.top_dir / self.sub_dir / self.sub_dir}_layer{layer_id}.yaml > /dev/null 2>&1"
         )
-        print(timeloopcmd)
+        # print(timeloopcmd)
         return cwd, timeloopcmd
 
     def run_timeloop(self, layer_info: dict):
@@ -308,8 +297,7 @@ class Profiler:
 
     def profile(self) -> Tuple[dict, dict, dict]:
         """Profile the model."""
-        # Run the pytorch2timeloop converter
-        layer_dir = self.convert_model()
+        layer_dir = self.base_dir / self.top_dir / self.sub_dir
 
         # check duplicated layer info
         layer_info = {}
@@ -400,9 +388,6 @@ def test():
         arch_name="simple_weight_stationary",
         model=torchvision.models.alexnet(),
         input_size=(3, 224, 224),
-        batch_size=1,
-        convert_fc=True,
-        exception_module_names=[],
     )
     profiler.profile()
 
