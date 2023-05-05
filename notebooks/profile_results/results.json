@@ -1,4 +1,131 @@
 {
+    "eyeriss_like": {
+        "summary": {
+            "total_area": 0.0,
+            "total_energy": 650.9300000000001,
+            "total_cycle": 568192.0,
+            "num_params": 595844,
+            "macs": 593450,
+            "activation_size": 2300.0
+        },
+        "layer_summary": {
+            "1": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer1",
+                "total_area": 0.0,
+                "total_energy": 11.42,
+                "total_cycle": 10752,
+                "num": 1,
+                "energy": 11.42,
+                "area": 0.0,
+                "cycle": 10752,
+                "gflops": 190.48,
+                "utilization": 0.57,
+                "edp": 0.123,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like/nerf/layer1/timeloop-mapper.stats.txt",
+                "shape": {
+                    "C": 63,
+                    "M": 256,
+                    "N": 64
+                }
+            },
+            "2": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer2",
+                "total_area": 0.0,
+                "total_energy": 260.40000000000003,
+                "total_cycle": 458752,
+                "num": 7,
+                "energy": 37.2,
+                "area": 0.0,
+                "cycle": 65536,
+                "gflops": 127.75,
+                "utilization": 0.38,
+                "edp": 2.44,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like/nerf/layer2/timeloop-mapper.stats.txt",
+                "shape": {
+                    "C": 256,
+                    "M": 256,
+                    "N": 64
+                }
+            },
+            "6": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer6",
+                "total_area": 0.0,
+                "total_energy": 59.17,
+                "total_cycle": 59392,
+                "num": 1,
+                "energy": 59.17,
+                "area": 0.0,
+                "cycle": 59392,
+                "gflops": 175.72,
+                "utilization": 0.52,
+                "edp": 3.51,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like/nerf/layer6/timeloop-mapper.stats.txt",
+                "shape": {
+                    "C": 319,
+                    "M": 256,
+                    "N": 64
+                }
+            },
+            "9": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer9",
+                "total_area": 0.0,
+                "total_energy": 2.84,
+                "total_cycle": 2048,
+                "num": 1,
+                "energy": 2.84,
+                "area": 0.0,
+                "cycle": 2048,
+                "gflops": 15.97,
+                "utilization": 0.05,
+                "edp": 0.00581,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like/nerf/layer9/timeloop-mapper.stats.txt",
+                "shape": {
+                    "C": 256,
+                    "M": 1,
+                    "N": 64
+                }
+            },
+            "11": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer11",
+                "total_area": 0.0,
+                "total_energy": 315.54,
+                "total_cycle": 36224,
+                "num": 1,
+                "energy": 315.54,
+                "area": 0.0,
+                "cycle": 36224,
+                "gflops": 127.77,
+                "utilization": 0.38,
+                "edp": 11.4,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like/nerf/layer11/timeloop-mapper.stats.txt",
+                "shape": {
+                    "C": 283,
+                    "M": 128,
+                    "N": 64
+                }
+            },
+            "12": {
+                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer12",
+                "total_area": 0.0,
+                "total_energy": 1.56,
+                "total_cycle": 1024,
+                "num": 1,
+                "energy": 1.56,
+                "area": 0.0,
+                "cycle": 1024,
+                "gflops": 47.81,
+                "utilization": 0.14,
+                "edp": 0.0016,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like/nerf/layer12/timeloop-mapper.stats.txt",
+                "shape": {
+                    "C": 128,
+                    "M": 3,
+                    "N": 64
+                }
+            }
+        },
+        "results": "/home/workspace/notebooks/profile_results/eyeriss_like_results.json"
+    },
     "eyeriss_like_onchip_compression": {
         "summary": {
             "total_area": 0.0,
@@ -480,132 +607,5 @@
             }
         },
         "results": "/home/workspace/notebooks/profile_results/eyeriss_like_w_gating_results.json"
-    },
-    "eyeriss_like": {
-        "summary": {
-            "total_area": 0.0,
-            "total_energy": 650.9300000000001,
-            "total_cycle": 568192.0,
-            "num_params": 595844,
-            "macs": 593450,
-            "activation_size": 2300.0
-        },
-        "layer_summary": {
-            "1": {
-                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer1",
-                "total_area": 0.0,
-                "total_energy": 11.42,
-                "total_cycle": 10752,
-                "num": 1,
-                "energy": 11.42,
-                "area": 0.0,
-                "cycle": 10752,
-                "gflops": 190.48,
-                "utilization": 0.57,
-                "edp": 0.123,
-                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like/nerf/layer1/timeloop-mapper.stats.txt",
-                "shape": {
-                    "C": 63,
-                    "M": 256,
-                    "N": 64
-                }
-            },
-            "2": {
-                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer2",
-                "total_area": 0.0,
-                "total_energy": 260.40000000000003,
-                "total_cycle": 458752,
-                "num": 7,
-                "energy": 37.2,
-                "area": 0.0,
-                "cycle": 65536,
-                "gflops": 127.75,
-                "utilization": 0.38,
-                "edp": 2.44,
-                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like/nerf/layer2/timeloop-mapper.stats.txt",
-                "shape": {
-                    "C": 256,
-                    "M": 256,
-                    "N": 64
-                }
-            },
-            "6": {
-                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer6",
-                "total_area": 0.0,
-                "total_energy": 59.17,
-                "total_cycle": 59392,
-                "num": 1,
-                "energy": 59.17,
-                "area": 0.0,
-                "cycle": 59392,
-                "gflops": 175.72,
-                "utilization": 0.52,
-                "edp": 3.51,
-                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like/nerf/layer6/timeloop-mapper.stats.txt",
-                "shape": {
-                    "C": 319,
-                    "M": 256,
-                    "N": 64
-                }
-            },
-            "9": {
-                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer9",
-                "total_area": 0.0,
-                "total_energy": 2.84,
-                "total_cycle": 2048,
-                "num": 1,
-                "energy": 2.84,
-                "area": 0.0,
-                "cycle": 2048,
-                "gflops": 15.97,
-                "utilization": 0.05,
-                "edp": 0.00581,
-                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like/nerf/layer9/timeloop-mapper.stats.txt",
-                "shape": {
-                    "C": 256,
-                    "M": 1,
-                    "N": 64
-                }
-            },
-            "11": {
-                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer11",
-                "total_area": 0.0,
-                "total_energy": 315.54,
-                "total_cycle": 36224,
-                "num": 1,
-                "energy": 315.54,
-                "area": 0.0,
-                "cycle": 36224,
-                "gflops": 127.77,
-                "utilization": 0.38,
-                "edp": 11.4,
-                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like/nerf/layer11/timeloop-mapper.stats.txt",
-                "shape": {
-                    "C": 283,
-                    "M": 128,
-                    "N": 64
-                }
-            },
-            "12": {
-                "name": "/home/workspace/notebooks/workloads/nerf/nerf_layer12",
-                "total_area": 0.0,
-                "total_energy": 1.56,
-                "total_cycle": 1024,
-                "num": 1,
-                "energy": 1.56,
-                "area": 0.0,
-                "cycle": 1024,
-                "gflops": 47.81,
-                "utilization": 0.14,
-                "edp": 0.0016,
-                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like/nerf/layer12/timeloop-mapper.stats.txt",
-                "shape": {
-                    "C": 128,
-                    "M": 3,
-                    "N": 64
-                }
-            }
-        },
-        "results": "/home/workspace/notebooks/profile_results/eyeriss_like_results.json"
     }
 }

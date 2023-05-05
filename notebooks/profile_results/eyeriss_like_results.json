@@ -141,12 +141,12 @@
         "mapper_algo": "random-pruned",
         "mapper_victory_condition": 3000,
         "mapper_max_permutations": 16,
+        "energy": 11.42,
+        "area": 0.0,
+        "cycle": 10752,
         "gflops": 190.48,
         "utilization": 0.57,
-        "cycle": 10752,
-        "energy": 11.42,
-        "edp": 0.123,
-        "area": 0.0
+        "edp": 0.123
     },
     "2": {
         "layer_dict": {
@@ -290,12 +290,12 @@
         "mapper_algo": "random-pruned",
         "mapper_victory_condition": 3000,
         "mapper_max_permutations": 16,
+        "energy": 37.2,
+        "area": 0.0,
+        "cycle": 65536,
         "gflops": 127.75,
         "utilization": 0.38,
-        "cycle": 65536,
-        "energy": 37.2,
-        "edp": 2.44,
-        "area": 0.0
+        "edp": 2.44
     },
     "6": {
         "layer_dict": {
@@ -439,12 +439,12 @@
         "mapper_algo": "random-pruned",
         "mapper_victory_condition": 3000,
         "mapper_max_permutations": 16,
+        "energy": 59.17,
+        "area": 0.0,
+        "cycle": 59392,
         "gflops": 175.72,
         "utilization": 0.52,
-        "cycle": 59392,
-        "energy": 59.17,
-        "edp": 3.51,
-        "area": 0.0
+        "edp": 3.51
     },
     "9": {
         "layer_dict": {
@@ -588,12 +588,12 @@
         "mapper_algo": "random-pruned",
         "mapper_victory_condition": 3000,
         "mapper_max_permutations": 16,
+        "energy": 2.84,
+        "area": 0.0,
+        "cycle": 2048,
         "gflops": 15.97,
         "utilization": 0.05,
-        "cycle": 2048,
-        "energy": 2.84,
-        "edp": 0.00581,
-        "area": 0.0
+        "edp": 0.00581
     },
     "11": {
         "layer_dict": {
@@ -737,12 +737,12 @@
         "mapper_algo": "random-pruned",
         "mapper_victory_condition": 3000,
         "mapper_max_permutations": 16,
+        "energy": 315.54,
+        "area": 0.0,
+        "cycle": 36224,
         "gflops": 127.77,
         "utilization": 0.38,
-        "cycle": 36224,
-        "energy": 315.54,
-        "edp": 11.4,
-        "area": 0.0
+        "edp": 11.4
     },
     "12": {
         "layer_dict": {
@@ -886,11 +886,11 @@
         "mapper_algo": "random-pruned",
         "mapper_victory_condition": 3000,
         "mapper_max_permutations": 16,
+        "energy": 1.56,
+        "area": 0.0,
+        "cycle": 1024,
         "gflops": 47.81,
         "utilization": 0.14,
-        "cycle": 1024,
-        "energy": 1.56,
-        "edp": 0.0016,
-        "area": 0.0
+        "edp": 0.0016
     }
 }
