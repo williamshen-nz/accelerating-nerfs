@@ -173,7 +173,7 @@ def compute_layer_sparsities(sparsity_results: Dict[str, Dict[int, Dict[str, flo
 
 
 def add_sparsity_to_nerf_layers(
-    layer_to_avg_sparsity: Dict[int, float], layer_dir: str = "workloads/nerf", dry_run: bool = False
+    layer_to_avg_sparsity: Dict[int, float], layer_dir: str = "workloads/nerf-sparse", dry_run: bool = False
 ) -> None:
     """
     Add sparsity (it's actually density) to the workload problems for each of the NeRF layers so Timeloop and Accelergy

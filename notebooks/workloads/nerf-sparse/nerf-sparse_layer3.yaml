@@ -1,9 +1,9 @@
 problem:
   instance:
-    C: 128
+    C: 256
     Hdilation: 1
     Hstride: 1
-    M: 3
+    M: 256
     N: 128
     P: 1
     Q: 1
@@ -11,6 +11,10 @@ problem:
     S: 1
     Wdilation: 1
     Wstride: 1
+    densities:
+      Inputs: 0.33934932537231965
+      Outputs: 0.33934932537231965
+      Weights: 1.0
   shape:
     coefficients:
     - default: 1
