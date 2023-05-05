@@ -26,7 +26,7 @@ from accelerating_nerfs.utils import NERF_SYNTHETIC_SCENES, render_image_with_oc
 def register_hooks(model: VanillaNeRF) -> Tuple[Callable, Dict[str, Any]]:
     """Register hooks to collect metrics about the input and output activations."""
     layer_metrics = {
-        "layers": set(),
+        "layers": [],
         "batch_sizes": defaultdict(list),
         "input": {
             "num_zeros": defaultdict(int),
@@ -78,7 +78,8 @@ def register_hooks(model: VanillaNeRF) -> Tuple[Callable, Dict[str, Any]]:
             assert output_tensor.numel() == 0
             return
 
-        layer_metrics["layers"].add(nn_module)
+        if nn_module not in layer_metrics["layers"]:
+            layer_metrics["layers"].append(nn_module)
 
         # Batch size
         assert input_tensor.shape[0] == output_tensor.shape[0], "batch size mismatch"
