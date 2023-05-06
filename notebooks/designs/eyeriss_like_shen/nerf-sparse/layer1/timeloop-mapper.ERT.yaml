@@ -1,136 +1,159 @@
-ERT_summary:
+ERT:
   version: 0.3
-  table_summary:
+  tables:
   - name: eyeriss_168.DRAM
     actions:
     - name: read
+      arguments: null
       energy: 512
     - name: write
+      arguments: null
       energy: 512
     - name: idle
+      arguments: null
       energy: 0
-    primitive_estimation(s):
-    - name: eyeriss_168.DRAM
-      estimator: Cacti
   - name: eyeriss_168.DummyBuffer[0..13]
     actions:
     - name: read
-      average_energy: 0.0
-      max_energy: 0
-      min_energy: 0
-    - name: write
-      average_energy: 0.0
-      max_energy: 0
-      min_energy: 0
-    - name: idle
+      arguments:
+        address_delta: 0
+        data_delta: 0
       energy: 0
-    primitive_estimation(s):
-    - name: eyeriss_168.DummyBuffer[0..13]
-      estimator: Cacti
+    - name: read
+      arguments:
+        address_delta: 0
+        data_delta: 1
+      energy: 0
+    - name: read
+      arguments:
+        address_delta: 1
+        data_delta: 0
+      energy: 0
+    - name: read
+      arguments:
+        address_delta: 1
+        data_delta: 1
+      energy: 0
+    - name: write
+      arguments:
+        address_delta: 0
+        data_delta: 0
+      energy: 0
+    - name: write
+      arguments:
+        address_delta: 0
+        data_delta: 1
+      energy: 0
+    - name: write
+      arguments:
+        address_delta: 1
+        data_delta: 0
+      energy: 0
+    - name: write
+      arguments:
+        address_delta: 1
+        data_delta: 1
+      energy: 0
+    - name: idle
+      arguments: null
+      energy: 0
   - name: eyeriss_168.PE[0..167].ifmap_spad
     actions:
     - name: write
+      arguments: null
       energy: 0.18752
     - name: read
+      arguments: null
       energy: 0.18752
     - name: gated_write
+      arguments: null
       energy: 0.00595
     - name: gated_read
+      arguments: null
       energy: 0.00595
     - name: idle
+      arguments: null
       energy: 0.01205
-    primitive_estimation(s):
-    - name: storage
-      estimator: Aladdin_table
-    - name: address_generators[0]
-      estimator: Aladdin_table
-    - name: address_generators[1]
-      estimator: Aladdin_table
   - name: eyeriss_168.PE[0..167].weights_spad
     actions:
     - name: write
+      arguments: null
       energy: 1.13063
     - name: read
+      arguments: null
       energy: 0.71011
     - name: gated_write
+      arguments: null
       energy: 0.00595
     - name: gated_read
+      arguments: null
       energy: 0.00595
     - name: idle
+      arguments: null
       energy: 0.00596
-    primitive_estimation(s):
-    - name: storage
-      estimator: Cacti
-    - name: address_generators[0]
-      estimator: Aladdin_table
-    - name: address_generators[1]
-      estimator: Aladdin_table
   - name: eyeriss_168.PE[0..167].psum_spad
     actions:
     - name: write
+      arguments: null
       energy: 1.13063
     - name: read
+      arguments: null
       energy: 0.71011
     - name: gated_write
+      arguments: null
       energy: 0.00595
     - name: gated_read
+      arguments: null
       energy: 0.00595
     - name: idle
+      arguments: null
       energy: 0.00596
-    primitive_estimation(s):
-    - name: storage
-      estimator: Cacti
-    - name: address_generators[0]
-      estimator: Aladdin_table
-    - name: address_generators[1]
-      estimator: Aladdin_table
   - name: eyeriss_168.PE[0..167].MACs
     actions:
     - name: mac_random
+      arguments: null
       energy: 2.20035
     - name: mac_reuse
+      arguments: null
       energy: 2.20035
     - name: mac_gated
+      arguments: null
       energy: 0.06595
-    primitive_estimation(s):
-    - name: multiplier
-      estimator: Aladdin_table
-    - name: adder
-      estimator: Aladdin_table
   - name: eyeriss_168.shared_glb
     actions:
     - name: write
+      arguments: null
       energy: 37.1554
     - name: read
+      arguments: null
       energy: 49.1739
     - name: gated_write
+      arguments: null
       energy: 0.00616
     - name: gated_read
+      arguments: null
       energy: 0.00616
     - name: address_generation
+      arguments: null
       energy: 0.02533
     - name: metadata_read
+      arguments: null
       energy: 9.97801
     - name: metadata_write
+      arguments: null
       energy: 6.86756
     - name: gated_metadata_read
+      arguments: null
       energy: 0.00052
     - name: gated_metadata_write
+      arguments: null
       energy: 0.00052
     - name: decompression_count
+      arguments: null
       energy: 0.0
     - name: compression_count
+      arguments: null
       energy: 0.0
     - name: idle
+      arguments: null
       energy: 0.00616
-    primitive_estimation(s):
-    - name: storage
-      estimator: Cacti
-    - name: address_generators[0]
-      estimator: Aladdin_table
-    - name: metadata_storage
-      estimator: Cacti
-    - name: metadata_counters[1]
-      estimator: Aladdin_table
-    - name: metadata_counters[0]
-      estimator: Aladdin_table

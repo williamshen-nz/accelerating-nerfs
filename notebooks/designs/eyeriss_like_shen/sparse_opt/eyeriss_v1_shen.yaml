@@ -1,4 +1,3 @@
-# Combination between gating and skipping and other cool things!
 # See: https://timeloop.csail.mit.edu/timeloop/input-formats/design/sparse-optimizations
 sparse_optimizations:
   targets:
@@ -20,7 +19,7 @@ sparse_optimizations:
                 flattened-rankIDs: [ [P, M, N, Q] ]
               - format: RLE
                 flattened-rankIDs: [ [P, M, N, Q] ]
-    
+
     - name: shared_glb
       representation-format:
         data-spaces:
@@ -34,12 +33,12 @@ sparse_optimizations:
 
     - name: weights_spad
       action-optimization:
-        - type: skipping
+        - type: skipping-spatial
           options:
             # If Inputs has zero value, we skip the read access to Weights
             - target: Weights
               condition-on: [ Inputs ]
-    
+
     - name: ifmap_spad
       representation-format:
         data-spaces:

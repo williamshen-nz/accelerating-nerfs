@@ -205,7 +205,8 @@ Level 4
     MAPPING
     -------
     Loop nest:
-      for C in [0:16)
+      for N in [0:4)
+        for C in [0:16)
 
     STATS
     -----
@@ -293,7 +294,6 @@ Level 6
     MAPPING
     -------
     Loop nest:
-      for N in [0:4)
 
     STATS
     -----
