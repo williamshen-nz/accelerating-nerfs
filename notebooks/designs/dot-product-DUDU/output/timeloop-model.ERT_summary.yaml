@@ -1,0 +1,31 @@
+ERT_summary:
+  version: 0.3
+  table_summary:
+  - name: PE.Buffer
+    actions:
+    - name: read
+      average_energy: 2.39764
+      max_energy: 4.75416
+      min_energy: 0.04112
+    - name: write
+      average_energy: 2.39764
+      max_energy: 4.75416
+      min_energy: 0.04112
+    - name: idle
+      energy: 0.04112
+    primitive_estimation(s):
+    - name: PE.Buffer
+      estimator: Aladdin_table
+  - name: PE.MAC
+    actions:
+    - name: mac_random
+      energy: 34.6914
+    - name: mac_reused
+      energy: 29.5134
+    - name: mac_gated
+      energy: 1.1314
+    - name: idle
+      energy: 0.9838
+    primitive_estimation(s):
+    - name: PE.MAC
+      estimator: Aladdin_table
