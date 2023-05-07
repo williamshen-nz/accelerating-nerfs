@@ -15,7 +15,7 @@ NeRFs are slow, we are trying to accelerate them! 🏎💨
     - [Training NeRFs](#training-nerfs)
     - [Rendering NeRFs](#rendering-nerfs)
     - [Evaluating Designs](#evaluating-designs)
-    - [Analysis](#analysis)
+    - [NeRF Analysis](#nerf-analysis)
 - [Tips](#tips)
     - [Profiling Rendering Code](#profiling-rendering-code)
 
@@ -116,6 +116,9 @@ The analysis notebooks will save the figures to the `notebooks/figures` director
 - NeRF Volumetric Rendering Weight Sparsity (weights are somewhat sparse)
     1. Run the `accelerating_nerfs/nerf_volrend_sparsity.py` script
     2. Process results in `notebooks/NeRF Volumetric Rendering Sparsity.ipynb` notebook
+- NeRF FP32 to FP16 Quantization
+    1. Run the `accelerating_nerfs/render_nerf_synthetic.py` script with `use_fp16=True`.
+    2. Results will be written to a `results_fp16/` directory which include rendering time, PSNR, power, energy, etc.
 
 ## Tips
 
