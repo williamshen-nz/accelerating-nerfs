@@ -53,6 +53,18 @@ h4 {
     border-color: white;
 }
 
+.btn-secondary {
+    background-color: rgb(115, 174, 217);
+    border-color: white;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: rgb(69, 159, 218);
+    border-color: white;
+    color: white;
+}
+
 .text {
     max-width: 750px;
     margin-left: auto;

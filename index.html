@@ -89,15 +89,19 @@
     <div class="subsection">
         <h4>Table of Contents</h4>
         <div class="text">
-            <a href="#videos">Videos</a><br>
-            <a href="#sparsity">Activation Sparsity</a><br>
+            <a href="#background">NeRF Background</a><br>
+            <a href="#sparsity">Exploiting Activation Sparsity</a><br>
+            <a href="#volumetric-rendering">Accelerating Volumetric Rendering</a><br>
             <a href="#quantization">Quantization</a>
         </div>
     </div>
     <hr>
-    <div class="nerf-videos" id="videos">
-        <h4>Videos</h4>
-        Rendered from our NeRF implementation using 32-bit floating point precision.
+    <div class="nerf-videos" id="background">
+        <h4>NeRF Background</h4>
+        <div style="max-width: 800px; margin: 1.5rem auto;">
+            <img src="assets/nerf-architecture.png" class="img-fluid" alt="NeRF Architecture">
+        </div>
+        Videos rendered from our NeRF implementation using 32-bit floating point precision.
         <div class="row justify-content-center">
             <div class="col-sm-2 col-md-2 video-container">
                 <video src="assets/chair.mp4" autoplay loop muted></video>
@@ -137,21 +141,47 @@
     </div>
     <hr>
     <div class="subsection text-left" id="sparsity">
-        <h4 class="text-center">Activation Sparsity</h4>
+        <h4 class="text-center">Exploiting Activation Sparsity</h4>
         <div class="text justify-content-center">
             <p>
-                We depict the average and standard deviation of the input activation sparsities of the fully-connected
-                (FC) layers of NeRFs trained on the synthetic datasets.
-
-                Note that all FC layers use the ReLU activation function except fc_10, which does not have an
-                activation function.
+                Our NeRF model consists of 12 fully-connected (FC) layers, 10 of which use the ReLU activation function
+                hence resulting in sparse activations. This results in a significant number of ineffectual computations,
+                which spend unnecessary energy and computation time.
             </p>
             <p>
-                We find the overall average sparsity is 60.3% across the FC layers, excluding fc_1 and fc_11.
-                Note that fc_1 receives the position-encoded ray samples while fc_11 receives the output from fc_10.
+                We propose to exploit this activation sparsity by using compressed representations of the activations,
+                along with gating and skipping to avoid carrying out unnecesary computations. The figure below shows the
+                average input activation sparsities of the FC layers of NeRFs trained on the synthetic datasets.
+            </p>
+            <p>
+                We find that the overall average sparsity is 60.3% across the FC layers, excluding fc_1 and fc_11. Note
+                that fc_1 receives the position-encoded ray samples while fc_11 receives the output from fc_10 which
+                does not have an activation function.
             </p>
         </div>
-        <img src="assets/activation-sparsity.png" alt="Activation Sparsity" class="img-fluid">
+        <div id="activationSparsityCrop">
+            <img src="assets/activation-sparsity-crop.png" alt="Activation Sparsity (Cropped)" class="img-fluid">
+        </div>
+        <div class="d-none" id="activationSparsity">
+            <img src="assets/activation-sparsity.png" alt="Activation Sparsity" class="img-fluid">
+        </div>
+        <div class="row text-center justify-content-center" style="margin: 1.5rem auto;">
+            <div class="col-sm-12">
+                <button class="btn btn-secondary" id="activationSparsityBtn">Show More 📊</button>
+            </div>
+        </div>
+        <div class="text justify-content-center">
+            <p>
+                We use the Eyeriss architecture to accelerate the NeRF model. We gain a significant reduction in energy
+                and cycles by exploiting the activation sparsity. The table below shows the results of our experiments.
+            </p>
+            <!-- TODO: image of table -->
+        </div>
+    </div>
+    <hr>
+    <div class="subsection" id="volumetric-rendering">
+        <h4 class="text-center">Accelerating Volumetric Rendering</h4>
+        <p>TODO: Willie</p>
     </div>
     <hr>
     <div class="subsection" id="quantization">
@@ -168,8 +198,11 @@
                 rendered from the FP32 and FP16 models. Thus, FP16 could be sufficient for many applications and
                 additionally comes at the benefit of 2x smaller model size.
             </p>
-            <p class="small-text" style="color: #b4b4b4">
+            <p class="small-text" style="color: #a1a1a1">
                 Note: we run FP32 and FP16 using PyTorch on a NVIDIA RTX 3090 GPU to determine the render time.
+                We estimate energy consumption by multiplying the render time by the average power consumption of the
+                GPU.
+                <!-- FP32 peak 343W, FP16 peak 326W -->
             </p>
         </div>
         <div class="nerf-videos">
@@ -237,7 +270,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-sm-12">
-                    <button class="btn btn-primary" id="seeMoreBtn">Show More 🎥</button>
+                    <button class="btn btn-secondary" id="quantVideosBtn">Show More 🎥</button>
                 </div>
             </div>
         </div>
@@ -252,15 +285,31 @@
 </div>
 
 <script>
-    const seeMoreBtn = document.getElementById("seeMoreBtn");
+    // Show activation sparsity
+    const activationSparsityBtn = document.getElementById("activationSparsityBtn");
+    const activationSparsity = document.getElementById("activationSparsity");
+    const activationSparsityCrop = document.getElementById("activationSparsityCrop");
+
+    activationSparsityBtn.addEventListener("click", () => {
+        activationSparsity.classList.toggle("d-none");
+        activationSparsityCrop.classList.toggle("d-none");
+        if (activationSparsityBtn.textContent === "Show More 📊") {
+            activationSparsityBtn.textContent = "Hide 📊";
+        } else {
+            activationSparsityBtn.textContent = "Show More 📊";
+        }
+    });
+
+    // Toggle hidden videos
+    const quantVideosBtn = document.getElementById("quantVideosBtn");
     const hiddenVideos = document.getElementById("hiddenVideos");
 
-    seeMoreBtn.addEventListener("click", () => {
+    quantVideosBtn.addEventListener("click", () => {
         hiddenVideos.classList.toggle("d-none");
-        if (seeMoreBtn.textContent === "Show More 🎥") {
-            seeMoreBtn.textContent = "Hide 🎥";
+        if (quantVideosBtn.textContent === "Show More 🎥") {
+            quantVideosBtn.textContent = "Hide 🎥";
         } else {
-            seeMoreBtn.textContent = "See More 🎥";
+            quantVideosBtn.textContent = "See More 🎥";
         }
     });
 </script>
