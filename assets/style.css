@@ -13,11 +13,17 @@ h4 {
 
 .main {
     margin-top: 3rem;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .intro {
     margin-bottom: 1.75rem;
+}
+
+.footer {
+    margin: 2rem auto;
 }
 
 .title {
