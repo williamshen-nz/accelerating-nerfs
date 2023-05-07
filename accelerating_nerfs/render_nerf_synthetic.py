@@ -35,10 +35,11 @@ def render_nerf_synthetic_all(
     set_random_seed(random_seed)
     checkpoint_pattern = get_checkpoint_pattern()
     project_root = get_project_root()
+    base_name = "results_fp16" if use_fp16 else "results"
 
     for scene in NERF_SYNTHETIC_SCENES[:max_num_scenes]:
         checkpoint = checkpoint_pattern.format(scene=scene)
-        result_dir = project_root / "results" / scene
+        result_dir = project_root / base_name / scene
         render_nerf_synthetic(
             scene=scene,
             checkpoint=checkpoint,
@@ -51,4 +52,5 @@ def render_nerf_synthetic_all(
 
 if __name__ == "__main__":
     # When profiling, you need to set CUDA_LAUNCH_BLOCKING=1 to get accurate numbers
-    render_nerf_synthetic_all(num_downscales=1, max_num_scenes=1, profile=False, use_fp16=False)
+    render_nerf_synthetic_all(num_downscales=1, max_num_scenes=None, profile=False, use_fp16=True)
+    render_nerf_synthetic_all(num_downscales=1, max_num_scenes=None, profile=False, use_fp16=False)

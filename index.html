@@ -53,7 +53,7 @@
         </div>
     </div>
     <hr>
-    <div class="text justify-content-center text-left" id="abstract">
+    <div class="subsection text justify-content-center text-left" id="abstract">
         <h4 class="text-center">Abstract</h4>
         <p>
             Neural Radiance Fields (NeRFs) have recently seen an explosion in interest, with significant interest not
@@ -86,10 +86,19 @@
         </ol>
     </div>
     <hr>
-    <div class="nerf-videos">
+    <div class="subsection">
+        <h4>Table of Contents</h4>
+        <div class="text">
+            <a href="#videos">Videos</a><br>
+            <a href="#sparsity">Activation Sparsity</a><br>
+            <a href="#quantization">Quantization</a>
+        </div>
+    </div>
+    <hr>
+    <div class="nerf-videos" id="videos">
         <h4>Videos</h4>
-        Rendered from our NeRF implementation.
-        <div class="row justify-content-center" id="videos">
+        Rendered from our NeRF implementation using 32-bit floating point precision.
+        <div class="row justify-content-center">
             <div class="col-sm-2 col-md-2 video-container">
                 <video src="assets/chair.mp4" autoplay loop muted></video>
                 <div class="video-title">Chair</div>
@@ -127,7 +136,7 @@
         </div>
     </div>
     <hr>
-    <div class="text-left" id="sparsity">
+    <div class="subsection text-left" id="sparsity">
         <h4 class="text-center">Activation Sparsity</h4>
         <div class="text justify-content-center">
             <p>
@@ -145,6 +154,95 @@
         <img src="assets/activation-sparsity.png" alt="Activation Sparsity" class="img-fluid">
     </div>
     <hr>
+    <div class="subsection" id="quantization">
+        <h4 class="text-center">Quantization</h4>
+        <div class="text text-left justify-content-center">
+            <p>
+                <strong>Question:</strong> The NeRF models by default use 32-bit floating point numbers (FP32). Can
+                we quantize the model to FP16 to speed up inference, and what tradeoffs do we make as a result?
+            </p>
+            <p>
+                <strong>Answer:</strong> Yes, we can quantize the model to fp16 and achieve significant speedups (>2x
+                🏎💨 improvement in rendering time) at the cost of decreased peak signal-to-noise ratio (PSNR). While the
+                PSNR is decreased, it is difficult to observe any visible difference between the images
+                rendered from the FP32 and FP16 models. Thus, FP16 could be sufficient for many applications and
+                additionally comes at the benefit of 2x smaller model size.
+            </p>
+            <p class="small-text" style="color: #b4b4b4">
+                Note: we run FP32 and FP16 using PyTorch on a NVIDIA RTX 3090 GPU to determine the render time.
+            </p>
+        </div>
+        <div class="nerf-videos">
+            <div class="row justify-content-center">
+                <div class="col-sm-3 col-md-3 col-lg-3 video-container">
+                    <h5>Lego (FP32)</h5>
+                    <video src="assets/lego.mp4" autoplay loop muted></video>
+                    <p>
+                        PSNR (avg) = 33.72 dB<br>
+                        <span style="color:red">🐌 Render Time = 160.85s</span><br>
+                        <span style="color:red">Model Size = 2.39 MB</span>
+                    </p>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3 video-container">
+                    <h5>Lego (FP16)</h5>
+                    <video src="assets/lego_fp16.mp4" autoplay loop muted></video>
+                    <p>
+                        PSNR (avg) = 32.74 dB<br>
+                        <span style="color:green">🏎💨 Render Time = 60.74s</span><br>
+                        <span style="color:green">Model Size =  1.20 MB</span>
+                    </p>
+                </div>
+            </div>
+            <div class="d-none" id="hiddenVideos">
+                <div class="row justify-content-center">
+                    <div class="col-sm-3 col-md-3 col-lg-3 video-container">
+                        <h5>Ficus (FP32)</h5>
+                        <video src="assets/ficus.mp4" autoplay loop muted></video>
+                        <p>
+                            PSNR (avg) = 32.93 dB<br>
+                            <span style="color:red">🐌 Render Time = 65.95s</span><br>
+                            <span style="color:red">Model Size = 2.39 MB</span>
+                        </p>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3 video-container">
+                        <h5>Ficus (FP16)</h5>
+                        <video src="assets/ficus_fp16.mp4" autoplay loop muted></video>
+                        <p>
+                            PSNR (avg) = 32.07 dB<br>
+                            <span style="color:green">🏎💨 Render Time = 32.33s</span><br>
+                            <span style="color:green">Model Size =  1.20 MB</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-3 col-md-3 col-lg-3 video-container">
+                        <h5>Ship (FP32)</h5>
+                        <video src="assets/ship.mp4" autoplay loop muted></video>
+                        <p>
+                            PSNR (avg) = 29.85 dB<br>
+                            <span style="color:red"> 🐌 Render Time = 368.00s</span><br>
+                            <span style="color:red">Model Size = 2.39 MB</span>
+                        </p>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3 video-container">
+                        <h5>Ship (FP16)</h5>
+                        <video src="assets/ship_fp16.mp4" autoplay loop muted></video>
+                        <p>
+                            PSNR (avg) = 29.43 dB<br>
+                            <span style="color:green">🏎💨 Render Time = 128.16s</span><br>
+                            <span style="color:green">Model Size =  1.20 MB</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-sm-12">
+                    <button class="btn btn-primary" id="seeMoreBtn">Show More 🎥</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
     <p class="small-text">
         Course project for
         <a href="http://csg.csail.mit.edu/6.5930/index.html" target="_blank">
@@ -152,5 +250,19 @@
         </a>
     </p>
 </div>
+
+<script>
+    const seeMoreBtn = document.getElementById("seeMoreBtn");
+    const hiddenVideos = document.getElementById("hiddenVideos");
+
+    seeMoreBtn.addEventListener("click", () => {
+        hiddenVideos.classList.toggle("d-none");
+        if (seeMoreBtn.textContent === "Show More 🎥") {
+            seeMoreBtn.textContent = "Hide 🎥";
+        } else {
+            seeMoreBtn.textContent = "See More 🎥";
+        }
+    });
+</script>
 </body>
 </html>
