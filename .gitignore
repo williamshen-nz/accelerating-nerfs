@@ -7,13 +7,15 @@
 nerf_synthetic/
 nerf-synthetic-checkpoints/
 
-accelerating_nerfs/results/
-results/
 .ipynb_checkpoints/
 
 *.cprof
 *.pstat
 *.pclprof
+
+# results
+results/**/rgb/
+results_fp16/**/rgb/
 
 # accelergy/timeloop docker cruft
 .bashrc
