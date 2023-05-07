@@ -12,6 +12,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from accelerating_nerfs.discretize_positional_enc import sin_lut
 from accelerating_nerfs.profiler import profiler
 
 
@@ -166,7 +167,14 @@ class SinusoidalEncoder(nn.Module):
         self.min_deg = min_deg
         self.max_deg = max_deg
         self.use_identity = use_identity
+        self._use_sin_lut = False
+        self._sin_fn = torch.sin
         self.register_buffer("scales", torch.tensor([2**i for i in range(min_deg, max_deg)]))
+
+    def enable_sin_lut(self):
+        self._use_sin_lut = True
+        self._sin_fn = sin_lut
+        print("Using sin_lut for positional encoding.")
 
     @property
     def latent_dim(self) -> int:
@@ -185,7 +193,7 @@ class SinusoidalEncoder(nn.Module):
             (x[Ellipsis, None, :] * self.scales[:, None]),
             list(x.shape[:-1]) + [(self.max_deg - self.min_deg) * self.x_dim],
         )
-        latent = torch.sin(torch.cat([xb, xb + 0.5 * math.pi], dim=-1))
+        latent = self._sin_fn(torch.cat([xb, xb + 0.5 * math.pi], dim=-1))
         if self.use_identity:
             latent = torch.cat([x] + [latent], dim=-1)
         return latent
