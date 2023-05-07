@@ -5,6 +5,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Tuple
 
+import gpustat
 import imageio
 import numpy as np
 import torch
@@ -120,10 +121,13 @@ def render_nerf_synthetic(
     rgb_dir = os.path.join(result_dir, "rgb")
     os.makedirs(rgb_dir, exist_ok=True)
     rgbs, rgb_paths = [], []
+    power_draws = []
 
     # Render frames
-    start_time = time.perf_counter()
+    render_time = 0.0
     for idx in tqdm(range(len(test_dataset)), f"Rendering {scene} test images"):
+        # We only care about the actual rendering time excluding metrics, saving images, etc.
+        start_time = time.perf_counter()
         data = test_dataset[idx]
         render_bkgd = data["color_bkgd"]
         rays = data["rays"]
@@ -148,6 +152,13 @@ def render_nerf_synthetic(
             # quantization
             use_fp16=use_fp16,
         )
+        duration = time.perf_counter() - start_time
+        render_time += duration
+
+        # Measure GPU power draw
+        stats = gpustat.GPUStatCollection.new_query()
+        power_draws.append(stats.jsonify()["gpus"][0]["power.draw"])
+
         # TODO: save depths?
         rgb_image = (rgb.cpu().numpy() * 255).astype(np.uint8)
         rgbs.append(rgb_image)
@@ -163,9 +174,7 @@ def render_nerf_synthetic(
         psnrs.append(psnr.item())
         lpips.append(lpips_fn(rgb, pixels).item())
 
-    end_time = time.perf_counter()
-    duration = end_time - start_time
-    print(f"Successfully rendered {len(test_dataset)} images in {duration:.2f} seconds")
+    print(f"Successfully rendered {len(test_dataset)} images in {render_time:.2f} seconds")
 
     # Stop profiling
     if profile:
@@ -175,14 +184,21 @@ def render_nerf_synthetic(
     psnr_avg = np.mean(psnrs)
     lpips_avg = np.mean(lpips)
     print(f"PSNR: {psnr_avg:.4f}, LPIPS: {lpips_avg:.4f}")
+    power_draw_avg = np.mean(power_draws)
+    print(f"Power draw (avg): {power_draw_avg:.2f} W")
+
+    # Estimate energy in Joules = Watts * seconds
+    energy = power_draw_avg * render_time
 
     metrics = {
         "scene": scene,
         "checkpoint": checkpoint,
         "num_downscales": num_downscales,
         "use_fp16": use_fp16,
-        "render_time": duration,
+        "render_time": render_time,
         "psnr_avg": psnr_avg,
+        "power_draw_avg": power_draw_avg,
+        "energy": energy,
         "lpips_avg": lpips_avg,
         "psnrs": psnrs,
         "lpips": lpips,

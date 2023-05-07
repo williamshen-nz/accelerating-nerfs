@@ -12,5 +12,6 @@ lpips
 nerfacc
 moviepy
 
+gpustat
 line_profiler
 line_profiler_pycharm
