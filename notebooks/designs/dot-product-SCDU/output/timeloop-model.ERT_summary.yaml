@@ -4,34 +4,34 @@ ERT_summary:
   - name: PE.MAC
     actions:
     - name: mac_random
-      energy: 34.6914
+      energy: 0.5608
     - name: mac_reused
-      energy: 29.5134
+      energy: 0.47989
     - name: mac_gated
-      energy: 1.1314
+      energy: 0.03642
     - name: idle
-      energy: 0.9838
+      energy: 0.01797
     primitive_estimation(s):
     - name: PE.MAC
       estimator: Aladdin_table
   - name: PE.Buffer
     actions:
     - name: write
-      energy: 4.75416
+      energy: 4.25016
     - name: read
-      energy: 4.75416
+      energy: 4.25016
     - name: gated_write
-      energy: 0.04112
+      energy: 0.0204
     - name: gated_read
-      energy: 0.04112
+      energy: 0.0204
     - name: metadata_read
-      energy: 2.14496
+      energy: 0.18108
     - name: metadata_write
-      energy: 2.14496
+      energy: 0.18108
     - name: gated_metadata_read
-      energy: 0.01959
+      energy: 0.00209
     - name: gated_metadata_write
-      energy: 0.01959
+      energy: 0.00209
     primitive_estimation(s):
     - name: storage
       estimator: Aladdin_table

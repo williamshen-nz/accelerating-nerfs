@@ -7,56 +7,56 @@ ERT:
       arguments:
         address_delta: 0
         data_delta: 0
-      energy: 0.04112
+      energy: 0.0204
     - name: read
       arguments:
         address_delta: 0
         data_delta: 1
-      energy: 0.59344
+      energy: 0.08944
     - name: read
       arguments:
         address_delta: 1
         data_delta: 0
-      energy: 4.20184
+      energy: 4.18112
     - name: read
       arguments:
         address_delta: 1
         data_delta: 1
-      energy: 4.75416
+      energy: 4.25016
     - name: write
       arguments:
         address_delta: 0
         data_delta: 0
-      energy: 0.04112
+      energy: 0.0204
     - name: write
       arguments:
         address_delta: 0
         data_delta: 1
-      energy: 0.59344
+      energy: 0.08944
     - name: write
       arguments:
         address_delta: 1
         data_delta: 0
-      energy: 4.20184
+      energy: 4.18112
     - name: write
       arguments:
         address_delta: 1
         data_delta: 1
-      energy: 4.75416
+      energy: 4.25016
     - name: idle
       arguments: null
-      energy: 0.04112
+      energy: 0.0204
   - name: PE.MAC
     actions:
     - name: mac_random
       arguments: null
-      energy: 34.6914
+      energy: 0.5608
     - name: mac_reused
       arguments: null
-      energy: 29.5134
+      energy: 0.47989
     - name: mac_gated
       arguments: null
-      energy: 1.1314
+      energy: 0.03642
     - name: idle
       arguments: null
-      energy: 0.9838
+      energy: 0.01797

@@ -6,17 +6,17 @@ Level 0
 
     SPECS
     -----
-    Word bits             : 64
+    Word bits             : 8
     Instances             : 1 (1*1)
-    Compute energy        : 34.69 pJ
+    Compute energy        : 0.56 pJ
 
     STATS
     -----
     Utilized instances      : 1
     Computes (total)        : 128
     Cycles                  : 128
-    Energy (total)          : 4440.50 pJ
-    Area (total)            : 18758.00 um^2
+    Energy (total)          : 71.78 pJ
+    Area (total)            : 332.25 um^2
 
 Level 1
 -------
@@ -26,7 +26,7 @@ Level 1
     -----
         Technology                  : SRAM
         Size                        : 512
-        Word bits                   : 64
+        Word bits                   : 8
         Block size                  : 1
         Cluster size                : 1
         Instances                   : 1 (1*1)
@@ -36,9 +36,9 @@ Level 1
         Multiple buffering          : 1.00
         Effective size              : 512
         Min utilization             : 0.00
-        Vector access energy        : 4.75 pJ
+        Vector access energy        : 4.25 pJ
         Vector access energy source : ERT
-        Area                        : 10462.72 um^2
+        Area                        : 10127.84 um^2
 
     MAPPING
     -------
@@ -59,9 +59,9 @@ Level 1
         Scalar fills (per-instance)              : 0
         Temporal reductions (per-instance)       : 0
         Address generations (per-cluster)        : 128
-        Energy (per-scalar-access)               : 4.75 pJ
-        Energy (per-instance)                    : 608.53 pJ
-        Energy (total)                           : 608.53 pJ
+        Energy (per-scalar-access)               : 4.25 pJ
+        Energy (per-instance)                    : 544.02 pJ
+        Energy (total)                           : 544.02 pJ
         Temporal Reduction Energy (per-instance) : 0.00 pJ
         Temporal Reduction Energy (total)        : 0.00 pJ
         Address Generation Energy (per-cluster)  : 0.00 pJ
@@ -82,9 +82,9 @@ Level 1
         Scalar fills (per-instance)              : 0
         Temporal reductions (per-instance)       : 0
         Address generations (per-cluster)        : 128
-        Energy (per-scalar-access)               : 4.75 pJ
-        Energy (per-instance)                    : 608.53 pJ
-        Energy (total)                           : 608.53 pJ
+        Energy (per-scalar-access)               : 4.25 pJ
+        Energy (per-instance)                    : 544.02 pJ
+        Energy (total)                           : 544.02 pJ
         Temporal Reduction Energy (per-instance) : 0.00 pJ
         Temporal Reduction Energy (total)        : 0.00 pJ
         Address Generation Energy (per-cluster)  : 0.00 pJ
@@ -105,9 +105,9 @@ Level 1
         Scalar fills (per-instance)              : 0
         Temporal reductions (per-instance)       : 127
         Address generations (per-cluster)        : 128
-        Energy (per-scalar-access)               : 4.75 pJ
-        Energy (per-instance)                    : 1212.31 pJ
-        Energy (total)                           : 1212.31 pJ
+        Energy (per-scalar-access)               : 4.25 pJ
+        Energy (per-instance)                    : 1083.79 pJ
+        Energy (total)                           : 1083.79 pJ
         Temporal Reduction Energy (per-instance) : 0.00 pJ
         Temporal Reduction Energy (total)        : 0.00 pJ
         Address Generation Energy (per-cluster)  : 0.00 pJ
@@ -130,7 +130,7 @@ Buffer <==> MAC
         Type            : Legacy
         Legacy sub-type : 
         ConnectionType  : 3
-        Word bits       : 64
+        Word bits       : 8
         Router energy   : - pJ
         Wire energy     : - pJ/b/mm
         Fill latency     : 0
@@ -194,11 +194,11 @@ Operational Intensity Stats
     Total reduction ops                     : 127
     Total ops                               : 255
     Total memory accesses required          : 257
-    Optimal Op per Byte                     : 0.12
+    Optimal Op per Byte                     : 0.99
 
 === Buffer ===
     Total scalar accesses                   : 511
-    Op per Byte                             : 0.06
+    Op per Byte                             : 0.50
 
 
 Summary Stats
@@ -206,14 +206,14 @@ Summary Stats
 GFLOPs (@1GHz): 1.99
 Utilization: 1.00
 Cycles: 128
-Energy: 0.01 uJ
-EDP(J*cycle): 8.79e-07
+Energy: 0.00 uJ
+EDP(J*cycle): 2.87e-07
 Area: 0.00 mm^2
 
 Computes = 128
 pJ/Compute
-    MAC             = 34.69
-    Buffer          = 18.98
+    MAC             = 0.56
+    Buffer          = 16.97
     Buffer <==> MAC = 0.00
-    Total           = 53.67
+    Total           = 17.53
 

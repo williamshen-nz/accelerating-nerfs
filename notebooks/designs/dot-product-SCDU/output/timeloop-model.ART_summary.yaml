@@ -2,10 +2,10 @@ ART_summary:
   version: 0.3
   table_summary:
   - name: PE.MAC
-    area: 18758.0
+    area: 332.25
     primitive_estimations: Aladdin_table
   - name: PE.Buffer
-    area: 15134.08
+    area: 10501.76
     primitive_estimations:
     - name: storage
       estimator: Aladdin_table
