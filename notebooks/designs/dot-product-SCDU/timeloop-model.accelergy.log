@@ -1,0 +1,42 @@
+    _                _                      
+   / \   ___ ___ ___| | ___ _ __ __ _ _   _ 
+  / _ \ / __/ __/ _ \ |/ _ \ '__/ _` | | | |
+ / ___ \ (_| (_|  __/ |  __/ | | (_| | |_| |
+/_/   \_\___\___\___|_|\___|_|  \__, |\__, |
+                                |___/ |___/ 
+
+Info: generating outputs according to the following specified output flags... 
+ Please use the -f flag to update the preference (default to all output files) 
+{'ERT': 1, 'ERT_summary': 1, 'ART': 1, 'ART_summary': 1, 'energy_estimation': 1, 'flattened_arch': 1}
+Info: config file located: /home/workspace/.config/accelergy/accelergy_config.yaml 
+config file content: 
+ {'version': 0.3, 'compound_components': [], 'estimator_plug_ins': ['/usr/local/share/accelergy/estimation_plug_ins'], 'primitive_components': ['/usr/local/share/accelergy/primitive_component_libs'], 'table_plug_ins': {'roots': ['/usr/local/share/accelergy/estimation_plug_ins/accelergy-table-based-plug-ins/set_of_table_templates']}}
+Warn: Cannot recognize the top key "mapping" in file map/dot-product-1level.yaml 
+Warn: Cannot recognize the top key "problem" in file prob/chair.dot-product.prob.yaml 
+Warn: Cannot recognize the top key "sparse_optimizations" in file sparse-opt/cpA.skipBZ.yaml 
+Info: Parsing file arch/1level.arch.yaml for architecture info 
+Info: Found non-numeric expression 45nm. Available bindings: {'technology': '45nm'} 
+WARN: Failed to evaluate "45nm". Setting PE.technology="45nm". Available bindings: {'technology': '45nm'}
+Info: Parsing file components/regfile_metadata.yaml for compound_components info 
+Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/pim_primitive_component.lib.yaml 
+Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/primitive_component.lib.yaml 
+Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/soc_primitives.lib.yaml 
+Info: Calculated "log(data_storage_depth)" = 6.238324625039508 
+Info: Found non-numeric expression 5ns. Available bindings: {'datawidth': 64, 'technology': '45nm', 'num_pipeline_stages': 2, 'latency': '5ns'} 
+WARN: Failed to evaluate "5ns". Setting PE.MAC.latency="5ns". Available bindings: {'datawidth': 64, 'technology': '45nm', 'num_pipeline_stages': 2, 'latency': '5ns'}
+Info: Calculated "data_storage_depth/num_storage_instances" = 512 
+Info: Found non-numeric expression avg_sparsity. Available bindings: {'data_storage_depth': 512, 'data_storage_width': 64, 'datawidth': 64, 'block-size': 1, 'metadata_storage_depth': 256, 'metadata_storage_width': 32, 'metadata_datawidth': 32, 'read_bandwidth': 32, 'write_bandwidth': 3, 'technology': '45nm', 'n_banks': 1, 'n_rdwr_ports': 2, 'num_storage_instances': 1, 'counter_width': 0, 'ag_datawidth': 6.238324625039508} 
+WARN: Failed to evaluate "avg_sparsity". Setting storage.avg_sparsity="avg_sparsity". Available bindings: {'data_storage_depth': 512, 'data_storage_width': 64, 'datawidth': 64, 'block-size': 1, 'metadata_storage_depth': 256, 'metadata_storage_width': 32, 'metadata_datawidth': 32, 'read_bandwidth': 32, 'write_bandwidth': 3, 'technology': '45nm', 'n_banks': 1, 'n_rdwr_ports': 2, 'num_storage_instances': 1, 'counter_width': 0, 'ag_datawidth': 6.238324625039508}
+Info: Calculated "metadata_storage_depth/num_storage_instances" = 256 
+Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti.estimator.yaml 
+Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/dummy_tables/dummy.estimator.yaml 
+Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-aladdin-plug-in/aladdin.estimator.yaml 
+Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-table-based-plug-ins/table.estimator.yaml 
+table-based-plug-ins Identifies a set of tables named:  test_tables
+Warn: No action counts are specified as yaml input 
+Info: flattened architecture is saved to: output//timeloop-model.flattened_architecture.yaml 
+Info: energy reference table is saved to: output//timeloop-model.ERT.yaml 
+Info: energy reference table summary is saved to: output//timeloop-model.ERT_summary.yaml 
+Warn: no runtime energy estimations are generated... not generating energy_estimation.yaml 
+Info: area reference table is saved to: output//timeloop-model.ART.yaml 
+Info: area reference table summary is saved to: output//timeloop-model.ART_summary.yaml 

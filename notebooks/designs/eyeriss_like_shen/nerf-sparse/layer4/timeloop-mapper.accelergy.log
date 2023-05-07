@@ -24,8 +24,8 @@ Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_shen/arch/comp
 Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_shen/arch/components/smartbuffer.yaml for compound_components info 
 Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_shen/arch/components/smartbuffer_metadata.yaml for compound_components info 
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/pim_primitive_component.lib.yaml 
-Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/soc_primitives.lib.yaml 
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/primitive_component.lib.yaml 
+Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/soc_primitives.lib.yaml 
 Info: Calculated "log(data_storage_depth)" = 2.4849066497880004 
 Info: Calculated "log(data_storage_depth)" = 5.4116460518550396 
 Info: Found non-numeric expression LPDDR4. Available bindings: {'width': 64, 'block_size': 4, 'datawidth': 16, 'metadata_storage_width': 60, 'metadata_datawidth': 5, 'metadata_block_size': 12, 'technology': '45nm', 'type': 'LPDDR4'} 

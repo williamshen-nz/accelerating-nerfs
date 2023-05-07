@@ -1,0 +1,30 @@
+architecture:
+  version: 0.3
+  local:
+  - name: PE.Buffer
+    class: storage
+    subclass: regfile_metadata
+    attributes:
+      ag_datawidth: 6.238324625039508
+      block-size: 1
+      counter_width: 0
+      data_storage_depth: 512
+      data_storage_width: 64
+      datawidth: 64
+      metadata_datawidth: 32
+      metadata_storage_depth: 256
+      metadata_storage_width: 32
+      n_banks: 1
+      n_rdwr_ports: 2
+      num_storage_instances: 1
+      read_bandwidth: 32
+      technology: 45nm
+      write_bandwidth: 3
+  - name: PE.MAC
+    class: compute
+    subclass: intmac
+    attributes:
+      datawidth: 64
+      latency: 5ns
+      num_pipeline_stages: 2
+      technology: 45nm
