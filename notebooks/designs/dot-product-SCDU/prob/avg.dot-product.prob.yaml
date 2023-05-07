@@ -21,4 +21,4 @@ problem:
     densities:
       A:
         distribution: fixed-structured # sparsity distribution name
-        density: 0.627083
+        density: 0.66159679353

@@ -1,21 +1,21 @@
 #!/bin/bash
 cd /home/workspace/notebooks/designs/dot-product-DUDU/
 pwd
-timeloop-model arch/*.yaml map/*.yaml prob/chair.dot-product.prob.yaml -o output
+timeloop-model arch/*.yaml map/*.yaml prob/avg.dot-product.prob.yaml -o output
 echo 'Experiment - Dense Baseline'
 tail -15 output/timeloop-model.stats.txt
 
 
 cd /home/workspace/notebooks/designs/dot-product-SCDU/
 pwd
-timeloop-model arch/*.yaml components/* map/*.yaml prob/chair.dot-product.prob.yaml sparse-opt/*.yaml -o output/
+timeloop-model arch/*.yaml components/* map/*.yaml prob/avg.dot-product.prob.yaml sparse-opt/*.yaml -o output/
 echo 'Experiment - SCDU Sparsity'
 tail -15 output/timeloop-model.stats.txt
 
 
 cd /home/workspace/notebooks/designs/dot-product-SUDU/
 pwd
-timeloop-model arch/*.yaml map/*.yaml prob/chair.dot-product.prob.yaml -o output
+timeloop-model arch/*.yaml map/*.yaml prob/avg.dot-product.prob.yaml -o output
 echo 'Experiment - SUDU Default'
 tail -15 output/timeloop-model.stats.txt
 echo 'Experiment - SUDU No Optimization'

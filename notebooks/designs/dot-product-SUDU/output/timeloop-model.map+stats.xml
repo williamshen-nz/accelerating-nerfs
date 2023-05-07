@@ -23,11 +23,11 @@
 							<t_>1</t_>
 						</meshY>
 						<word_bits>
-							<t_>64</t_>
+							<t_>8</t_>
 						</word_bits>
 					</specs_>
-					<energy_>4.44049920000000020e+03</energy_>
-					<area_>1.87580000000000000e+04</area_>
+					<energy_>7.17823999999999955e+01</energy_>
+					<area_>3.32250000000000000e+02</area_>
 					<cycles_>128</cycles_>
 					<utilized_instances_>1</utilized_instances_>
 					<avg_utilized_instances_>1</avg_utilized_instances_>
@@ -65,7 +65,7 @@
 							<t_>512</t_>
 						</size>
 						<word_bits>
-							<t_>64</t_>
+							<t_>8</t_>
 						</word_bits>
 						<addr_gen_bits>
 							<t_>9</t_>
@@ -424,23 +424,23 @@
 						</write_bandwidth>
 						<energy_per_algorithmic_access>
 							<PerDataSpace>
-								<item>4.75415999999999972e+00</item>
-								<item>4.75415999999999972e+00</item>
-								<item>4.75415999999999972e+00</item>
+								<item>4.25016000000000016e+00</item>
+								<item>4.25016000000000016e+00</item>
+								<item>4.25016000000000016e+00</item>
 							</PerDataSpace>
 						</energy_per_algorithmic_access>
 						<energy_per_access>
 							<PerDataSpace>
-								<item>4.75415999999999972e+00</item>
-								<item>4.75415999999999972e+00</item>
-								<item>4.75415999999999972e+00</item>
+								<item>4.25016000000000016e+00</item>
+								<item>4.25016000000000016e+00</item>
+								<item>4.25016000000000016e+00</item>
 							</PerDataSpace>
 						</energy_per_access>
 						<energy>
 							<PerDataSpace>
-								<item>6.08532479999999964e+02</item>
-								<item>6.08532479999999964e+02</item>
-								<item>1.21231079999999997e+03</item>
+								<item>5.44020480000000020e+02</item>
+								<item>5.44020480000000020e+02</item>
+								<item>1.08379079999999999e+03</item>
 							</PerDataSpace>
 						</energy>
 						<temporal_reduction_energy>
@@ -497,12 +497,12 @@
 								<name>Buffer &lt;==&gt; MAC</name>
 							</NetworkSpecs>
 							<word_bits>
-								<t_>64</t_>
+								<t_>8</t_>
 							</word_bits>
 							<router_energy></router_energy>
 							<wire_energy></wire_energy>
 							<tile_width>
-								<t_>1.36959848130756910e+02</t_>
+								<t_>1.82277261335581855e+01</t_>
 							</tile_width>
 							<energy_per_hop></energy_per_hop>
 							<fill_latency>
@@ -641,7 +641,7 @@
 								<type>UNSET</type>
 							</DensityDistributionSpecs>
 							<type>fixed-structured</type>
-							<fixed_density>3.72916999999999998e-01</fixed_density>
+							<fixed_density>6.61596793530000005e-01</fixed_density>
 						</specs_>
 					</px>
 				</second>

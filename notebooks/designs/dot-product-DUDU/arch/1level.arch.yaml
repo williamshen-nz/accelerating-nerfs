@@ -12,8 +12,8 @@ architecture:
           subclass: regfile # detailed hardware implementation class
           attributes:       # attributes associated with the component
             depth: 512       # number of entries in storage
-            width: 64        # number of bits for each entry
-            datawidth: 64    # number of bits per data
+            width: 8        # number of bits for each entry
+            datawidth: 8    # number of bits per data
             block_size: 1   # number of blocks per storage fetch
             read_bandwidth: 3
             write_bandwidth: 1
@@ -22,4 +22,4 @@ architecture:
           class: compute
           subclass: intmac
           attributes:
-            datawidth: 64
+            datawidth: 8
