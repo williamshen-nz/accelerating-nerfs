@@ -1,0 +1,19 @@
+{
+    "scene": "lego",
+    "checkpoint": "/tmp/pycharm_project_86/nerf-synthetic-checkpoints/results/lego/nerf_50000.pt",
+    "num_downscales": 0,
+    "use_fp16": false,
+    "render_time": 2.9177376099978574,
+    "psnr_avg": 35.13179016113281,
+    "power_draw_avg": 347.0,
+    "energy": 1012.4549506692565,
+    "lpips_avg": 0.04167467728257179,
+    "psnrs": [
+        35.13179016113281
+    ],
+    "lpips": [
+        0.04167467728257179
+    ],
+    "og_size": 2393095,
+    "quantized_size": null
+}
