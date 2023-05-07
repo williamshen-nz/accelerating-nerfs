@@ -7,7 +7,7 @@
                     "Hdilation": 1,
                     "Hstride": 1,
                     "M": 256,
-                    "N": 128,
+                    "N": 64,
                     "P": 1,
                     "Q": 1,
                     "R": 1,
@@ -141,12 +141,12 @@
         "mapper_algo": "random-pruned",
         "mapper_victory_condition": 3000,
         "mapper_max_permutations": 16,
-        "energy": 21.38,
+        "energy": 11.42,
         "area": 0.0,
-        "cycle": 21504,
+        "cycle": 10752,
         "gflops": 190.48,
         "utilization": 0.57,
-        "edp": 0.46
+        "edp": 0.123
     },
     "2": {
         "layer_dict": {
@@ -156,7 +156,7 @@
                     "Hdilation": 1,
                     "Hstride": 1,
                     "M": 256,
-                    "N": 128,
+                    "N": 64,
                     "P": 1,
                     "Q": 1,
                     "R": 1,
@@ -290,12 +290,12 @@
         "mapper_algo": "random-pruned",
         "mapper_victory_condition": 3000,
         "mapper_max_permutations": 16,
-        "energy": 63.22,
+        "energy": 37.2,
         "area": 0.0,
-        "cycle": 131072,
+        "cycle": 65536,
         "gflops": 127.75,
         "utilization": 0.38,
-        "edp": 8.29
+        "edp": 2.44
     },
     "6": {
         "layer_dict": {
@@ -305,7 +305,7 @@
                     "Hdilation": 1,
                     "Hstride": 1,
                     "M": 256,
-                    "N": 128,
+                    "N": 64,
                     "P": 1,
                     "Q": 1,
                     "R": 1,
@@ -439,12 +439,12 @@
         "mapper_algo": "random-pruned",
         "mapper_victory_condition": 3000,
         "mapper_max_permutations": 16,
-        "energy": 107.75,
+        "energy": 59.17,
         "area": 0.0,
-        "cycle": 118784,
+        "cycle": 59392,
         "gflops": 175.72,
         "utilization": 0.52,
-        "edp": 12.8
+        "edp": 3.51
     },
     "9": {
         "layer_dict": {
@@ -454,7 +454,7 @@
                     "Hdilation": 1,
                     "Hstride": 1,
                     "M": 1,
-                    "N": 128,
+                    "N": 64,
                     "P": 1,
                     "Q": 1,
                     "R": 1,
@@ -588,12 +588,12 @@
         "mapper_algo": "random-pruned",
         "mapper_victory_condition": 3000,
         "mapper_max_permutations": 16,
-        "energy": 5.64,
+        "energy": 2.84,
         "area": 0.0,
-        "cycle": 4096,
+        "cycle": 2048,
         "gflops": 15.97,
         "utilization": 0.05,
-        "edp": 0.0231
+        "edp": 0.00581
     },
     "11": {
         "layer_dict": {
@@ -603,7 +603,7 @@
                     "Hdilation": 1,
                     "Hstride": 1,
                     "M": 128,
-                    "N": 128,
+                    "N": 64,
                     "P": 1,
                     "Q": 1,
                     "R": 1,
@@ -737,12 +737,12 @@
         "mapper_algo": "random-pruned",
         "mapper_victory_condition": 3000,
         "mapper_max_permutations": 16,
-        "energy": 631.07,
+        "energy": 315.54,
         "area": 0.0,
-        "cycle": 72448,
+        "cycle": 36224,
         "gflops": 127.77,
         "utilization": 0.38,
-        "edp": 45.7
+        "edp": 11.4
     },
     "12": {
         "layer_dict": {
@@ -752,7 +752,7 @@
                     "Hdilation": 1,
                     "Hstride": 1,
                     "M": 3,
-                    "N": 128,
+                    "N": 64,
                     "P": 1,
                     "Q": 1,
                     "R": 1,
@@ -886,11 +886,11 @@
         "mapper_algo": "random-pruned",
         "mapper_victory_condition": 3000,
         "mapper_max_permutations": 16,
-        "energy": 3.07,
+        "energy": 1.56,
         "area": 0.0,
-        "cycle": 2048,
+        "cycle": 1024,
         "gflops": 47.81,
         "utilization": 0.14,
-        "edp": 0.00629
+        "edp": 0.0016
     }
 }

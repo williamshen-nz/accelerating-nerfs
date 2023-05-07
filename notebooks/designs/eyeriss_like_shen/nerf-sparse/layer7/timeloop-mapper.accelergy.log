@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/usr/local/bin/accelergy", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/dist-packages/accelergy/accelergy_console.py", line 164, in main
+    run()
+  File "/usr/local/lib/python3.8/dist-packages/accelergy/accelergy_console.py", line 41, in run
+    args = parse_commandline_args()
+  File "/usr/local/lib/python3.8/dist-packages/accelergy/io.py", line 28, in parse_commandline_args
+    ascii_banner = pyfiglet.figlet_format("Accelergy")
+  File "/usr/local/lib/python3.8/dist-packages/pyfiglet/__init__.py", line 65, in figlet_format
+    fig = Figlet(font, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/pyfiglet/__init__.py", line 794, in __init__
+    self.setFont()
+  File "/usr/local/lib/python3.8/dist-packages/pyfiglet/__init__.py", line 801, in setFont
+    self.Font = FigletFont(font=self.font)
+  File "/usr/local/lib/python3.8/dist-packages/pyfiglet/__init__.py", line 127, in __init__
+    self.loadFont()
+  File "/usr/local/lib/python3.8/dist-packages/pyfiglet/__init__.py", line 314, in loadFont
+    width, letter = __char(data)
+  File "/usr/local/lib/python3.8/dist-packages/pyfiglet/__init__.py", line 289, in __char
+    end = re.compile(re.escape(end) + r'{1,2}$')
+KeyboardInterrupt

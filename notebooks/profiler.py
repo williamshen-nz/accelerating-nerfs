@@ -219,22 +219,15 @@ class Profiler:
 
         # Insert sparse_opt before constraint_pth if enabled
         if self.sparsity_enabled:
-            timeloop_cmd.insert(-1, f"{self.base_dir / self.timeloop_dir / 'sparse_opt/*.yaml'}")
-            print(f"Sparse optimization is enabled for layer {layer_id}")
+            sparse_opt_dir = self.base_dir / self.timeloop_dir / "sparse_opt"
+            assert len(os.listdir(sparse_opt_dir)) > 0
+            timeloop_cmd.insert(-1, f"{sparse_opt_dir}/*.yaml")
+            print(f"Sparse optimization enabled for layer {layer_id}")
 
         timeloop_cmd = " ".join(timeloop_cmd)
         timeloop_cmd += " > /dev/null 2>&1"
-
-        timeloopcmd = (
-            f"timeloop-mapper "
-            f"{self.base_dir / self.timeloop_dir / 'arch' / arch_fname} "
-            f"{self.base_dir / self.timeloop_dir / 'arch/components/*.yaml'} "
-            f"{self.base_dir / self.timeloop_dir / 'mapper/mapper.yaml'} "
-            f"{constraint_pth} "
-            f"{self.base_dir / self.top_dir / self.sub_dir / self.sub_dir}_layer{layer_id}.yaml > /dev/null 2>&1"
-        )
-        # print(timeloopcmd)
-        return cwd, timeloopcmd
+        # print(timeloop_cmd)
+        return cwd, timeloop_cmd
 
     def run_timeloop(self, layer_info: dict):
         """Run Timeloop and Accelergy in the required layers."""
@@ -364,6 +357,9 @@ class Profiler:
             layer_metrics[layer_id]["num"] = info["num"]
             for key in self.layer_metric_keys:
                 layer_metrics[layer_id][key] = info[key]
+
+            # Add path to stats file
+            layer_metrics[layer_id]["stats_fname"] = str(self.stats_fname(layer_id))
 
         if self.model is not None:
             model_metrics = {

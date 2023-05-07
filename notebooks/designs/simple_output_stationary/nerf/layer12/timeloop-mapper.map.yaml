@@ -65,9 +65,9 @@ mapping:
     split: 1
   - target: shared_glb
     type: temporal
-    factors: C4 M1 R1 S1 N8 P1 Q1
-    permutation: CNMRSPQ
+    factors: C4 M1 R1 S1 N1 P1 Q1
+    permutation: CMRSNPQ
   - target: DRAM
     type: temporal
-    factors: C1 M1 R1 S1 N1 P1 Q1
-    permutation: CMRSNPQ
+    factors: C1 M1 R1 S1 N4 P1 Q1
+    permutation: NCMRSPQ

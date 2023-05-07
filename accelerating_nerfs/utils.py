@@ -60,6 +60,8 @@ def render_image_with_occgrid(
     alpha_thre: float = 0.0,
     # test options
     test_chunk_size: int = 8192,
+    # simple quantization
+    use_fp16: bool = False,
 ):
     """Render the pixels of an image."""
     rays_shape = rays.origins.shape
@@ -72,10 +74,15 @@ def render_image_with_occgrid(
 
     def sigma_fn(t_starts, t_ends, ray_indices):
         with profiler.profile("sigma_fn", len(ray_indices)):
+            if use_fp16:  # convert to fp16 if enabled
+                t_starts = t_starts.half()
+                t_ends = t_ends.half()
+
             with profiler.profile(f"sigma_fn.ray_to_positions", len(ray_indices)):
                 t_origins = rays.origins[ray_indices]
                 t_dirs = rays.viewdirs[ray_indices]
                 positions = t_origins + t_dirs * (t_starts + t_ends)[:, None] / 2.0
+
             with profiler.profile(f"sigma_fn.radiance_field.query_density", len(positions)):
                 sigmas = radiance_field.query_density(positions)
                 sigmas = sigmas.squeeze(-1)
@@ -83,6 +90,10 @@ def render_image_with_occgrid(
 
     def rgb_sigma_fn(t_starts, t_ends, ray_indices):
         with profiler.profile("rgb_sigma_fn", len(ray_indices)):
+            if use_fp16:  # convert to fp16 if enabled
+                t_starts = t_starts.half()
+                t_ends = t_ends.half()
+
             with profiler.profile("rgb_sigma_fn.ray_to_positions", len(ray_indices)):
                 t_origins = chunk_rays.origins[ray_indices]
                 t_dirs = chunk_rays.viewdirs[ray_indices]
@@ -97,8 +108,9 @@ def render_image_with_occgrid(
     for i in range(0, num_rays, chunk):
         chunk_rays = namedtuple_map(lambda r: r[i : i + chunk], rays)
         ray_indices, t_starts, t_ends = estimator.sampling(
-            chunk_rays.origins,
-            chunk_rays.viewdirs,
+            # Need to pass float to estimator as it's custom CUDA code that uses floats
+            chunk_rays.origins if not use_fp16 else chunk_rays.origins.float(),
+            chunk_rays.viewdirs if not use_fp16 else chunk_rays.viewdirs.float(),
             sigma_fn=sigma_fn,
             near_plane=near_plane,
             far_plane=far_plane,
@@ -115,6 +127,7 @@ def render_image_with_occgrid(
                 n_rays=chunk_rays.origins.shape[0],
                 rgb_sigma_fn=rgb_sigma_fn,
                 render_bkgd=render_bkgd,
+                use_fp16=use_fp16,
             )
         chunk_results = [rgb, opacity, depth, len(t_starts)]
         results.append(chunk_results)

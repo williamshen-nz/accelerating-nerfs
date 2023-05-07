@@ -23,7 +23,7 @@ def check_cuda_launch_blocking():
 
 @torch.no_grad()
 def render_nerf_synthetic_all(
-    num_downscales: int, max_num_scenes: Optional[int], profile: bool, quantize: bool, random_seed: int = 42
+    num_downscales: int, max_num_scenes: Optional[int], profile: bool, use_fp16: bool, random_seed: int = 42
 ):
     # Validate arguments
     assert num_downscales >= 0, "num_downscales must >= 0"
@@ -35,20 +35,22 @@ def render_nerf_synthetic_all(
     set_random_seed(random_seed)
     checkpoint_pattern = get_checkpoint_pattern()
     project_root = get_project_root()
+    base_name = "results_fp16" if use_fp16 else "results"
 
     for scene in NERF_SYNTHETIC_SCENES[:max_num_scenes]:
         checkpoint = checkpoint_pattern.format(scene=scene)
-        result_dir = project_root / "results" / scene
+        result_dir = project_root / base_name / scene
         render_nerf_synthetic(
             scene=scene,
             checkpoint=checkpoint,
             result_dir=result_dir,
             num_downscales=num_downscales,
-            quantize=quantize,
+            use_fp16=use_fp16,
             profile=profile,
         )
 
 
 if __name__ == "__main__":
     # When profiling, you need to set CUDA_LAUNCH_BLOCKING=1 to get accurate numbers
-    render_nerf_synthetic_all(num_downscales=1, max_num_scenes=None, profile=False, quantize=False)
+    render_nerf_synthetic_all(num_downscales=1, max_num_scenes=None, profile=False, use_fp16=True)
+    render_nerf_synthetic_all(num_downscales=1, max_num_scenes=None, profile=False, use_fp16=False)

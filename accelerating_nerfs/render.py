@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from functools import lru_cache
 from pathlib import Path
 from typing import Tuple
@@ -83,7 +84,7 @@ def render_nerf_synthetic(
     result_dir: Path,
     num_downscales: int = 0,
     profile: bool = False,
-    quantize: bool = False,
+    use_fp16: bool = False,
     video_fps: int = 24,
 ):
     assert num_downscales >= 0
@@ -101,15 +102,13 @@ def render_nerf_synthetic(
 
     # Quantize model if required
     og_size = get_size_of_model(radiance_field)
-    if quantize:
-        radiance_field = quantize_vanilla_nerf(radiance_field, estimator, scene)
-        radiance_field.to(device)
+    if use_fp16:
+        radiance_field = radiance_field.half()
         quantized_size = get_size_of_model(radiance_field)
         print(
-            f"Successfully quantized NeRF. Original size = {sizeof_fmt(og_size)}, "
-            f"Quantized size = {sizeof_fmt(quantized_size)}"
+            f"Successfully converted NeRF to fp16. fp32 size = {sizeof_fmt(og_size)}, "
+            f"fp16 size = {sizeof_fmt(quantized_size)}"
         )
-        raise NotImplementedError("Quantized is broken af")
     else:
         quantized_size = None
 
@@ -123,11 +122,16 @@ def render_nerf_synthetic(
     rgbs, rgb_paths = [], []
 
     # Render frames
+    start_time = time.perf_counter()
     for idx in tqdm(range(len(test_dataset)), f"Rendering {scene} test images"):
         data = test_dataset[idx]
         render_bkgd = data["color_bkgd"]
         rays = data["rays"]
         pixels = data["pixels"]
+        if use_fp16:
+            render_bkgd = render_bkgd.half()
+            rays = rays.half()
+            pixels = pixels.half()
 
         # Render
         rgb, acc, depth, _ = render_image_with_occgrid(
@@ -136,10 +140,13 @@ def render_nerf_synthetic(
             rays,
             # rendering options
             near_plane=near_plane,
+            far_plane=far_plane,
             render_step_size=render_step_size,
             render_bkgd=render_bkgd,
             # test options
             test_chunk_size=4096,
+            # quantization
+            use_fp16=use_fp16,
         )
         # TODO: save depths?
         rgb_image = (rgb.cpu().numpy() * 255).astype(np.uint8)
@@ -156,7 +163,9 @@ def render_nerf_synthetic(
         psnrs.append(psnr.item())
         lpips.append(lpips_fn(rgb, pixels).item())
 
-    print(f"Successfully rendered {len(test_dataset)} images")
+    end_time = time.perf_counter()
+    duration = end_time - start_time
+    print(f"Successfully rendered {len(test_dataset)} images in {duration:.2f} seconds")
 
     # Stop profiling
     if profile:
@@ -171,6 +180,8 @@ def render_nerf_synthetic(
         "scene": scene,
         "checkpoint": checkpoint,
         "num_downscales": num_downscales,
+        "use_fp16": use_fp16,
+        "render_time": duration,
         "psnr_avg": psnr_avg,
         "lpips_avg": lpips_avg,
         "psnrs": psnrs,
