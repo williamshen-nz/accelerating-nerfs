@@ -33,11 +33,11 @@ for exp_fname in ["/home/workspace/notebooks/designs/dot-product-DUDU/output/tim
             if line.startswith("area"):
                 metric = line.split(": ")[1].split(" ")[0]
                 print("Area", eval(metric), line)
-                energy_tot += eval(metric)
+                area_tot += eval(metric)
             elif line.startswith("energy (total)"):
                 metric = line.split(": ")[1].split(" ")[0]
                 print("Energy", eval(metric), line)
-                area_tot += eval(metric)
+                energy_tot += eval(metric)
 
     sub_result["total_energy"] = energy_tot
     sub_result["total_area"] = area_tot
