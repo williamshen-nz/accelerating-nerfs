@@ -27,6 +27,8 @@ def rendering(
     rgb_sigma_fn: Optional[Callable] = None,
     # rendering options
     render_bkgd: Optional[Tensor] = None,
+    # quantization
+    use_fp16: bool = False
 ) -> Tuple[Tensor, Tensor, Tensor, Dict]:
     """Render the rays through the radience field defined by `rgb_sigma_fn`."""
     if ray_indices is not None:
@@ -51,6 +53,14 @@ def rendering(
             ray_indices=ray_indices,
             n_rays=n_rays,
         )
+
+    if use_fp16:
+        t_starts = t_starts.half()
+        t_ends = t_ends.half()
+        weights = weights.half()
+        trans = trans.half()
+        alphas = alphas.half()
+
     extras = {
         "weights": weights,
         "alphas": alphas,
