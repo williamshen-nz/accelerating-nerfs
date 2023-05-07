@@ -207,7 +207,7 @@
         <div class="text text-left justify-content-center">
             <p>
                 The NeRF models by default use 32-bit floating point numbers (FP32). We quantize the
-                models to FP16 and achieve significant speedups and reductions in energy (>2-3x 🏎💨 improvement in
+                models to FP16 and achieve significant speedups and reductions in energy (>2.5-3x 🏎💨 speed up in
                 rendering time) at the cost of marginally decreased peak signal-to-noise ratio (PSNR).
             </p>
             <p>
@@ -217,9 +217,7 @@
             </p>
             <p class="small-text" style="color: #a1a1a1">
                 Note: we run FP32 and FP16 using PyTorch on a NVIDIA RTX 3090 GPU to determine the render time.
-                We estimate energy by multiplying the render time by the average power consumption of the
-                GPU.
-                <!-- FP32 peak 343W, FP16 peak 326W -->
+                We estimate energy by multiplying the render time by the average power consumption of the GPU.
             </p>
         </div>
         <div class="nerf-videos">
