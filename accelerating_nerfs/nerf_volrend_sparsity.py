@@ -53,6 +53,10 @@ def monkey_patch_volrend():
                 results["num_zero_weights"] += num_zero
                 results["num_total_weights"] += total
                 results["weights_sparsity"].append(num_zero / total)
+
+                dot_product = weights[..., None] * values
+
+                results[""]
         return accumulate_along_rays(weights, values, ray_indices, n_rays)
 
     # Monkey patch

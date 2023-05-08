@@ -1,0 +1,66 @@
+{
+    "sigma_fn.ray_to_positions": {
+        "count": 217512457,
+        "time": 1.0682903183624148
+    },
+    "nerf.query_density.posi_encoder": {
+        "count": 217512457,
+        "time": 1.4842378527391702
+    },
+    "nerf.query_density.mlp_query_density": {
+        "count": 217512457,
+        "time": 28.379686425381806
+    },
+    "sigma_fn.radiance_field.query_density": {
+        "count": 217512457,
+        "time": 30.14644230506383
+    },
+    "sigma_fn": {
+        "count": 217512457,
+        "time": 31.29543184224167
+    },
+    "rgb_sigma_fn.ray_to_positions": {
+        "count": 217512457,
+        "time": 1.0443484450224787
+    },
+    "nerf.forward.posi_encoder": {
+        "count": 217512457,
+        "time": 1.5004828085075133
+    },
+    "nerf.forward.view_encoder": {
+        "count": 217512457,
+        "time": 1.1341007032024208
+    },
+    "nerf.forward.mlp_forward": {
+        "count": 217512457,
+        "time": 35.08540715146228
+    },
+    "nerf.forward.sigmoid": {
+        "count": 217512457,
+        "time": 0.1891123990935739
+    },
+    "nerf.forward.relu": {
+        "count": 217512457,
+        "time": 0.16647012811154127
+    },
+    "rgb_sigma_fn.radiance_field": {
+        "count": 217512457,
+        "time": 38.27373713927227
+    },
+    "rgb_sigma_fn": {
+        "count": 217512457,
+        "time": 39.389572314481484
+    },
+    "rendering.render_weight_from_density": {
+        "count": 217512457,
+        "time": 3.727904130209936
+    },
+    "rendering.colors.accumulate_along_rays": {
+        "count": 217512457,
+        "time": 0.6164642702497076
+    },
+    "rendering": {
+        "count": 217512457,
+        "time": 45.95405438414309
+    }
+}
