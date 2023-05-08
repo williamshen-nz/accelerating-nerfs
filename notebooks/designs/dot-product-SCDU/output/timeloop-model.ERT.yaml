@@ -19,16 +19,16 @@ ERT:
     actions:
     - name: write
       arguments: null
-      energy: 4.25016
+      energy: 0.42018
     - name: read
       arguments: null
-      energy: 4.25016
+      energy: 0.42018
     - name: gated_write
       arguments: null
-      energy: 0.0204
+      energy: 0.00441
     - name: gated_read
       arguments: null
-      energy: 0.0204
+      energy: 0.00441
     - name: metadata_read
       arguments: null
       energy: 0.18108

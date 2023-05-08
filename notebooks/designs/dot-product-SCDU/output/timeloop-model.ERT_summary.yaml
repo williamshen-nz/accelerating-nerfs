@@ -17,13 +17,13 @@ ERT_summary:
   - name: PE.Buffer
     actions:
     - name: write
-      energy: 4.25016
+      energy: 0.42018
     - name: read
-      energy: 4.25016
+      energy: 0.42018
     - name: gated_write
-      energy: 0.0204
+      energy: 0.00441
     - name: gated_read
-      energy: 0.0204
+      energy: 0.00441
     - name: metadata_read
       energy: 0.18108
     - name: metadata_write

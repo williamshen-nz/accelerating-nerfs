@@ -5,7 +5,7 @@ ART_summary:
     area: 332.25
     primitive_estimations: Aladdin_table
   - name: PE.Buffer
-    area: 10501.76
+    area: 1261.76
     primitive_estimations:
     - name: storage
       estimator: Aladdin_table

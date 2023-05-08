@@ -11,7 +11,7 @@ architecture:
           class: storage    # class is either "storage" or "compute"
           subclass: regfile # detailed hardware implementation class
           attributes:       # attributes associated with the component
-            depth: 512       # number of entries in storage
+            depth: 64       # number of entries in storage
             width: 8        # number of bits for each entry
             datawidth: 8    # number of bits per data
             block_size: 1   # number of blocks per storage fetch

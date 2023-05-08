@@ -4,15 +4,15 @@ ERT_summary:
   - name: PE.Buffer
     actions:
     - name: read
-      average_energy: 2.13528
-      max_energy: 4.25016
-      min_energy: 0.0204
+      average_energy: 0.2123
+      max_energy: 0.42018
+      min_energy: 0.00441
     - name: write
-      average_energy: 2.13528
-      max_energy: 4.25016
-      min_energy: 0.0204
+      average_energy: 0.2123
+      max_energy: 0.42018
+      min_energy: 0.00441
     - name: idle
-      energy: 0.0204
+      energy: 0.00441
     primitive_estimation(s):
     - name: PE.Buffer
       estimator: Aladdin_table

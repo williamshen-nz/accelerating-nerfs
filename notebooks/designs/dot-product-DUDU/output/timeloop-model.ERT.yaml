@@ -7,45 +7,45 @@ ERT:
       arguments:
         address_delta: 0
         data_delta: 0
-      energy: 0.0204
+      energy: 0.00441
     - name: read
       arguments:
         address_delta: 0
         data_delta: 1
-      energy: 0.08944
+      energy: 0.07345
     - name: read
       arguments:
         address_delta: 1
         data_delta: 0
-      energy: 4.18112
+      energy: 0.35114
     - name: read
       arguments:
         address_delta: 1
         data_delta: 1
-      energy: 4.25016
+      energy: 0.42018
     - name: write
       arguments:
         address_delta: 0
         data_delta: 0
-      energy: 0.0204
+      energy: 0.00441
     - name: write
       arguments:
         address_delta: 0
         data_delta: 1
-      energy: 0.08944
+      energy: 0.07345
     - name: write
       arguments:
         address_delta: 1
         data_delta: 0
-      energy: 4.18112
+      energy: 0.35114
     - name: write
       arguments:
         address_delta: 1
         data_delta: 1
-      energy: 4.25016
+      energy: 0.42018
     - name: idle
       arguments: null
-      energy: 0.0204
+      energy: 0.00441
   - name: PE.MAC
     actions:
     - name: mac_random

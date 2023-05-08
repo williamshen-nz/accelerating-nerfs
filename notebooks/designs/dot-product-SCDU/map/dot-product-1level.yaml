@@ -1,5 +1,5 @@
 mapping:
   - target: Buffer
     type: temporal
-    factors: K=128 M=1
+    factors: K=16 M=1
     permutation: KM

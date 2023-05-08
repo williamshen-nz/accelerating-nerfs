@@ -20,8 +20,8 @@ Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_com
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/primitive_component.lib.yaml 
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/soc_primitives.lib.yaml 
 Warn: No compound component classes specified, architecture can only contain primitive components 
-Info: Found non-numeric expression 5ns. Available bindings: {'depth': 512, 'width': 8, 'datawidth': 8, 'block_size': 1, 'read_bandwidth': 3, 'write_bandwidth': 1, 'technology': '45nm', 'n_ports': 2, 'latency': '5ns'} 
-WARN: Failed to evaluate "5ns". Setting PE.Buffer.latency="5ns". Available bindings: {'depth': 512, 'width': 8, 'datawidth': 8, 'block_size': 1, 'read_bandwidth': 3, 'write_bandwidth': 1, 'technology': '45nm', 'n_ports': 2, 'latency': '5ns'}
+Info: Found non-numeric expression 5ns. Available bindings: {'depth': 64, 'width': 8, 'datawidth': 8, 'block_size': 1, 'read_bandwidth': 3, 'write_bandwidth': 1, 'technology': '45nm', 'n_ports': 2, 'latency': '5ns'} 
+WARN: Failed to evaluate "5ns". Setting PE.Buffer.latency="5ns". Available bindings: {'depth': 64, 'width': 8, 'datawidth': 8, 'block_size': 1, 'read_bandwidth': 3, 'write_bandwidth': 1, 'technology': '45nm', 'n_ports': 2, 'latency': '5ns'}
 Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti.estimator.yaml 
 Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/dummy_tables/dummy.estimator.yaml 
 Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-aladdin-plug-in/aladdin.estimator.yaml 

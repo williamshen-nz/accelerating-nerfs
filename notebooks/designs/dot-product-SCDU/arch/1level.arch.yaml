@@ -12,7 +12,7 @@ architecture:
           subclass: regfile_metadata    # compound component with separate data and metadata storages
                                         # definition found in ../components/refile_metadata.yaml
           attributes:
-            data_storage_depth: 512      # depth of the data storage only
+            data_storage_depth: 64      # depth of the data storage only
             data_storage_width: 8       # width of the data storage only
             datawidth: 8                # actual data's datawidth
             block-size: 1
