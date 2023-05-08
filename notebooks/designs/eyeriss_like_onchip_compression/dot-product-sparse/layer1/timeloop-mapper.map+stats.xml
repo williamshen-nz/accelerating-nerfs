@@ -1022,7 +1022,7 @@
 						<utilized_instances>
 							<PerDataSpace>
 								<item>8.00000000000000000e+00</item>
-								<item>5.28000000000000025e+00</item>
+								<item>5.29277434824000004e+00</item>
 								<item>8.00000000000000000e+00</item>
 							</PerDataSpace>
 						</utilized_instances>
@@ -1972,7 +1972,7 @@
 							<PerDataSpace>
 								<item>1.00000000000000000e+00</item>
 								<item>1.00000000000000000e+00</item>
-								<item>6.60000000000000031e-01</item>
+								<item>1.00000000000000000e+00</item>
 							</PerDataSpace>
 						</utilized_instances>
 						<utilized_clusters>
@@ -2370,21 +2370,21 @@
 						<energy_per_algorithmic_access>
 							<PerDataSpace>
 								<item>nan</item>
-								<item>7.54538315429687501e+00</item>
+								<item>7.59879565887922581e+00</item>
 								<item>3.71554000000000002e+01</item>
 							</PerDataSpace>
 						</energy_per_algorithmic_access>
 						<energy_per_access>
 							<PerDataSpace>
 								<item>nan</item>
-								<item>1.13624593382352934e+01</item>
+								<item>1.14428922863122455e+01</item>
 								<item>3.71554000000000002e+01</item>
 							</PerDataSpace>
 						</energy_per_access>
 						<energy>
 							<PerDataSpace>
 								<item>0.00000000000000000e+00</item>
-								<item>1.93161808750000000e+03</item>
+								<item>1.94529168867308181e+03</item>
 								<item>7.43108000000000004e+01</item>
 							</PerDataSpace>
 						</energy>
@@ -3080,22 +3080,22 @@
 						<energy_per_algorithmic_access>
 							<PerDataSpace>
 								<item>1.28000000000000000e+02</item>
-								<item>8.95000000000000000e+01</item>
-								<item>2.04800000000000000e+03</item>
+								<item>9.01335555216169553e+01</item>
+								<item>5.12000000000000000e+02</item>
 							</PerDataSpace>
 						</energy_per_algorithmic_access>
 						<energy_per_access>
 							<PerDataSpace>
 								<item>1.28000000000000000e+02</item>
-								<item>1.34776470588235298e+02</item>
-								<item>2.04800000000000000e+03</item>
+								<item>1.35730530667846722e+02</item>
+								<item>5.12000000000000000e+02</item>
 							</PerDataSpace>
 						</energy_per_access>
 						<energy>
 							<PerDataSpace>
 								<item>1.63840000000000000e+04</item>
-								<item>1.14560000000000000e+04</item>
-								<item>2.04800000000000000e+03</item>
+								<item>1.15370951067669703e+04</item>
+								<item>5.12000000000000000e+02</item>
 							</PerDataSpace>
 						</energy>
 						<temporal_reduction_energy>
@@ -3882,7 +3882,7 @@
 								<type>UNSET</type>
 							</DensityDistributionSpecs>
 							<type>fixed-structured</type>
-							<fixed_density>6.60000000000000031e-01</fixed_density>
+							<fixed_density>6.61596793530000005e-01</fixed_density>
 						</specs_>
 					</px>
 				</second>
@@ -3897,7 +3897,7 @@
 								<type>UNSET</type>
 							</DensityDistributionSpecs>
 							<type>fixed-structured</type>
-							<fixed_density>6.60000000000000031e-01</fixed_density>
+							<fixed_density>1.00000000000000000e+00</fixed_density>
 						</specs_>
 					</px>
 				</second>

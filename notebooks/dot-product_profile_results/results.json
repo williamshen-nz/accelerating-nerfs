@@ -26,8 +26,8 @@
     "eyeriss_like_onchip_compression": {
         "summary": {
             "total_area": 0.0,
-            "total_energy": 0.03,
-            "total_cycle": 11.0
+            "total_energy": 0.18,
+            "total_cycle": 60.0
         },
         "layer_summary": {
             "1": {
@@ -41,8 +41,78 @@
                 "cycle": 11,
                 "gflops": 15.36,
                 "utilization": 0.05,
-                "edp": 3.58e-07,
+                "edp": 3.42e-07,
                 "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like_onchip_compression/dot-product-sparse/layer1/timeloop-mapper.stats.txt"
+            },
+            "2": {
+                "name": "/home/workspace/notebooks/workloads/dot-product-sparse/dot-product-sparse_layer2",
+                "total_area": 0.0,
+                "total_energy": 0.03,
+                "total_cycle": 11,
+                "num": 1,
+                "energy": 0.03,
+                "area": 0.0,
+                "cycle": 11,
+                "gflops": 14.64,
+                "utilization": 0.04,
+                "edp": 3.33e-07,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like_onchip_compression/dot-product-sparse/layer2/timeloop-mapper.stats.txt"
+            },
+            "3": {
+                "name": "/home/workspace/notebooks/workloads/dot-product-sparse/dot-product-sparse_layer3",
+                "total_area": 0.0,
+                "total_energy": 0.03,
+                "total_cycle": 9,
+                "num": 1,
+                "energy": 0.03,
+                "area": 0.0,
+                "cycle": 9,
+                "gflops": 15.89,
+                "utilization": 0.05,
+                "edp": 2.55e-07,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like_onchip_compression/dot-product-sparse/layer3/timeloop-mapper.stats.txt"
+            },
+            "4": {
+                "name": "/home/workspace/notebooks/workloads/dot-product-sparse/dot-product-sparse_layer4",
+                "total_area": 0.0,
+                "total_energy": 0.03,
+                "total_cycle": 8,
+                "num": 1,
+                "energy": 0.03,
+                "area": 0.0,
+                "cycle": 8,
+                "gflops": 15.12,
+                "utilization": 0.05,
+                "edp": 2.2e-07,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like_onchip_compression/dot-product-sparse/layer4/timeloop-mapper.stats.txt"
+            },
+            "5": {
+                "name": "/home/workspace/notebooks/workloads/dot-product-sparse/dot-product-sparse_layer5",
+                "total_area": 0.0,
+                "total_energy": 0.03,
+                "total_cycle": 11,
+                "num": 1,
+                "energy": 0.03,
+                "area": 0.0,
+                "cycle": 11,
+                "gflops": 15.91,
+                "utilization": 0.05,
+                "edp": 3.4e-07,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like_onchip_compression/dot-product-sparse/layer5/timeloop-mapper.stats.txt"
+            },
+            "6": {
+                "name": "/home/workspace/notebooks/workloads/dot-product-sparse/dot-product-sparse_layer6",
+                "total_area": 0.0,
+                "total_energy": 0.03,
+                "total_cycle": 10,
+                "num": 1,
+                "energy": 0.03,
+                "area": 0.0,
+                "cycle": 10,
+                "gflops": 15.7,
+                "utilization": 0.05,
+                "edp": 2.98e-07,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like_onchip_compression/dot-product-sparse/layer6/timeloop-mapper.stats.txt"
             }
         },
         "results": "/home/workspace/notebooks/dot-product_profile_results/eyeriss_like_onchip_compression_results.json"
@@ -50,8 +120,8 @@
     "eyeriss_like_w_gating": {
         "summary": {
             "total_area": 0.0,
-            "total_energy": 0.03,
-            "total_cycle": 11.0
+            "total_energy": 0.18,
+            "total_cycle": 61.0
         },
         "layer_summary": {
             "1": {
@@ -65,8 +135,78 @@
                 "cycle": 11,
                 "gflops": 15.36,
                 "utilization": 0.05,
-                "edp": 3.65e-07,
+                "edp": 3.5e-07,
                 "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like_w_gating/dot-product-sparse/layer1/timeloop-mapper.stats.txt"
+            },
+            "2": {
+                "name": "/home/workspace/notebooks/workloads/dot-product-sparse/dot-product-sparse_layer2",
+                "total_area": 0.0,
+                "total_energy": 0.03,
+                "total_cycle": 11,
+                "num": 1,
+                "energy": 0.03,
+                "area": 0.0,
+                "cycle": 11,
+                "gflops": 14.64,
+                "utilization": 0.04,
+                "edp": 3.42e-07,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like_w_gating/dot-product-sparse/layer2/timeloop-mapper.stats.txt"
+            },
+            "3": {
+                "name": "/home/workspace/notebooks/workloads/dot-product-sparse/dot-product-sparse_layer3",
+                "total_area": 0.0,
+                "total_energy": 0.03,
+                "total_cycle": 9,
+                "num": 1,
+                "energy": 0.03,
+                "area": 0.0,
+                "cycle": 9,
+                "gflops": 15.89,
+                "utilization": 0.05,
+                "edp": 2.65e-07,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like_w_gating/dot-product-sparse/layer3/timeloop-mapper.stats.txt"
+            },
+            "4": {
+                "name": "/home/workspace/notebooks/workloads/dot-product-sparse/dot-product-sparse_layer4",
+                "total_area": 0.0,
+                "total_energy": 0.03,
+                "total_cycle": 9,
+                "num": 1,
+                "energy": 0.03,
+                "area": 0.0,
+                "cycle": 9,
+                "gflops": 13.44,
+                "utilization": 0.04,
+                "edp": 2.58e-07,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like_w_gating/dot-product-sparse/layer4/timeloop-mapper.stats.txt"
+            },
+            "5": {
+                "name": "/home/workspace/notebooks/workloads/dot-product-sparse/dot-product-sparse_layer5",
+                "total_area": 0.0,
+                "total_energy": 0.03,
+                "total_cycle": 11,
+                "num": 1,
+                "energy": 0.03,
+                "area": 0.0,
+                "cycle": 11,
+                "gflops": 15.91,
+                "utilization": 0.05,
+                "edp": 3.48e-07,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like_w_gating/dot-product-sparse/layer5/timeloop-mapper.stats.txt"
+            },
+            "6": {
+                "name": "/home/workspace/notebooks/workloads/dot-product-sparse/dot-product-sparse_layer6",
+                "total_area": 0.0,
+                "total_energy": 0.03,
+                "total_cycle": 10,
+                "num": 1,
+                "energy": 0.03,
+                "area": 0.0,
+                "cycle": 10,
+                "gflops": 15.7,
+                "utilization": 0.05,
+                "edp": 3.06e-07,
+                "stats_fname": "/home/workspace/notebooks/designs/eyeriss_like_w_gating/dot-product-sparse/layer6/timeloop-mapper.stats.txt"
             }
         },
         "results": "/home/workspace/notebooks/dot-product_profile_results/eyeriss_like_w_gating_results.json"
