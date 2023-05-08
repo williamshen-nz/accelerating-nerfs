@@ -33,16 +33,16 @@ sparse_optimizations:
 # No skipping, only compression
 #    - name: weights_spad
 #      action-optimization:
-#        - type: skipping-spatial
+#        - type: skipping
 #          options:
 #            # If Inputs has zero value, we skip the read access to Weights
 #            - target: Weights
 #              condition-on: [ Inputs ]
 
-    - name: ifmap_spad
-      representation-format:
-        data-spaces:
-          - name: Inputs
-            ranks:
-              - format: RLE
-                flattened-rankIDs: [ [R, S, P, C, M, N, Q] ]
+#    - name: ifmap_spad
+#      representation-format:
+#        data-spaces:
+#          - name: Inputs
+#            ranks:
+#              - format: RLE
+#                flattened-rankIDs: [ [R, S, P, C, M, N, Q] ]

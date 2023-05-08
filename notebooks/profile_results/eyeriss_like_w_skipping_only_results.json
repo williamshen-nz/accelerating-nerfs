@@ -1,0 +1,1850 @@
+{
+    "1": {
+        "layer_dict": {
+            "problem": {
+                "instance": {
+                    "C": 63,
+                    "Hdilation": 1,
+                    "Hstride": 1,
+                    "M": 256,
+                    "N": 64,
+                    "P": 1,
+                    "Q": 1,
+                    "R": 1,
+                    "S": 1,
+                    "Wdilation": 1,
+                    "Wstride": 1,
+                    "densities": {
+                        "Inputs": 0.999999956053383,
+                        "Outputs": 0.44577414285910133,
+                        "Weights": 1.0
+                    }
+                },
+                "shape": {
+                    "coefficients": [
+                        {
+                            "default": 1,
+                            "name": "Wstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Wdilation"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hdilation"
+                        }
+                    ],
+                    "data-spaces": [
+                        {
+                            "name": "Weights",
+                            "projection": [
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Inputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R",
+                                        "Wdilation"
+                                    ],
+                                    [
+                                        "P",
+                                        "Wstride"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S",
+                                        "Hdilation"
+                                    ],
+                                    [
+                                        "Q",
+                                        "Hstride"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Outputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "Q"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "P"
+                                    ]
+                                ]
+                            ],
+                            "read-write": true
+                        }
+                    ],
+                    "dimensions": [
+                        "C",
+                        "M",
+                        "R",
+                        "S",
+                        "N",
+                        "P",
+                        "Q"
+                    ],
+                    "name": "linear"
+                }
+            }
+        },
+        "num": 1,
+        "name": "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer1",
+        "mapper_timeout": 200,
+        "mapper_algo": "random-pruned",
+        "mapper_victory_condition": 800,
+        "mapper_max_permutations": 16,
+        "energy": 12.91,
+        "area": 0.0,
+        "cycle": 10752,
+        "gflops": 190.48,
+        "utilization": 0.57,
+        "edp": 0.139
+    },
+    "2": {
+        "layer_dict": {
+            "problem": {
+                "instance": {
+                    "C": 256,
+                    "Hdilation": 1,
+                    "Hstride": 1,
+                    "M": 256,
+                    "N": 64,
+                    "P": 1,
+                    "Q": 1,
+                    "R": 1,
+                    "S": 1,
+                    "Wdilation": 1,
+                    "Wstride": 1,
+                    "densities": {
+                        "Inputs": 0.44577414285910133,
+                        "Outputs": 0.3052761252170336,
+                        "Weights": 1.0
+                    }
+                },
+                "shape": {
+                    "coefficients": [
+                        {
+                            "default": 1,
+                            "name": "Wstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Wdilation"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hdilation"
+                        }
+                    ],
+                    "data-spaces": [
+                        {
+                            "name": "Weights",
+                            "projection": [
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Inputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R",
+                                        "Wdilation"
+                                    ],
+                                    [
+                                        "P",
+                                        "Wstride"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S",
+                                        "Hdilation"
+                                    ],
+                                    [
+                                        "Q",
+                                        "Hstride"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Outputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "Q"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "P"
+                                    ]
+                                ]
+                            ],
+                            "read-write": true
+                        }
+                    ],
+                    "dimensions": [
+                        "C",
+                        "M",
+                        "R",
+                        "S",
+                        "N",
+                        "P",
+                        "Q"
+                    ],
+                    "name": "linear"
+                }
+            }
+        },
+        "num": 1,
+        "name": "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer2",
+        "mapper_timeout": 200,
+        "mapper_algo": "random-pruned",
+        "mapper_victory_condition": 800,
+        "mapper_max_permutations": 16,
+        "energy": 31.1,
+        "area": 0.0,
+        "cycle": 32768,
+        "gflops": 113.62,
+        "utilization": 0.34,
+        "edp": 1.02
+    },
+    "3": {
+        "layer_dict": {
+            "problem": {
+                "instance": {
+                    "C": 256,
+                    "Hdilation": 1,
+                    "Hstride": 1,
+                    "M": 256,
+                    "N": 64,
+                    "P": 1,
+                    "Q": 1,
+                    "R": 1,
+                    "S": 1,
+                    "Wdilation": 1,
+                    "Wstride": 1,
+                    "densities": {
+                        "Inputs": 0.3052761252170336,
+                        "Outputs": 0.29951443951219237,
+                        "Weights": 1.0
+                    }
+                },
+                "shape": {
+                    "coefficients": [
+                        {
+                            "default": 1,
+                            "name": "Wstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Wdilation"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hdilation"
+                        }
+                    ],
+                    "data-spaces": [
+                        {
+                            "name": "Weights",
+                            "projection": [
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Inputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R",
+                                        "Wdilation"
+                                    ],
+                                    [
+                                        "P",
+                                        "Wstride"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S",
+                                        "Hdilation"
+                                    ],
+                                    [
+                                        "Q",
+                                        "Hstride"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Outputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "Q"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "P"
+                                    ]
+                                ]
+                            ],
+                            "read-write": true
+                        }
+                    ],
+                    "dimensions": [
+                        "C",
+                        "M",
+                        "R",
+                        "S",
+                        "N",
+                        "P",
+                        "Q"
+                    ],
+                    "name": "linear"
+                }
+            }
+        },
+        "num": 1,
+        "name": "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer3",
+        "mapper_timeout": 200,
+        "mapper_algo": "random-pruned",
+        "mapper_victory_condition": 800,
+        "mapper_max_permutations": 16,
+        "energy": 29.39,
+        "area": 0.0,
+        "cycle": 32768,
+        "gflops": 77.65,
+        "utilization": 0.23,
+        "edp": 0.963
+    },
+    "4": {
+        "layer_dict": {
+            "problem": {
+                "instance": {
+                    "C": 256,
+                    "Hdilation": 1,
+                    "Hstride": 1,
+                    "M": 256,
+                    "N": 64,
+                    "P": 1,
+                    "Q": 1,
+                    "R": 1,
+                    "S": 1,
+                    "Wdilation": 1,
+                    "Wstride": 1,
+                    "densities": {
+                        "Inputs": 0.29951443951219237,
+                        "Outputs": 0.3106220461071759,
+                        "Weights": 1.0
+                    }
+                },
+                "shape": {
+                    "coefficients": [
+                        {
+                            "default": 1,
+                            "name": "Wstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Wdilation"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hdilation"
+                        }
+                    ],
+                    "data-spaces": [
+                        {
+                            "name": "Weights",
+                            "projection": [
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Inputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R",
+                                        "Wdilation"
+                                    ],
+                                    [
+                                        "P",
+                                        "Wstride"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S",
+                                        "Hdilation"
+                                    ],
+                                    [
+                                        "Q",
+                                        "Hstride"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Outputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "Q"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "P"
+                                    ]
+                                ]
+                            ],
+                            "read-write": true
+                        }
+                    ],
+                    "dimensions": [
+                        "C",
+                        "M",
+                        "R",
+                        "S",
+                        "N",
+                        "P",
+                        "Q"
+                    ],
+                    "name": "linear"
+                }
+            }
+        },
+        "num": 1,
+        "name": "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer4",
+        "mapper_timeout": 200,
+        "mapper_algo": "random-pruned",
+        "mapper_victory_condition": 800,
+        "mapper_max_permutations": 16,
+        "energy": 29.32,
+        "area": 0.0,
+        "cycle": 32768,
+        "gflops": 76.18,
+        "utilization": 0.23,
+        "edp": 0.961
+    },
+    "5": {
+        "layer_dict": {
+            "problem": {
+                "instance": {
+                    "C": 256,
+                    "Hdilation": 1,
+                    "Hstride": 1,
+                    "M": 256,
+                    "N": 64,
+                    "P": 1,
+                    "Q": 1,
+                    "R": 1,
+                    "S": 1,
+                    "Wdilation": 1,
+                    "Wstride": 1,
+                    "densities": {
+                        "Inputs": 0.3106220461071759,
+                        "Outputs": 0.3248678330742185,
+                        "Weights": 1.0
+                    }
+                },
+                "shape": {
+                    "coefficients": [
+                        {
+                            "default": 1,
+                            "name": "Wstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Wdilation"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hdilation"
+                        }
+                    ],
+                    "data-spaces": [
+                        {
+                            "name": "Weights",
+                            "projection": [
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Inputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R",
+                                        "Wdilation"
+                                    ],
+                                    [
+                                        "P",
+                                        "Wstride"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S",
+                                        "Hdilation"
+                                    ],
+                                    [
+                                        "Q",
+                                        "Hstride"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Outputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "Q"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "P"
+                                    ]
+                                ]
+                            ],
+                            "read-write": true
+                        }
+                    ],
+                    "dimensions": [
+                        "C",
+                        "M",
+                        "R",
+                        "S",
+                        "N",
+                        "P",
+                        "Q"
+                    ],
+                    "name": "linear"
+                }
+            }
+        },
+        "num": 1,
+        "name": "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer5",
+        "mapper_timeout": 200,
+        "mapper_algo": "random-pruned",
+        "mapper_victory_condition": 800,
+        "mapper_max_permutations": 16,
+        "energy": 29.45,
+        "area": 0.0,
+        "cycle": 32768,
+        "gflops": 79.02,
+        "utilization": 0.24,
+        "edp": 0.965
+    },
+    "6": {
+        "layer_dict": {
+            "problem": {
+                "instance": {
+                    "C": 319,
+                    "Hdilation": 1,
+                    "Hstride": 1,
+                    "M": 256,
+                    "N": 64,
+                    "P": 1,
+                    "Q": 1,
+                    "R": 1,
+                    "S": 1,
+                    "Wdilation": 1,
+                    "Wstride": 1,
+                    "densities": {
+                        "Inputs": 0.458201136358505,
+                        "Outputs": 0.3499051030453799,
+                        "Weights": 1.0
+                    }
+                },
+                "shape": {
+                    "coefficients": [
+                        {
+                            "default": 1,
+                            "name": "Wstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Wdilation"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hdilation"
+                        }
+                    ],
+                    "data-spaces": [
+                        {
+                            "name": "Weights",
+                            "projection": [
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Inputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R",
+                                        "Wdilation"
+                                    ],
+                                    [
+                                        "P",
+                                        "Wstride"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S",
+                                        "Hdilation"
+                                    ],
+                                    [
+                                        "Q",
+                                        "Hstride"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Outputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "Q"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "P"
+                                    ]
+                                ]
+                            ],
+                            "read-write": true
+                        }
+                    ],
+                    "dimensions": [
+                        "C",
+                        "M",
+                        "R",
+                        "S",
+                        "N",
+                        "P",
+                        "Q"
+                    ],
+                    "name": "linear"
+                }
+            }
+        },
+        "num": 1,
+        "name": "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer6",
+        "mapper_timeout": 200,
+        "mapper_algo": "random-pruned",
+        "mapper_victory_condition": 800,
+        "mapper_max_permutations": 16,
+        "energy": 107.79,
+        "area": 0.0,
+        "cycle": 29696,
+        "gflops": 160.74,
+        "utilization": 0.48,
+        "edp": 3.2
+    },
+    "7": {
+        "layer_dict": {
+            "problem": {
+                "instance": {
+                    "C": 256,
+                    "Hdilation": 1,
+                    "Hstride": 1,
+                    "M": 256,
+                    "N": 64,
+                    "P": 1,
+                    "Q": 1,
+                    "R": 1,
+                    "S": 1,
+                    "Wdilation": 1,
+                    "Wstride": 1,
+                    "densities": {
+                        "Inputs": 0.3499051030453799,
+                        "Outputs": 0.3061052845077121,
+                        "Weights": 1.0
+                    }
+                },
+                "shape": {
+                    "coefficients": [
+                        {
+                            "default": 1,
+                            "name": "Wstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Wdilation"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hdilation"
+                        }
+                    ],
+                    "data-spaces": [
+                        {
+                            "name": "Weights",
+                            "projection": [
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Inputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R",
+                                        "Wdilation"
+                                    ],
+                                    [
+                                        "P",
+                                        "Wstride"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S",
+                                        "Hdilation"
+                                    ],
+                                    [
+                                        "Q",
+                                        "Hstride"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Outputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "Q"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "P"
+                                    ]
+                                ]
+                            ],
+                            "read-write": true
+                        }
+                    ],
+                    "dimensions": [
+                        "C",
+                        "M",
+                        "R",
+                        "S",
+                        "N",
+                        "P",
+                        "Q"
+                    ],
+                    "name": "linear"
+                }
+            }
+        },
+        "num": 1,
+        "name": "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer7",
+        "mapper_timeout": 200,
+        "mapper_algo": "random-pruned",
+        "mapper_victory_condition": 800,
+        "mapper_max_permutations": 16,
+        "energy": 29.93,
+        "area": 0.0,
+        "cycle": 32768,
+        "gflops": 89.08,
+        "utilization": 0.27,
+        "edp": 0.981
+    },
+    "8": {
+        "layer_dict": {
+            "problem": {
+                "instance": {
+                    "C": 256,
+                    "Hdilation": 1,
+                    "Hstride": 1,
+                    "M": 256,
+                    "N": 64,
+                    "P": 1,
+                    "Q": 1,
+                    "R": 1,
+                    "S": 1,
+                    "Wdilation": 1,
+                    "Wstride": 1,
+                    "densities": {
+                        "Inputs": 0.3061052845077121,
+                        "Outputs": 0.30124270859846225,
+                        "Weights": 1.0
+                    }
+                },
+                "shape": {
+                    "coefficients": [
+                        {
+                            "default": 1,
+                            "name": "Wstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Wdilation"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hdilation"
+                        }
+                    ],
+                    "data-spaces": [
+                        {
+                            "name": "Weights",
+                            "projection": [
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Inputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R",
+                                        "Wdilation"
+                                    ],
+                                    [
+                                        "P",
+                                        "Wstride"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S",
+                                        "Hdilation"
+                                    ],
+                                    [
+                                        "Q",
+                                        "Hstride"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Outputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "Q"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "P"
+                                    ]
+                                ]
+                            ],
+                            "read-write": true
+                        }
+                    ],
+                    "dimensions": [
+                        "C",
+                        "M",
+                        "R",
+                        "S",
+                        "N",
+                        "P",
+                        "Q"
+                    ],
+                    "name": "linear"
+                }
+            }
+        },
+        "num": 1,
+        "name": "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer8",
+        "mapper_timeout": 200,
+        "mapper_algo": "random-pruned",
+        "mapper_victory_condition": 800,
+        "mapper_max_permutations": 16,
+        "energy": 29.4,
+        "area": 0.0,
+        "cycle": 32768,
+        "gflops": 77.86,
+        "utilization": 0.23,
+        "edp": 0.963
+    },
+    "9": {
+        "layer_dict": {
+            "problem": {
+                "instance": {
+                    "C": 256,
+                    "Hdilation": 1,
+                    "Hstride": 1,
+                    "M": 1,
+                    "N": 64,
+                    "P": 1,
+                    "Q": 1,
+                    "R": 1,
+                    "S": 1,
+                    "Wdilation": 1,
+                    "Wstride": 1,
+                    "densities": {
+                        "Inputs": 0.30124270859846225,
+                        "Outputs": 0.3477407934631964,
+                        "Weights": 1.0
+                    }
+                },
+                "shape": {
+                    "coefficients": [
+                        {
+                            "default": 1,
+                            "name": "Wstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Wdilation"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hdilation"
+                        }
+                    ],
+                    "data-spaces": [
+                        {
+                            "name": "Weights",
+                            "projection": [
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Inputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R",
+                                        "Wdilation"
+                                    ],
+                                    [
+                                        "P",
+                                        "Wstride"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S",
+                                        "Hdilation"
+                                    ],
+                                    [
+                                        "Q",
+                                        "Hstride"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Outputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "Q"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "P"
+                                    ]
+                                ]
+                            ],
+                            "read-write": true
+                        }
+                    ],
+                    "dimensions": [
+                        "C",
+                        "M",
+                        "R",
+                        "S",
+                        "N",
+                        "P",
+                        "Q"
+                    ],
+                    "name": "linear"
+                }
+            }
+        },
+        "num": 1,
+        "name": "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer9",
+        "mapper_timeout": 200,
+        "mapper_algo": "random-pruned",
+        "mapper_victory_condition": 800,
+        "mapper_max_permutations": 16,
+        "energy": 2.78,
+        "area": 0.0,
+        "cycle": 1032,
+        "gflops": 9.5,
+        "utilization": 0.03,
+        "edp": 0.00286
+    },
+    "10": {
+        "layer_dict": {
+            "problem": {
+                "instance": {
+                    "C": 256,
+                    "Hdilation": 1,
+                    "Hstride": 1,
+                    "M": 256,
+                    "N": 64,
+                    "P": 1,
+                    "Q": 1,
+                    "R": 1,
+                    "S": 1,
+                    "Wdilation": 1,
+                    "Wstride": 1,
+                    "densities": {
+                        "Inputs": 0.3129442400712461,
+                        "Outputs": 0.9999999978361654,
+                        "Weights": 1.0
+                    }
+                },
+                "shape": {
+                    "coefficients": [
+                        {
+                            "default": 1,
+                            "name": "Wstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Wdilation"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hdilation"
+                        }
+                    ],
+                    "data-spaces": [
+                        {
+                            "name": "Weights",
+                            "projection": [
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Inputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R",
+                                        "Wdilation"
+                                    ],
+                                    [
+                                        "P",
+                                        "Wstride"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S",
+                                        "Hdilation"
+                                    ],
+                                    [
+                                        "Q",
+                                        "Hstride"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Outputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "Q"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "P"
+                                    ]
+                                ]
+                            ],
+                            "read-write": true
+                        }
+                    ],
+                    "dimensions": [
+                        "C",
+                        "M",
+                        "R",
+                        "S",
+                        "N",
+                        "P",
+                        "Q"
+                    ],
+                    "name": "linear"
+                }
+            }
+        },
+        "num": 1,
+        "name": "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer10",
+        "mapper_timeout": 200,
+        "mapper_algo": "random-pruned",
+        "mapper_victory_condition": 800,
+        "mapper_max_permutations": 16,
+        "energy": 29.48,
+        "area": 0.0,
+        "cycle": 32768,
+        "gflops": 79.61,
+        "utilization": 0.24,
+        "edp": 0.966
+    },
+    "11": {
+        "layer_dict": {
+            "problem": {
+                "instance": {
+                    "C": 283,
+                    "Hdilation": 1,
+                    "Hstride": 1,
+                    "M": 128,
+                    "N": 64,
+                    "P": 1,
+                    "Q": 1,
+                    "R": 1,
+                    "S": 1,
+                    "Wdilation": 1,
+                    "Wstride": 1,
+                    "densities": {
+                        "Inputs": 0.9999999975027676,
+                        "Outputs": 0.28788729989201256,
+                        "Weights": 1.0
+                    }
+                },
+                "shape": {
+                    "coefficients": [
+                        {
+                            "default": 1,
+                            "name": "Wstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Wdilation"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hdilation"
+                        }
+                    ],
+                    "data-spaces": [
+                        {
+                            "name": "Weights",
+                            "projection": [
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Inputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R",
+                                        "Wdilation"
+                                    ],
+                                    [
+                                        "P",
+                                        "Wstride"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S",
+                                        "Hdilation"
+                                    ],
+                                    [
+                                        "Q",
+                                        "Hstride"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Outputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "Q"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "P"
+                                    ]
+                                ]
+                            ],
+                            "read-write": true
+                        }
+                    ],
+                    "dimensions": [
+                        "C",
+                        "M",
+                        "R",
+                        "S",
+                        "N",
+                        "P",
+                        "Q"
+                    ],
+                    "name": "linear"
+                }
+            }
+        },
+        "num": 1,
+        "name": "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer11",
+        "mapper_timeout": 200,
+        "mapper_algo": "random-pruned",
+        "mapper_victory_condition": 800,
+        "mapper_max_permutations": 16,
+        "energy": 53.0,
+        "area": 0.0,
+        "cycle": 36224,
+        "gflops": 127.77,
+        "utilization": 0.38,
+        "edp": 1.92
+    },
+    "12": {
+        "layer_dict": {
+            "problem": {
+                "instance": {
+                    "C": 128,
+                    "Hdilation": 1,
+                    "Hstride": 1,
+                    "M": 3,
+                    "N": 64,
+                    "P": 1,
+                    "Q": 1,
+                    "R": 1,
+                    "S": 1,
+                    "Wdilation": 1,
+                    "Wstride": 1,
+                    "densities": {
+                        "Inputs": 0.28788729989201256,
+                        "Outputs": 1.0,
+                        "Weights": 1.0
+                    }
+                },
+                "shape": {
+                    "coefficients": [
+                        {
+                            "default": 1,
+                            "name": "Wstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hstride"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Wdilation"
+                        },
+                        {
+                            "default": 1,
+                            "name": "Hdilation"
+                        }
+                    ],
+                    "data-spaces": [
+                        {
+                            "name": "Weights",
+                            "projection": [
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Inputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "C"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "R",
+                                        "Wdilation"
+                                    ],
+                                    [
+                                        "P",
+                                        "Wstride"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "S",
+                                        "Hdilation"
+                                    ],
+                                    [
+                                        "Q",
+                                        "Hstride"
+                                    ]
+                                ]
+                            ]
+                        },
+                        {
+                            "name": "Outputs",
+                            "projection": [
+                                [
+                                    [
+                                        "N"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "M"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "Q"
+                                    ]
+                                ],
+                                [
+                                    [
+                                        "P"
+                                    ]
+                                ]
+                            ],
+                            "read-write": true
+                        }
+                    ],
+                    "dimensions": [
+                        "C",
+                        "M",
+                        "R",
+                        "S",
+                        "N",
+                        "P",
+                        "Q"
+                    ],
+                    "name": "linear"
+                }
+            }
+        },
+        "num": 1,
+        "name": "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer12",
+        "mapper_timeout": 200,
+        "mapper_algo": "random-pruned",
+        "mapper_victory_condition": 800,
+        "mapper_max_permutations": 16,
+        "energy": 1.73,
+        "area": 0.0,
+        "cycle": 536,
+        "gflops": 26.04,
+        "utilization": 0.08,
+        "edp": 0.000925
+    }
+}

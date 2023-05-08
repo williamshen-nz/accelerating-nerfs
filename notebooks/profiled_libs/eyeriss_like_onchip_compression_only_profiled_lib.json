@@ -2,9 +2,9 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer1": {
         "area": 0.0,
         "cycle": 10752,
-        "edp": 0.131,
-        "energy": 12.18,
-        "gflops": 191.32,
+        "edp": 0.139,
+        "energy": 12.91,
+        "gflops": 190.48,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -154,8 +154,8 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer10": {
         "area": 0.0,
         "cycle": 65536,
-        "edp": 2.36,
-        "energy": 36.07,
+        "edp": 2.69,
+        "energy": 41.1,
         "gflops": 127.75,
         "layer_dict": {
             "problem": {
@@ -306,9 +306,9 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer11": {
         "area": 0.0,
         "cycle": 36224,
-        "edp": 1.9,
-        "energy": 52.32,
-        "gflops": 127.93,
+        "edp": 1.92,
+        "energy": 53.0,
+        "gflops": 127.77,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -458,8 +458,8 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer12": {
         "area": 0.0,
         "cycle": 1024,
-        "edp": 0.00057,
-        "energy": 0.56,
+        "edp": 0.00148,
+        "energy": 1.45,
         "gflops": 47.81,
         "layer_dict": {
             "problem": {
@@ -610,9 +610,9 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer2": {
         "area": 0.0,
         "cycle": 65536,
-        "edp": 2.34,
-        "energy": 35.73,
-        "gflops": 127.92,
+        "edp": 2.69,
+        "energy": 41.1,
+        "gflops": 127.75,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -762,9 +762,9 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer3": {
         "area": 0.0,
         "cycle": 65536,
-        "edp": 2.26,
-        "energy": 34.51,
-        "gflops": 127.93,
+        "edp": 2.69,
+        "energy": 41.1,
+        "gflops": 127.75,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -914,9 +914,9 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer4": {
         "area": 0.0,
         "cycle": 65536,
-        "edp": 2.26,
-        "energy": 34.47,
-        "gflops": 127.92,
+        "edp": 2.69,
+        "energy": 41.1,
+        "gflops": 127.75,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -1066,9 +1066,9 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer5": {
         "area": 0.0,
         "cycle": 65536,
-        "edp": 2.27,
-        "energy": 34.63,
-        "gflops": 127.92,
+        "edp": 2.69,
+        "energy": 41.1,
+        "gflops": 127.75,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -1218,9 +1218,9 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer6": {
         "area": 0.0,
         "cycle": 59392,
-        "edp": 3.21,
-        "energy": 54.0,
-        "gflops": 175.9,
+        "edp": 3.47,
+        "energy": 58.37,
+        "gflops": 175.72,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -1370,9 +1370,9 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer7": {
         "area": 0.0,
         "cycle": 65536,
-        "edp": 2.29,
-        "energy": 35.01,
-        "gflops": 127.92,
+        "edp": 2.69,
+        "energy": 41.1,
+        "gflops": 127.75,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -1522,9 +1522,9 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer8": {
         "area": 0.0,
         "cycle": 65536,
-        "edp": 2.26,
-        "energy": 34.53,
-        "gflops": 127.92,
+        "edp": 2.69,
+        "energy": 41.1,
+        "gflops": 127.75,
         "layer_dict": {
             "problem": {
                 "instance": {
@@ -1674,9 +1674,9 @@
     "/home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer9": {
         "area": 0.0,
         "cycle": 2048,
-        "edp": 0.00179,
-        "energy": 0.87,
-        "gflops": 15.99,
+        "edp": 0.00529,
+        "energy": 2.58,
+        "gflops": 15.97,
         "layer_dict": {
             "problem": {
                 "instance": {
