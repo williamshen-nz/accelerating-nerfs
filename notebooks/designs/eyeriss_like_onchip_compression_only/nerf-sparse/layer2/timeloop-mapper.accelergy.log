@@ -11,18 +11,18 @@ Info: generating outputs according to the following specified output flags...
 Info: config file located: /home/workspace/.config/accelergy/accelergy_config.yaml 
 config file content: 
  {'version': 0.3, 'compound_components': [], 'estimator_plug_ins': ['/usr/local/share/accelergy/estimation_plug_ins'], 'primitive_components': ['/usr/local/share/accelergy/primitive_component_libs'], 'table_plug_ins': {'roots': ['/usr/local/share/accelergy/estimation_plug_ins/accelergy-table-based-plug-ins/set_of_table_templates']}}
-Warn: Cannot recognize the top key "mapper" in file /home/workspace/notebooks/designs/eyeriss_like_shen/mapper/mapper.yaml 
-Warn: Cannot recognize the top key "architecture_constraints" in file /home/workspace/notebooks/designs/eyeriss_like_shen/constraints/eyeriss_like_arch_constraints.yaml 
-Warn: Cannot recognize the top key "mapspace_constraints" in file /home/workspace/notebooks/designs/eyeriss_like_shen/constraints/eyeriss_like_map_constraints.yaml 
-Warn: Cannot recognize the top key "sparse_optimizations" in file /home/workspace/notebooks/designs/eyeriss_like_shen/sparse_opt/eyeriss_v1_shen.yaml 
+Warn: Cannot recognize the top key "mapper" in file /home/workspace/notebooks/designs/eyeriss_like_onchip_compression_only/mapper/mapper.yaml 
+Warn: Cannot recognize the top key "architecture_constraints" in file /home/workspace/notebooks/designs/eyeriss_like_onchip_compression_only/constraints/eyeriss_like_arch_constraints.yaml 
+Warn: Cannot recognize the top key "mapspace_constraints" in file /home/workspace/notebooks/designs/eyeriss_like_onchip_compression_only/constraints/eyeriss_like_map_constraints.yaml 
+Warn: Cannot recognize the top key "sparse_optimizations" in file /home/workspace/notebooks/designs/eyeriss_like_onchip_compression_only/sparse_opt/eyeriss_v1_onchip_compression_only.yaml 
 Warn: Cannot recognize the top key "problem" in file /home/workspace/notebooks/workloads/nerf-sparse/nerf-sparse_layer2.yaml 
-Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_shen/arch/eyeriss_like_shen.yaml for architecture info 
+Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_onchip_compression_only/arch/eyeriss_like_onchip_compression_only.yaml for architecture info 
 Info: Found non-numeric expression 45nm. Available bindings: {'technology': '45nm'} 
 WARN: Failed to evaluate "45nm". Setting eyeriss_168.technology="45nm". Available bindings: {'technology': '45nm'}
-Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_shen/arch/components/mac.yaml for compound_components info 
-Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_shen/arch/components/regfile_metadata.yaml for compound_components info 
-Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_shen/arch/components/smartbuffer.yaml for compound_components info 
-Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_shen/arch/components/smartbuffer_metadata.yaml for compound_components info 
+Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_onchip_compression_only/arch/components/mac.yaml for compound_components info 
+Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_onchip_compression_only/arch/components/regfile_metadata.yaml for compound_components info 
+Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_onchip_compression_only/arch/components/smartbuffer.yaml for compound_components info 
+Info: Parsing file /home/workspace/notebooks/designs/eyeriss_like_onchip_compression_only/arch/components/smartbuffer_metadata.yaml for compound_components info 
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/pim_primitive_component.lib.yaml 
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/soc_primitives.lib.yaml 
 Info: primitive component file parsed:  /usr/local/share/accelergy/primitive_component_libs/primitive_component.lib.yaml 
@@ -45,16 +45,16 @@ Info: estimator plug-in identified by:  /usr/local/share/accelergy/estimation_pl
 table-based-plug-ins Identifies a set of tables named:  test_tables
 Info: CACTI plug-in... Querying CACTI for request:
  {'class_name': 'SRAM', 'attributes': OrderedDict([('technology', '45nm'), ('width', 16), ('depth', 224), ('datawidth', 16), ('n_rdwr_ports', 2), ('n_banks', 1), ('avg_sparsity', 'avg_sparsity'), ('n_rd_ports', 0), ('n_wr_ports', 0), ('latency', '5ns')]), 'action_name': 'write', 'arguments': None}
-copy  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/default_SRAM.cfg  to  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_06_15_51_02_SRAM.cfg
-CACTI plug-in removing temp file:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_06_15_51_02_SRAM.cfg
+copy  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/default_SRAM.cfg  to  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_08_16_45_53_SRAM.cfg
+CACTI plug-in removing temp file:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_08_16_45_53_SRAM.cfg
 Info: CACTI plug-in... Querying CACTI for request:
  {'class_name': 'SRAM', 'attributes': OrderedDict([('technology', '45nm'), ('width', 64), ('depth', 12800), ('datawidth', 64), ('n_rdwr_ports', 2), ('n_banks', 1), ('avg_sparsity', 'avg_sparsity'), ('n_rd_ports', 0), ('n_wr_ports', 0), ('latency', '5ns')]), 'action_name': 'write', 'arguments': None}
-copy  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/default_SRAM.cfg  to  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_06_15_51_02_SRAM.cfg
-CACTI plug-in removing temp file:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_06_15_51_02_SRAM.cfg
+copy  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/default_SRAM.cfg  to  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_08_16_45_53_SRAM.cfg
+CACTI plug-in removing temp file:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_08_16_45_53_SRAM.cfg
 Info: CACTI plug-in... Querying CACTI for request:
  {'class_name': 'SRAM', 'attributes': OrderedDict([('technology', '45nm'), ('width', 32), ('depth', 4096), ('datawidth', 32), ('n_rd_ports', 0), ('n_wr_ports', 0), ('n_rdwr_ports', 1), ('n_banks', 1), ('latency', '5ns')]), 'action_name': 'read', 'arguments': None}
-copy  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/default_SRAM.cfg  to  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_06_15_51_02_SRAM.cfg
-CACTI plug-in removing temp file:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_06_15_51_02_SRAM.cfg
+copy  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/default_SRAM.cfg  to  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_08_16_45_53_SRAM.cfg
+CACTI plug-in removing temp file:  /usr/local/share/accelergy/estimation_plug_ins/accelergy-cacti-plug-in/cacti/timeloop-mapper.05_08_16_45_53_SRAM.cfg
 Warn: No action counts are specified as yaml input 
 Info: flattened architecture is saved to: ./timeloop-mapper.flattened_architecture.yaml 
 Info: energy reference table is saved to: ./timeloop-mapper.ERT.yaml 
