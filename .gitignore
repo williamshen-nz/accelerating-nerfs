@@ -14,8 +14,10 @@ nerf-synthetic-checkpoints/
 *.pclprof
 
 # results
+accelerating_nerfs/results/
 results/**/rgb/
 results_fp16/**/rgb/
+results_copy/
 
 # accelergy/timeloop docker cruft
 .bashrc
