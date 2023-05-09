@@ -373,7 +373,7 @@ Level 5
         Representation format                                       : none
         Max utilized Repr format storage capacity                   : 0
         Utilized instances (max)                                    : 1
-        Utilized instances (average)                                : 0.66
+        Utilized instances (average)                                : 1.00
         Utilized clusters (max)                                     : 1
         Algorithmic scalar reads (per-instance)                     : 0
         Actual scalar reads (per-instance)                          : 0
@@ -391,7 +391,7 @@ Level 5
         Address generations (per-cluster)                           : 2
         Energy (per-scalar-access)                                  : 37.18 pJ
         Energy (per-instance)                                       : 74.36 pJ
-        Energy (total)                                              : 49.08 pJ
+        Energy (total)                                              : 74.36 pJ
         Temporal Reduction Energy (per-instance)                    : 0.00 pJ
         Temporal Reduction Energy (total)                           : 0.00 pJ
         Address Generation Energy (per-cluster)                     : 0.00 pJ
@@ -519,9 +519,9 @@ Level 6
         Skipped scalar format updates (per-instance)                : 0
         Temporal reductions (per-instance)                          : 0
         Address generations (per-cluster)                           : 85
-        Energy (per-scalar-access)                                  : 134.78 pJ
-        Energy (per-instance)                                       : 11456.00 pJ
-        Energy (total)                                              : 11456.00 pJ
+        Energy (per-scalar-access)                                  : 135.73 pJ
+        Energy (per-instance)                                       : 11537.10 pJ
+        Energy (total)                                              : 11537.10 pJ
         Temporal Reduction Energy (per-instance)                    : 0.00 pJ
         Temporal Reduction Energy (total)                           : 0.00 pJ
         Address Generation Energy (per-cluster)                     : 0.00 pJ
@@ -570,9 +570,9 @@ Level 6
         Skipped scalar format updates (per-instance)                : 0
         Temporal reductions (per-instance)                          : 0
         Address generations (per-cluster)                           : 1
-        Energy (per-scalar-access)                                  : 2048.00 pJ
-        Energy (per-instance)                                       : 2048.00 pJ
-        Energy (total)                                              : 2048.00 pJ
+        Energy (per-scalar-access)                                  : 512.00 pJ
+        Energy (per-instance)                                       : 512.00 pJ
+        Energy (total)                                              : 512.00 pJ
         Temporal Reduction Energy (per-instance)                    : 0.00 pJ
         Temporal Reduction Energy (total)                           : 0.00 pJ
         Address Generation Energy (per-cluster)                     : 0.00 pJ
@@ -1005,7 +1005,7 @@ Operational Intensity Stats
     Op per Byte                             : 0.31
 === DummyBuffer ===
 === shared_glb ===
-    Total scalar accesses                   : 257
+    Total scalar accesses                   : 258
     Op per Byte                             : 0.33
 === DRAM ===
     Total scalar accesses                   : 257
@@ -1018,7 +1018,7 @@ GFLOPs (@1GHz): 15.36
 Utilization: 0.05
 Cycles: 11
 Energy: 0.03 uJ
-EDP(J*cycle): 3.65e-07
+EDP(J*cycle): 3.50e-07
 Area: 0.00 mm^2
 
 Algorithmic Computes = 128
@@ -1028,15 +1028,15 @@ pJ/Algorithmic-Compute
     weights_spad                 = 1.62
     ifmap_spad                   = 0.39
     DummyBuffer                  = 0.00
-    shared_glb                   = 21.99
-    DRAM                         = 233.50
+    shared_glb                   = 22.19
+    DRAM                         = 222.13
     DRAM <==> shared_glb         = 0.00
     DummyBuffer <==> ifmap_spad  = 0.00
     ifmap_spad <==> weights_spad = 0.00
     psum_spad <==> MACs          = 0.00
     shared_glb <==> DummyBuffer  = 0.00
     weights_spad <==> psum_spad  = 0.00
-    Total                        = 259.47
+    Total                        = 248.30
 
 Actual Computes = 85
 pJ/Compute
@@ -1045,13 +1045,13 @@ pJ/Compute
     weights_spad                 = 2.44
     ifmap_spad                   = 0.59
     DummyBuffer                  = 0.00
-    shared_glb                   = 33.11
-    DRAM                         = 351.62
+    shared_glb                   = 33.41
+    DRAM                         = 334.51
     DRAM <==> shared_glb         = 0.00
     DummyBuffer <==> ifmap_spad  = 0.00
     ifmap_spad <==> weights_spad = 0.00
     psum_spad <==> MACs          = 0.00
     shared_glb <==> DummyBuffer  = 0.00
     weights_spad <==> psum_spad  = 0.00
-    Total                        = 390.73
+    Total                        = 373.91
 
