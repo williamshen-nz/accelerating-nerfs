@@ -23,6 +23,9 @@ results_copy/
 .bashrc
 .bash_history
 .profile
+.pdbhistory
+.python_history
+results_tmp.txt
 .wget-hsts
 .config/
 .local/
