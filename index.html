@@ -6,6 +6,19 @@
     <title>Accelerating NeRFs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J5DJXGGXH8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'G-J5DJXGGXH8');
+    </script>
+
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
 
@@ -66,11 +79,10 @@
             that the input activations of the fully-connected (FC) layers have an average sparsity of 65.8% due to the
             use of ReLUs, and the weights of ray samples for volumetric rendering have an average sparsity of 33.8%. We
             exploit these sparsities using an Eyeriss-based architecture with sparse optimizations, resulting in over
-            50% improvements in performance and energy for the MLP.
+            50% improvements in performance and energy for the MLP. Finally, we study post-training FP16 quantization on
+            a GPU, resulting in 2.7x and 3.1x improvements in rendering speed and energy consumption, respectively.
         </p>
         <p>
-            Finally, we study post-training FP16 quantization on a GPU, resulting in 2.7x and 3.1x improvements in
-            rendering speed and energy consumption, respectively.
             Our proposed methods demonstrate the potential for hardware acceleration to significantly speed up NeRFs,
             making them more accessible for a wider range of applications and low-compute devices.
         </p>
