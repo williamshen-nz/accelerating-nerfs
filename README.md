@@ -94,30 +94,34 @@ the dataset downloaded and NeRFs trained to run this script.
 
 ### Evaluating Designs
 
-Use the `notebooks/Profile NeRF.ipynb` notebook to evaluate designs. You need to use the Timeloop and Accelergy docker
-environment to run this notebook. To do so, follow the instructions
+You need to use the Timeloop and Accelergy docker environment to run the notebooks. To do so, follow the instructions
 in [Timeloop and Accelergy Setup](#timeloop-and-accelergy-setup).
 
-You can check out the architecture designs in the `notebooks/designs` directory.
+- Exploiting Input Activation Sparsity: use the `notebooks/Profile NeRF.ipynb` notebook to evaluate designs, and
+  `notebooks/Analyze Profile Results.ipynb` to analyze the results.
+- Accelerating Volumetric Rendering: use the `notebooks/Profile NeRF -Volumetric Rendering.ipynb` notebook to evaluate
+  designs, and `notebooks/Analyze Profile Results - Dot Product - Eyeriss.ipynb` to analyze the results.
+
+You can check out the hardware architecture designs in the `notebooks/designs` directory.
 
 ### NeRF Analysis
 
-The analysis notebooks will save the figures to the `notebooks/figures` directory.
+Note: the analysis notebooks will save the figures to the `notebooks/figures` directory.
 
 - NeRF Rendering Time Breakdown
-    1. Run the `accelerating_nerfs/render_nerf_synthetic.py` script
+    1. (Optional) Run the `accelerating_nerfs/render_nerf_synthetic.py` script.
     2. Process results in `notebooks/Time Breakdown.ipynb` notebook
 - NeRF Input Activation Sparsity (activations are sparse)
-    1. Run the `accelerating_nerfs/nerf_activation_sparsity.py` script (this adds hooks to the FC layers)
+    1. (Optional) Run the `accelerating_nerfs/nerf_activation_sparsity.py` script (this adds hooks to the FC layers)
     2. Process results in `notebooks/NeRF Activation Sparsity.ipynb` notebook
 - NeRF MLP Weight Sparsity (we find that the weights are **not** sparse)
     1. Run the `notebooks/NeRF Weight Sparsity.ipynb` notebook, which loads checkpoints and checks the sparsity of the
        weights.
 - NeRF Volumetric Rendering Weight Sparsity (weights are somewhat sparse)
-    1. Run the `accelerating_nerfs/nerf_volrend_sparsity.py` script
+    1. (Optional) Run the `accelerating_nerfs/nerf_volrend_sparsity.py` script
     2. Process results in `notebooks/NeRF Volumetric Rendering Sparsity.ipynb` notebook
 - NeRF FP32 to FP16 Quantization
-    1. Run the `accelerating_nerfs/render_nerf_synthetic.py` script with `use_fp16=True`.
+    1. (Optional) Run the `accelerating_nerfs/render_nerf_synthetic.py` script with `use_fp16=True`.
     2. Results will be written to a `results_fp16/` directory which include rendering time, PSNR, power, energy, etc.
 
 ## Tips
